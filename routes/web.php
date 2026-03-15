@@ -46,7 +46,7 @@ Route::get('venture/{slug}', [WebviewController::class, 'index']);
 Route::get('menu/{slug}', [WebviewController::class, 'menuindex']);
 Route::get('view-product-load/{slug}', [WebviewController::class, 'productdetailsnew']);
 Route::get('product/{slug}', [WebviewController::class, 'productdetails']);
-Route::get('view-product/{slug}', [WebviewController::class, 'viewproductdetails']);
+Route::get('view-product/{slug}', [WebviewController::class, 'viewproductdetails'])->name('viewProduct');
 Route::get('products/category/{slug}', [WebviewController::class, 'categoryproduct']);
 Route::get('products/brand/{slug}', [WebviewController::class, 'brandproduct']);
 Route::get('get/products/by-category', [WebviewController::class, 'getcategoryproduct']);
@@ -57,6 +57,11 @@ Route::get('/combo-offer', [WebviewController::class, 'combo'])->name('combo');
 Route::get('load/related-product', [WebviewController::class, 'loadrelatedpro']);
 
 Route::get('quick-shop/{id}', [WebviewController::class, 'quick'])->name('quick');
+
+// wishlist
+Route::post('add-to-wishlist', [CartController::class, 'addtowishlist'])->name('wishlist.add');
+Route::get('/wishlist', [CartController::class, 'wishlistPage'])->name('wishlist');
+Route::get('/wishlist/remove/{id}', [CartController::class, 'removewishlist'])->name('wishlist.remove');
 
 Route::get('category-info-ajax', [WebviewController::class, 'categoryinfoajax']);
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\City;
 use App\Models\Incompleteorder;
+use App\Models\Mainproduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Cart;
@@ -12,6 +13,7 @@ use App\Models\Varient;
 use Session;
 use App\Models\Size;
 use App\Models\Zone;
+use Toastr;
 
 class CartController extends Controller
 {
@@ -20,12 +22,12 @@ class CartController extends Controller
 
     public function addtocartnew(Request $request)
     {
-        if($request->size == ''){
-            return redirect()->back()->with('error','Please Select Size!');
+        if ($request->size == '') {
+            return redirect()->back()->with('error', 'Please Select Size!');
         }
 
-      $pid = $request->product_id;
-      $cartProduct = Product::find($pid);
+        $pid = $request->product_id;
+        $cartProduct = Product::find($pid);
         if ($request->price > 0) {
             Cart::add([
                 'id' => $request->product_id,
@@ -42,10 +44,9 @@ class CartController extends Controller
                 ],
 
             ]);
-        }
-        else {
+        } else {
             $size = Size::where('product_id', $cartProduct->id)->first();
-            $price =$size->SalePrice;
+            $price = $size->SalePrice;
             Cart::add([
                 'id' => $request->product_id,
                 'name' => $cartProduct->ProductName,
@@ -63,18 +64,18 @@ class CartController extends Controller
             ]);
         }
 
-        return back()->with('success','Success');
+        return back()->with('success', 'Success');
         // return response()->json('success',200);
     }
 
     public function addtocart(Request $request)
     {
-        if($request->size == ''){
-            return redirect()->back()->with('error','Please Select Size!');
+        if ($request->size == '') {
+            return redirect()->back()->with('error', 'Please Select Size!');
         }
 
-      $pid = $request->product_id;
-      $cartProduct = Product::find($pid);
+        $pid = $request->product_id;
+        $cartProduct = Product::find($pid);
         if ($request->price > 0) {
             Cart::add([
                 'id' => $request->product_id,
@@ -91,10 +92,9 @@ class CartController extends Controller
                 ],
 
             ]);
-        }
-        else {
+        } else {
             $size = Size::where('product_id', $cartProduct->id)->first();
-            $price =$size->SalePrice;
+            $price = $size->SalePrice;
             Cart::add([
                 'id' => $request->product_id,
                 'name' => $cartProduct->ProductName,
@@ -264,28 +264,75 @@ class CartController extends Controller
         return view('webview.content.cart.complete', ['order' => $order]);
     }
 
-    public function landingpage($slug){
-        $productdetails=Product::where('ProductSlug',$slug)->first();
+    public function landingpage($slug)
+    {
+        $productdetails = Product::where('ProductSlug', $slug)->first();
         $sizes = Size::where('product_id', $productdetails->id)->get();
         $color = Varient::where('product_id', $productdetails->id)->first();
         $cartProduct = Product::find($productdetails->id);
-            $size = Size::where('product_id', $cartProduct->id)->first();
-            $price =$size->SalePrice;
-            Cart::add([
-                'id' => $cartProduct->id,
-                'name' => $cartProduct->ProductName,
-                'code' => $cartProduct->ProductSku,
-                'price' => $price,
-                'qty' => 1,
-                'weight' => 1,
-                'image' => $cartProduct->ProductImage,
-                'options' => [
-                    'size' => $size->size,
-                    'color' => $color->color,
+        $size = Size::where('product_id', $cartProduct->id)->first();
+        $price = $size->SalePrice;
+        Cart::add([
+            'id' => $cartProduct->id,
+            'name' => $cartProduct->ProductName,
+            'code' => $cartProduct->ProductSku,
+            'price' => $price,
+            'qty' => 1,
+            'weight' => 1,
+            'image' => $cartProduct->ProductImage,
+            'options' => [
+                'size' => $size->size,
+                'color' => $color->color,
 
-                ],
-            ]);
+            ],
+        ]);
 
-     return view('auth.landingpage',['productdetails'=>$productdetails]);
+        return view('auth.landingpage', ['productdetails' => $productdetails]);
+    }
+
+    function addtowishlist(Request $request)
+    {
+        $pid = $request->product_id;
+
+        $wishlist = session()->get('wishlist', []);
+
+        if (in_array($pid, $wishlist)) {
+            Toastr::info('Product already in wishlist!', 'Info');
+            return back();
+        }
+
+        $wishlist[] = $pid;
+
+        session()->put('wishlist', $wishlist);
+
+        Toastr::success('Product added to wishlist!', 'Success', [
+            'timeOut' => 2000,
+            'closeButton' => true,
+            'progressBar' => true,
+        ]);
+
+        return back();
+    }
+
+    public function wishlistPage()
+    {
+        $wishlist = session()->get('wishlist', []);
+        $products = Mainproduct::whereIn('id', $wishlist)->get();
+
+        return view('webview.content.product.wishlist', compact('products'));
+    }
+
+    public function removewishlist($id)
+    {
+        $wishlist = session()->get('wishlist', []);
+
+        if (($key = array_search($id, $wishlist)) !== false) {
+            unset($wishlist[$key]);
+            session()->put('wishlist', $wishlist);
+        }
+
+        Toastr::success('Removed from wishlist!', 'Success');
+
+        return back();
     }
 }
