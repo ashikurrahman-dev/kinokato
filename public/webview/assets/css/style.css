@@ -2,6 +2,10 @@
 
 .main-body {
     background-color: #fff;
+    font-family: "Inter", sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+     font-family: "Inter", sans-serif;
 }
 
 .sticky {
@@ -783,19 +787,19 @@ button#purcheseBtn {
     margin-right: 12px;
 }
 
-.dropdown-toggle::after {
-    display: inline-block;
-    margin-left: 1.255em;
-    vertical-align: 0.255em;
+.dropdown-toggle::after{
     content: "";
     position: absolute;
-    border-top: 0.3em solid;
-    border-right: 0.3em solid transparent;
-    border-bottom: 0;
-    border-left: 0.3em solid transparent;
-    right: 10px;
-    top: 14px;
+    right: 14px;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid #666;
+    border-right: 2px solid #666;
+    transform: translateY(-50%) rotate(45deg);
+    transition: all .25s ease;
 }
+
 
 .sidebar .side-menu nav .nav>li>.mega-menu .yamm-content {
     padding: 10px 20px;
