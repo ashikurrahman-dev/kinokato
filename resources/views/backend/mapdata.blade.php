@@ -1,0 +1,1 @@
+<p class="m-0"><b>Total: {{$data['total']}} pics</b></p><p class="m-0"><b>Ready To Ship: {{$data['rts']}} pics</b></p><p class="m-0"><b>Delivered: {{$data['d']}} pics</b></p><p class="m-0"><b>Canceled: {{$data['c']}} pics</b></p><p class="m-0"><b>Del. Faild: {{$data['df']}} pics</b></p>

@@ -1,0 +1,32 @@
+[24-Oct-2024 06:19:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/rashibdc/rashifashionbd.com/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/rashibdc/rashifashionbd.com/config/database.php on line 18
+[29-Oct-2024 13:59:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/rashibdc/rashifashionbd.com/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/rashibdc/rashifashionbd.com/config/database.php on line 18
+[14-Nov-2024 21:26:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/rashibdc/public_html/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/rashibdc/public_html/config/database.php on line 18
+[14-Nov-2024 21:29:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/rashibdc/public_html/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/rashibdc/public_html/config/database.php on line 18
+[05-Jan-2025 12:04:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/rashibdc/public_html/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/rashibdc/public_html/config/database.php on line 18
+[25-Jan-2025 18:37:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/rashibdc/public_html/config/app.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/rashibdc/public_html/config/app.php on line 16
+[25-Jan-2025 18:38:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/rashibdc/public_html/config/app.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/rashibdc/public_html/config/app.php on line 16
+[12-Feb-2025 11:18:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/rashibdc/public_html/config/app.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/rashibdc/public_html/config/app.php on line 16
