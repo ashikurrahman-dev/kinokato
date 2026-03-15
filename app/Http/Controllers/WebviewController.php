@@ -199,6 +199,10 @@ class WebviewController extends Controller
 
         $topproducts = Mainproduct::where('status', 'Active')->where('top_rated', '1')->orderByRaw('ISNULL(`position`), `position` ASC')->select('id', 'ProductName', 'ProductSlug', 'ProductImage','ProductHoverImage' , 'status', 'position', 'top_rated', 'RelatedProductIds')->latest()->get();
         $today_deal = Mainproduct::where('status', 'Active')->where('top_rated', '1')->orderByRaw('ISNULL(`position`), `position` ASC')->select('id', 'ProductName', 'ProductSlug', 'ProductImage', 'ProductHoverImage','status', 'position', 'top_rated', 'RelatedProductIds')->latest()->take(2)->get();
+        
+        $our_products = Mainproduct::where('status', 'Active')->orderByRaw('ISNULL(`position`), `position` ASC')->select('id', 'ProductName', 'ProductSlug', 'ProductImage', 'ProductHoverImage','status', 'position', 'top_rated', 'RelatedProductIds')->inRandomOrder()->take(8)->get();
+        
+
         $categoryproducts = Category::where('status', 'Active')->orderBy('position')->get();
 
         $categoryproducts->each(function ($category) {
@@ -209,7 +213,7 @@ class WebviewController extends Controller
                 ->get();
         });
       
-      return view('webview.content.maincontent', ['categories' => $categories, 'sliders' => $sliders, 'adds' => $adds, 'addbottoms' => $addbottoms, 'topproducts' => $topproducts, 'categoryproducts' => $categoryproducts, 'today_deal' => $today_deal]);
+      return view('webview.content.maincontent', ['categories' => $categories, 'sliders' => $sliders, 'adds' => $adds, 'addbottoms' => $addbottoms, 'topproducts' => $topproducts, 'categoryproducts' => $categoryproducts, 'today_deal' => $today_deal, 'our_products' => $our_products]);
     }
 
     public function productdetailsnew($slug)
