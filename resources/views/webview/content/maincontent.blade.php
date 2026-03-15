@@ -251,7 +251,7 @@
                             <span class="category-text">Todays </span>
                         </div>
                         <div class="flash-wrapper">
-                            <h2 class="flashsale-main-title">Flash Sales</h2>
+                            <h2 class="m-0 flashsale-main-title">Flash Sales</h2>
 
                             <div class="flashsale-countdown">
 
@@ -632,9 +632,9 @@
 
                             <div class="music-banner-overlay-content">
 
-                                <p class="music-banner-category">{{ $basicinfo->banner_subtitle }}</p>
+                                <p class="m-0 music-banner-category">{{ $basicinfo->banner_subtitle }}</p>
 
-                                <h2 class="music-banner-title">
+                                <h2 class="m-0 music-banner-title">
                                     {!! $basicinfo->banner_title !!}
                                 </h2>
 
@@ -660,7 +660,7 @@
                                         <p>Seconds</p>
                                     </div>
                                 </div>
-                                <a href="{{ $basicinfo->banner_link }}" class="music-banner-btn">Buy Now!</a>
+                                <a href="{{ $basicinfo->banner_link }}" class="music-banner-btn d-none d-lg-inline-block">Buy Now!</a>
 
                             </div>
 
