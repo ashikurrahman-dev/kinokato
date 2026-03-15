@@ -16,7 +16,7 @@
     <div class="main-header" id="myHeader" style="background: #fff;border-bottom: 1px solid #e9e9e9;">
         <div class="container">
             <div class="row" style="" class="pcview_margin">
-                <div class="col-9 col-sm-9 col-md-9 col-lg-2 logo-holder ps-0">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-2 logo-holder ps-0">
                     <!-- ============================================================= LOGO ============================================================= -->
                     <div class="logo" style="display: flex;justify-content:start;align-items:center">
                         <!-- <button type="button" class="d-lg-block" onclick="openNav()" id="menubutton">
@@ -40,11 +40,11 @@
                         <a href="">Contact</a>
                         <a href="">About</a>
                         <a href="">Sing Up</a>
-                    
+
                 </div>
                 <!-- /.top-search-holder -->
 
-                <div class="p-0 col-3 col-sm-3 col-md-3 col-lg-6 animate-dropdown top-cart-row top-search-holder" id="headcart">
+                <div class="p-0 col-6 col-sm-6 col-md-6 col-lg-6 animate-dropdown top-cart-row top-search-holder" id="headcart">
 
                     <div class="search-area" id="d-sm-none" style="margin-top:-10px">
                         <div class="navbar">
@@ -96,7 +96,7 @@
                         <!-- /.dropdown-menu-->
                     </div>
                     <!-- /.dropdown-cart -->
-                   
+
                     <a type="button" class="search-button d-lg-none" onclick="showser()"
                         style="float: right;font-size: 30px; color: #b9b9b9;    margin-right: 10px;" href="#"
                         id="smsericon">
@@ -164,7 +164,7 @@
 
             <ul class="list-unstyled">
                 @forelse ($categories as $category)
-                    <li class="nav-item dropdown mb-2">
+                    <li class="mb-2 nav-item dropdown">
                         @php
                             $subcategories = App\Models\Subcategory::where('status','Active')->where('category_id',$category->id)->get();
                         @endphp
