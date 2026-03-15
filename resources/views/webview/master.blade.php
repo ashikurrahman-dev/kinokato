@@ -172,7 +172,7 @@
 
     {!!$basicinfo->facebook_pixel!!}
     {!!$basicinfo->google_analytics!!}
-    
+
      <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -180,14 +180,14 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-5DTFQM7B');</script>
     <!-- End Google Tag Manager -->
-    
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5HK9KEKCZN"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-    
+
       gtag('config', 'G-5HK9KEKCZN');
     </script>
 
@@ -317,6 +317,21 @@
                             aria-hidden="true">Add
                             More Products</span></button>
                     <a href="{{ url('checkout') }}" class="btn" style="background: #212129;color:#fff">Submit Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="quickShopModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header with Close Button -->
+                <div class="modal-header">
+                    <h5 class="m-0 modal-title fs-6 fw-bold">Select your product </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="quickShopModalBody">
                 </div>
             </div>
         </div>
@@ -721,15 +736,39 @@
             $('img').lazyload();
         });
     </script>
-    
+
     <script src="{{ asset('public/webview/assets/js/zoomsl.min.js') }}"></script>
     <script type="text/javascript">
         $(".block__pic").imagezoomsl({
             zoomrange: [3, 3]
         });
     </script>
-    
-    
+
+    <script>
+        $(document).ready(function () {
+            $('.quick-shop-btn').on('click', function () {
+                var productId = $(this).data('product-id');
+
+                $('#quickShopModalBody').html('<p>Loading...</p>');
+
+                $('#quickShopModal').modal('show');
+
+                $.ajax({
+                    url: '{{url("quick-shop")}}/' + productId, // your route
+                    type: 'GET',
+                    success: function (response) {
+                        $('#quickShopModalBody').html(response);
+                    },
+                    error: function () {
+                        $('#quickShopModalBody').html('<p>Something went wrong!</p>');
+                    }
+                });
+            });
+        });
+
+    </script>
+
+
 
 </body>
 

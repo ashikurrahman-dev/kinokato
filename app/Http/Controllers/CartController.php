@@ -19,58 +19,13 @@ class CartController extends Controller
 
 
     public function addtocartnew(Request $request)
-    { 
-        $pid = $request->product_id;
-        $cartProduct = Product::where('id', $pid)->first();
-        
-        $size = Size::where('id', $request->size)->first();
-        
-        if ($request->price > 0) {
-            Cart::add([
-                'id' => $request->product_id,
-                'name' => $cartProduct->ProductName,
-                'code' => $cartProduct->ProductSku,
-                'price' => $request->price,
-                'qty' => $request->qty,
-                'weight' => 1,
-                'image' => $cartProduct->ProductImage,
-                'options' => [
-                    'size' => $size->size,
-                    'color' => $request->color,
-                    'sigment' => $request->sigment,
-                ],
-
-            ]);
-        } else {
-            return back()->with('error', 'সাইজ সিলেক্ট করুন!');
-            // $price = Size::where('product_id', $cartProduct->id)->first()->SalePrice;
-            // Cart::add([
-            //     'id' => $request->product_id,
-            //     'name' => $cartProduct->ProductName,
-            //     'code' => $cartProduct->ProductSku,
-            //     'price' => $price,
-            //     'qty' => $request->qty,
-            //     'weight' => 1,
-            //     'image' => $cartProduct->ProductImage,
-            //     'options' => [
-            //         'size' => $request->size,
-            //         'color' => $request->color,
-            //         'sigment' => $request->sigment,
-            //     ],
-
-            // ]);
+    {
+        if($request->size == ''){
+            return redirect()->back()->with('error','Please Select Size!');
         }
 
-        return back()->with('success','Success'); 
-        // return response()->json('success',200);
-    }
-    
-    public function addtocart(Request $request)
-    {
-        $pid = $request->product_id;
-        $cartProduct = Product::where('id', $pid)->first();
-        $size = Size::where('id', $request->size)->first();
-        
+      $pid = $request->product_id;
+      $cartProduct = Product::find($pid);
         if ($request->price > 0) {
             Cart::add([
                 'id' => $request->product_id,
@@ -81,14 +36,16 @@ class CartController extends Controller
                 'weight' => 1,
                 'image' => $cartProduct->ProductImage,
                 'options' => [
-                    'size' => $size->size,
+                    'size' => $request->size,
                     'color' => $request->color,
                     'sigment' => $request->sigment,
                 ],
 
             ]);
-        } else {
-            $price = Size::where('product_id', $cartProduct->id)->first()->SalePrice;
+        }
+        else {
+            $size = Size::where('product_id', $cartProduct->id)->first();
+            $price =$size->SalePrice;
             Cart::add([
                 'id' => $request->product_id,
                 'name' => $cartProduct->ProductName,
@@ -98,7 +55,56 @@ class CartController extends Controller
                 'weight' => 1,
                 'image' => $cartProduct->ProductImage,
                 'options' => [
+                    'size' => $size->size,
+                    'color' => $request->color,
+                    'sigment' => $request->sigment,
+                ],
+
+            ]);
+        }
+
+        return back()->with('success','Success');
+        // return response()->json('success',200);
+    }
+
+    public function addtocart(Request $request)
+    {
+        if($request->size == ''){
+            return redirect()->back()->with('error','Please Select Size!');
+        }
+
+      $pid = $request->product_id;
+      $cartProduct = Product::find($pid);
+        if ($request->price > 0) {
+            Cart::add([
+                'id' => $request->product_id,
+                'name' => $cartProduct->ProductName,
+                'code' => $cartProduct->ProductSku,
+                'price' => $request->price,
+                'qty' => $request->qty,
+                'weight' => 1,
+                'image' => $cartProduct->ProductImage,
+                'options' => [
                     'size' => $request->size,
+                    'color' => $request->color,
+                    'sigment' => $request->sigment,
+                ],
+
+            ]);
+        }
+        else {
+            $size = Size::where('product_id', $cartProduct->id)->first();
+            $price =$size->SalePrice;
+            Cart::add([
+                'id' => $request->product_id,
+                'name' => $cartProduct->ProductName,
+                'code' => $cartProduct->ProductSku,
+                'price' => $price,
+                'qty' => $request->qty,
+                'weight' => 1,
+                'image' => $cartProduct->ProductImage,
+                'options' => [
+                    'size' => $size->size,
                     'color' => $request->color,
                     'sigment' => $request->sigment,
                 ],
@@ -257,7 +263,7 @@ class CartController extends Controller
             ->first();
         return view('webview.content.cart.complete', ['order' => $order]);
     }
-    
+
     public function landingpage($slug){
         $productdetails=Product::where('ProductSlug',$slug)->first();
         $sizes = Size::where('product_id', $productdetails->id)->get();

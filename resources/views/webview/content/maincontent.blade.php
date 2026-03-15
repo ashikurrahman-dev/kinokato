@@ -29,7 +29,7 @@
     <meta property="twitter:card" content="{{ env('APP_URL') }}/public/rankone1.png" />
     <meta property="twitter:title" content="Best Online Shopping in Bangladesh | {{ env('APP_NAME') }}" />
     <meta property="twitter:url" content="{{ env('APP_URL') }}">
-    <meta name="twitter:image" content="{{ env('APP_URL') }}/public/rankone1.png"> 
+    <meta name="twitter:image" content="{{ env('APP_URL') }}/public/rankone1.png">
 @endsection
 
 <style>
@@ -144,7 +144,7 @@
 </style>
 <style>
     /* Owl Nav Buttons */
-    
+
 
     #categorySlide .owl-nav {
         position: absolute;
@@ -174,12 +174,12 @@
 <div class="container p-0" style="margin-top:30px;">
     <div class="row">
         <!-- Categories -->
-        <div class="mb-3 col-lg-2 col-12 d-sm-none p-0">
+        <div class="p-0 mb-3 col-lg-2 col-12 d-sm-none">
             <!-- <div class="category-title">
                 <h5 class="m-0 text-white fw-bold">Categories</h5>
             </div> -->
             <div class="category-list">
-                <ul class="list-unstyled m-0 p-0">
+                <ul class="p-0 m-0 list-unstyled">
                     @forelse ($categories as $category)
                         <li class=" position-relative">
                             @php
@@ -200,7 +200,7 @@
 
 
                             @if($subcategories->isNotEmpty())
-                                <ul class="subcategory-dropdown list-unstyled bg-white shadow-sm p-2 position-absolute start-100 top-0 "
+                                <ul class="top-0 p-2 bg-white shadow-sm subcategory-dropdown list-unstyled position-absolute start-100 "
                                     style="min-width:180px; display:none; z-index:999;">
                                         @foreach($subcategories as $value)
                                             <li class="py-1">
@@ -248,7 +248,7 @@
                             <span class="category-text">Todays </span>
                         </div>
                         <div style="display:flex; align-items:center; justify-content: space-between;margin:20px 0">
-                            <h2 class="main-title m-0">Flash Sales</h2>
+                            <h2 class="m-0 main-title">Flash Sales</h2>
                             <div>
 
                             </div>
@@ -271,7 +271,7 @@
                                     ->where('id', json_decode($promotional->RelatedProductIds)[0]->productID)
                                     ->select('id', 'ProductName')
                                     ->first();
-    
+
                             @endphp
                             @if (isset($firstpro))
                                 <div class="item" id="featuredproduct">
@@ -292,7 +292,7 @@
                                                                     <i class="fa-regular fa-heart"
                                                                     style="font-size: 18px;color:black;"></i>
                                                                 </button><br>
-                                                                <button>
+                                                                <button class="quick-shop-btn" type="button" data-product-id="{{ $promotional->id }}">
                                                                     <i class="fa-regular fa-eye"
                                                                     style="font-size: 18px;color:black;"></i>
                                                                 </button>
@@ -321,7 +321,7 @@
                                                                     id="f_pro_name">{{ $promotional->ProductName }}</a>
                                                             </h2>
                                                         </div>
-                                                        
+
                                                         <div class="price-box" style="padding-top: 5px;">
                                                             <del class="old-product-price strong-400"
                                                                 style="color:#db4444">৳{{ round($firstpro->sizes[0]->RegularPrice) }}</del>
@@ -331,7 +331,7 @@
 
                                                         <div class="d-flex" style="justify-content:space-between">
                                                             <div class="star" style="padding-top: 5px;">
-                                                                
+
                                                                 <span class="fas fa-star" id="checked"></span>
                                                                 <span class="fas fa-star" id="checked"></span>
                                                                 <span class="fas fa-star" id="checked"></span>
@@ -344,7 +344,7 @@
 
                                                         </div>
 
-                                                        
+
 
                                                     </div>
                                                     <!-- <a href="{{ url('view-product/' . $promotional->ProductSlug) }}">
@@ -367,7 +367,7 @@
                         @empty
                         @endforelse
                     </div>
-                    
+
                 </div>
             </div>
             <div class="text-center" style="margin-top:30px">
@@ -435,7 +435,7 @@
                             <span class="category-text">This Month</span>
                         </div>
                         <div style="display:flex; align-items:center; justify-content: space-between;margin:20px 0">
-                            <h2 class="main-title m-0">Best Selling Product</h2>
+                            <h2 class="m-0 main-title">Best Selling Product</h2>
                             <a href="{{ url('promotional/products') }}" class="mb-0 btn btn-sm"
                                 style="padding: 12px 30px;color: white;font-weight: bold;font-size:12px; background:#db4444;">VIEW
                                 ALL</a>
@@ -478,7 +478,7 @@
                                                                     <i class="fa-regular fa-heart"
                                                                     style="font-size: 18px;color:black;"></i>
                                                                 </button><br>
-                                                                <button>
+                                                                <button class="quick-shop-btn" type="button" data-product-id="{{ $promotional->id }}">
                                                                     <i class="fa-regular fa-eye"
                                                                     style="font-size: 18px;color:black;"></i>
                                                                 </button>
@@ -507,7 +507,7 @@
                                                                     id="f_pro_name">{{ $promotional->ProductName }}</a>
                                                             </h2>
                                                         </div>
-                                                        
+
                                                         <div class="price-box" style="padding-top: 5px;">
                                                             <del class="old-product-price strong-400"
                                                                 style="color:#db4444">৳{{ round($firstpro->sizes[0]->RegularPrice) }}</del>
@@ -517,7 +517,7 @@
 
                                                         <div class="d-flex" style="justify-content:space-between">
                                                             <div class="star" style="padding-top: 5px;">
-                                                                
+
                                                                 <span class="fas fa-star" id="checked"></span>
                                                                 <span class="fas fa-star" id="checked"></span>
                                                                 <span class="fas fa-star" id="checked"></span>
@@ -530,7 +530,7 @@
 
                                                         </div>
 
-                                                        
+
 
                                                     </div>
                                                     <!-- <a href="{{ url('view-product/' . $promotional->ProductSlug) }}">
@@ -573,7 +573,7 @@
                             <span class="category-text">Our Products</span>
                         </div>
                         <div style="display:flex; align-items:center; justify-content: space-between;margin:20px 0">
-                            <h2 class="main-title m-0">Explore Our Products</h2>
+                            <h2 class="m-0 main-title">Explore Our Products</h2>
                             <!-- <a href="{{ url('promotional/products') }}" class="mb-0 btn btn-sm"
                                 style="padding: 12px 30px;color: white;font-weight: bold;font-size:12px; background:#db4444;">VIEW
                                 ALL</a> -->
@@ -616,7 +616,7 @@
                                                                     <i class="fa-regular fa-heart"
                                                                     style="font-size: 18px;color:black;"></i>
                                                                 </button><br>
-                                                                <button>
+                                                                <button class="quick-shop-btn" type="button" data-product-id="{{ $promotional->id }}">
                                                                     <i class="fa-regular fa-eye"
                                                                     style="font-size: 18px;color:black;"></i>
                                                                 </button>
@@ -645,7 +645,7 @@
                                                                     id="f_pro_name">{{ $promotional->ProductName }}</a>
                                                             </h2>
                                                         </div>
-                                                        
+
                                                         <div class="price-box" style="padding-top: 5px;">
                                                             <del class="old-product-price strong-400"
                                                                 style="color:#db4444">৳{{ round($firstpro->sizes[0]->RegularPrice) }}</del>
@@ -655,7 +655,7 @@
 
                                                         <div class="d-flex" style="justify-content:space-between">
                                                             <div class="star" style="padding-top: 5px;">
-                                                                
+
                                                                 <span class="fas fa-star" id="checked"></span>
                                                                 <span class="fas fa-star" id="checked"></span>
                                                                 <span class="fas fa-star" id="checked"></span>
@@ -668,7 +668,7 @@
 
                                                         </div>
 
-                                                        
+
 
                                                     </div>
                                                     <!-- <a href="{{ url('view-product/' . $promotional->ProductSlug) }}">
@@ -701,7 +701,7 @@
         </div>
     @else
     @endif
-    
+
     <div class="container">
         <hr style="border: 1px solid #999;margin: 50px 0;">
     </div>
@@ -751,9 +751,9 @@
                         ALL</a>
                 </div>
                 @if(App\Models\Category::find($categoryproduct->id)->category_banner)
-                    <div class="col-12 mb-2 mt-1">
+                    <div class="mt-1 mb-2 col-12">
                         <img src="{{ asset(App\Models\Category::find($categoryproduct->id)->category_banner) }}" alt="" class="category_Banner_Image">
-                    </div> 
+                    </div>
                 @endif
 
                 @forelse ($categoryproduct->mainproducts as $product)
@@ -789,13 +789,13 @@
                                                                     <span class="pip_pip_1s">ছাড়</span>
                                                                 </span>
                                                             </div>
-                                                
-                                                            <a href="{{ url('view-product/' . $product->ProductSlug) }}" class="hover-switch" 
+
+                                                            <a href="{{ url('view-product/' . $product->ProductSlug) }}" class="hover-switch"
                                                                data-main="{{ asset($product->ProductImage) }}"
                                                                data-hover="{{ !empty($product->ProductHoverImage) ? asset($product->ProductHoverImage) : '' }}">
-                                                                <img src="{{ asset($product->ProductImage) }}" 
-                                                                     alt="{{ $product->ProductName }}" 
-                                                                     class="switchable-img" 
+                                                                <img src="{{ asset($product->ProductImage) }}"
+                                                                     alt="{{ $product->ProductName }}"
+                                                                     class="switchable-img"
                                                                      style="width:100%; transition: opacity 0.3s ease;">
                                                             </a>
                                                         </div>
@@ -803,7 +803,7 @@
                                                 </div>
 
 
-                                               
+
                                                 <div class="col-12">
                                                     <div class="p-2 infofe p-md-2"
                                                         style="padding-bottom: 4px !important;background: white;">
@@ -847,11 +847,11 @@
                                                     </a>
 
                                                 </div>
-                                                
+
                                             </div>
-                                            
+
                                         </div>
-                                       
+
 
                                     </div>
                                 </div>

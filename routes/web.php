@@ -56,6 +56,8 @@ Route::get('/search', [WebviewController::class, 'search'])->name('search');
 Route::get('/combo-offer', [WebviewController::class, 'combo'])->name('combo');
 Route::get('load/related-product', [WebviewController::class, 'loadrelatedpro']);
 
+Route::get('quick-shop/{id}', [WebviewController::class, 'quick'])->name('quick');
+
 Route::get('category-info-ajax', [WebviewController::class, 'categoryinfoajax']);
 
 Route::get('get/slug/products', [WebviewController::class, 'getslugproduct']);
