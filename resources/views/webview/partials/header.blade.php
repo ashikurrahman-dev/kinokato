@@ -1,53 +1,27 @@
 <header class="header-style-1">
 
     <!-- ============================================== TOP MENU ============================================== -->
-    <div class="top-barhead animate-dropdown" id="d-sm-none">
+    <div class="top-barhead animate-dropdown" id="">
         <div class="header-top-inner">
-            <div class="cnt-account">
-                <ul class="list-unstyled">
-                    <li><a target="_blank" href="{{ $basicinfo->facebook }}"><i class="fa-brands fa-facebook-f"></i></a>
-                    </li>
-                    <li><a target="_blank" href="{{ $basicinfo->linkedin }}"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li><a href="mailto:{{ $basicinfo->email }}"><i class="fa-solid fa-envelope"></i></a></li>
-                    <li><a href="tel:+88{{ $basicinfo->phone_one }}"><i class="fa-solid fa-phone"></i></a></li>
-                    <li><a target="_blank" href="{{ $basicinfo->youtube }}"><i class="fa-brands fa-youtube"></i></a>
-                    </li>
-                </ul>
+            <div style="display:flex; align-items:center;justify-content:center;">
+                <p class="m-0" style="color: white;text-align:center;">
+                    {{ $basicinfo->marquee_text }}
+                    <a href="" style="color:white; text-decoration:underline;font-size:17px; margin-left:20px">
+                        Shop Now
+                    </a>
+                </p>
             </div>
-            <!-- /.cnt-account -->
-            <div class="cnt-block">
-                <ul class="list-unstyled">
-                    <li><a href="#"><i class="icon fas fa-clock"></i>&nbsp;24 hours</a>
-                    </li>
-                    <li><a href="tel:{{ $basicinfo->phone_one }}"><i
-                                class="icon fas fa-phone"></i>&nbsp;{{ $basicinfo->phone_one }}</a></li>
-                </ul>
-                <!-- /.list-unstyled -->
-            </div>
-
-            <div class="d-none d-lg-block" id="lgmar">
-                <marquee behavior="" direction="" style="color:#fff;margin-top: 2px;">
-                    {{ $basicinfo->marquee_text }}</marquee>
-            </div>
-
-            <!-- /.cnt-cart -->
-            <div class="clearfix"></div>
         </div>
-    </div>
-    <div class="col-12" id="d-lg-none">
-        <marquee behavior="" direction="" style="color: #fff;background: #212129;font-weight:bold;">
-            {{ $basicinfo->marquee_text }}</marquee>
     </div>
     <div class="main-header" id="myHeader" style="background: #fff;border-bottom: 1px solid #e9e9e9;">
         <div class="container">
             <div class="row" style="" class="pcview_margin">
-                <div class="col-9 col-sm-9 col-md-9 col-lg-3 logo-holder ps-0">
+                <div class="col-9 col-sm-9 col-md-9 col-lg-2 logo-holder ps-0">
                     <!-- ============================================================= LOGO ============================================================= -->
-                    <div class="logo" style="display: flex;justify-content:space-between">
-                        <button type="button" class="d-lg-block" onclick="openNav()" id="menubutton">
+                    <div class="logo" style="display: flex;justify-content:start;align-items:center">
+                        <!-- <button type="button" class="d-lg-block" onclick="openNav()" id="menubutton">
                             <img src="{{ asset('public/menu.png') }}" alt="" id="menuiconcss">
-                        </button>
+                        </button> -->
 
                         <a href="{{ url('/') }}" id="logoimage">
                             <img src="{{ asset($basicinfo->logo) }}" alt="" id="logosm"
@@ -59,16 +33,25 @@
                 </div>
                 <!-- /.logo-holder -->
 
-                <div class="col-md-2 col-lg-7 top-search-holder d-flex" style="justify-content:center!important;"
+                <div class="col-md-2 col-lg-4 nav-items" style="display:flex;align-items:center;justify-content:space-around;"
                     id="d-sm-none">
                     <!-- /.contact-row -->
-                    <!-- ============================================================= SEARCH AREA ============================================================= -->
+                        <a href="{{ url('/') }}">Home</a>
+                        <a href="">Contact</a>
+                        <a href="">About</a>
+                        <a href="">Sing Up</a>
+                    
+                </div>
+                <!-- /.top-search-holder -->
+
+                <div class="p-0 col-3 col-sm-3 col-md-3 col-lg-6 animate-dropdown top-cart-row top-search-holder" id="headcart">
+
                     <div class="search-area" id="d-sm-none" style="margin-top:-10px">
                         <div class="navbar">
 
-                            <form action="{{ url('search') }}" method="GET">
+                            <form action="{{ url('search') }}" method="GET" style="margin-top:10px">
                                 <div class="control-group" style="display: flex;">
-                                    <input class="m-0 search-field" name="search" placeholder="Search here..."
+                                    <input class="m-0 search-field" name="search" placeholder="What are you looking for?"
                                         style="width:384px">
                                     <button class="search-button" type="submit"></button>
                                 </div>
@@ -76,17 +59,13 @@
                         </div>
 
                     </div>
-                </div>
-                <!-- /.top-search-holder -->
 
-                <div class="p-0 col-3 col-sm-3 col-md-3 col-lg-2 animate-dropdown top-cart-row" id="headcart">
                     <div class="">
-                        <a href="{{ url('track-order') }}" class="d-none d-lg-block" id="iconhead">
-                            <img src="{{ asset('public/express-delivery.png') }}" alt=""
-                                style="width: 30px;margin-top: -12px;">
+                        <a href="{{ url('/wishlist') }}" class="d-none d-lg-block" id="iconhead">
+                           <i class="fa-regular fa-heart" style="font-size:21px;"></i>
                         </a>
                     </div>
-                    <div class="d-none d-xl-inline-block" id="d-sm-none">
+                    <!-- <div class="d-none d-xl-inline-block" id="d-sm-none">
 
                         @if (Auth::id())
                             <a href="#" type="button" onclick="openProfileNav()"
@@ -95,16 +74,18 @@
                             <a href="{{ url('login') }}" id="iconhead" style="padding-right: 16px;"><i
                                     class="fa-solid fa-user"></i></a>
                         @endif
-                    </div>
+                    </div> -->
 
                     <div class="dropdown-cart" id="d-sm-none" style="margin-left:-15px;">
                         <a href="#" class="dropdown" onclick="checkcart(this)" data-bs-toggle="dropdown"
                             id="smcarticon">
                             <div class="items-cart-inner">
                                 <div class="basket" style="padding: 0;display:flex;">
-                                    <span style="color: #212129;font-weight:bold">৳
-                                        {{ intval(Cart::subtotal()) }}</span><i class="fa-solid fa-cart-shopping"
-                                        style="    padding-top: 26px;font-size: 15px;color: #212129;"></i>
+                                    <span style="color: #212129;font-weight:bold;position:relative">
+                                        <span style="    position: absolute;right: -13px;top: -11px;">{{ intval(Cart::count()) }}</span>
+                                        <i class="fa-solid fa-cart-shopping"
+                                        style="padding-top: 26px;font-size: 21px;color: #212129;"></i>
+                                    </span>
                                 </div>
                             </div>
                         </a>
@@ -115,19 +96,30 @@
                         <!-- /.dropdown-menu-->
                     </div>
                     <!-- /.dropdown-cart -->
-
+                   
                     <a type="button" class="search-button d-lg-none" onclick="showser()"
                         style="float: right;font-size: 30px; color: #b9b9b9;    margin-right: 10px;" href="#"
-                        id="smsericon"><img src="{{ asset('public/search.png') }}" style="width:25px"></a>
+                        id="smsericon">
+                        <!-- <img src="{{ asset('public/search.png') }}" style="width:25px"> -->
+                         <i style="color:black;" class="fa-solid fa-magnifying-glass"></i>
+                    </a>
                     <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= -->
                     <input type="text" id="valcheck" value="0" hidden>
 
+                    <div class="d-lg-none">
+                        <a href="{{ url('/wishlist') }}" class="" id="iconhead">
+                           <i class="fa-regular fa-heart" style="font-size:30px;"></i>
+                        </a>
+                    </div>
 
-                    <div class="dropdown-cart" id="d-lg-none">
+                    <div class="dropdown-cart" id="d-lg-none" style="padding-right:5px">
                         <div type="button" onclick="checkcartview()">
-                            <span style="font-size: 16px;line-height: 50px;color: #ffffff;position: absolute;top: 32px;right: 23px;">{{ count(Cart::content()) }}</span>
-                            <i class="fa-solid fa-cart-shopping"
-                                        style="padding-top:8px;font-size: 25px;color: #212129;"></i>
+                            <span style="font-size: 16px;line-height: 50px;position:relative;">
+                                <span style="color: #000;position: absolute;top: -32px;right: -9px;">{{ count(Cart::content()) }}</span>
+
+                                <i class="fa-solid fa-cart-shopping"
+                                            style="padding-top:8px;font-size: 25px;color: #212129;"></i>
+                            </span>
                         </div>
                         <!-- /.dropdown-menu-->
                     </div>
