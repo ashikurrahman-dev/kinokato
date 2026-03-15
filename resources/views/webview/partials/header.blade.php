@@ -1,3 +1,17 @@
+<style>
+.cat-nav { background:#fff; border:1px solid #e5e5e5; border-radius:8px; padding:8px 0; }
+.cat-item { position: relative; }
+.cat-row { display:flex; align-items:center; justify-content:space-between; padding:9px 16px; transition:background .15s; }
+.cat-row:hover { background:#f5f5f5; }
+.cat-link { color:#222; font-size:14px; text-decoration:none; flex:1; }
+.arrow-btn { background:none; border:none; padding:2px 6px; cursor:pointer; color:#888; font-size:12px; transition:transform .25s; }
+.arrow-btn.open { transform:rotate(180deg); color:#222; }
+.sub-list { list-style:none; padding:0; margin:0; background:#fafafa; border-top:1px solid #eee; display:none; }
+.sub-list.show { display:block; }
+.sub-list li a { display:block; padding:8px 16px 8px 70px; font-size:13px; color:#555; text-decoration:none; }
+.sub-list li a:hover { background:#f0f0f0; color:#111; }
+.divider { border-top:1px solid #f0f0f0; margin:2px 0; }
+</style>
 <header class="header-style-1">
 
     <!-- ============================================== TOP MENU ============================================== -->
@@ -37,10 +51,10 @@
                     id="d-sm-none">
                     <!-- /.contact-row -->
                         <a href="{{ url('/') }}">Home</a>
-                        <a href="">Contact</a>
-                        <a href="">About</a>
-                        <a href="">Sing Up</a>
-
+                        <a href="{{ url('venture/contact_us') }}">Contact</a>
+                        <a href="{{ url('venture/about_us') }}">About</a>
+                        <a href="{{ url('register') }}">Sing Up</a>
+                    
                 </div>
                 <!-- /.top-search-holder -->
 
@@ -162,32 +176,44 @@
         </div>
         <ul class="level1-styles collapse show" id="id0">
 
-            <ul class="list-unstyled">
-                @forelse ($categories as $category)
-                    <li class="mb-2 nav-item dropdown">
-                        @php
-                            $subcategories = App\Models\Subcategory::where('status','Active')->where('category_id',$category->id)->get();
-                        @endphp
-                        <a class="nav-link dropdown-toggle"
-                           href="{{ url('products/category/' . $category->slug) }}"
-                           id="categoryDropdown{{ $category->id }}"
-                           role="button"
-                           data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            {{ $category->category_name }}
-                        </a>
+            <ul class="list-unstyled mb-0">
+    @forelse ($categories as $category)
+        @php
+            $subcategories = App\Models\Subcategory::where('status','Active')
+                ->where('category_id', $category->id)->get();
+        @endphp
 
-                        @if($subcategories->isNotEmpty())
-                            <ul class="dropdown-menu" aria-labelledby="categoryDropdown{{ $category->id }}">
-                                @foreach($subcategories as $value)
-                                    <li><a class="dropdown-item" href="{{ url('products/sub/category/'.$value->slug) }}">{{ $value->sub_category_name }}</a></li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </li>
-                @empty
-                @endforelse
-            </ul>
+        <li class="cat-item">
+            <div class="cat-row">
+                <a class="cat-link" href="{{ url('products/category/' . $category->slug) }}">
+                    {{ $category->category_name }}
+                </a>
+
+                @if($subcategories->isNotEmpty())
+                    <button class="arrow-btn m-0" onclick="toggleSub(this)">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                @endif
+            </div>
+
+            @if($subcategories->isNotEmpty())
+                <ul class="sub-list">
+                    @foreach($subcategories as $value)
+                        <li>
+                            <a href="{{ url('products/sub/category/' . $value->slug) }}">
+                                {{ $value->sub_category_name }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+        </li>
+        <li class="divider"></li>
+
+    @empty
+    @endforelse
+</ul>
+
 
 
         </ul>
@@ -417,4 +443,11 @@
 
         }
     }
+</script>
+<script>
+    function toggleSub(btn) {
+    const subList = btn.closest('.cat-item').querySelector('.sub-list');
+    btn.classList.toggle('open');
+    subList.classList.toggle('show');
+}
 </script>
