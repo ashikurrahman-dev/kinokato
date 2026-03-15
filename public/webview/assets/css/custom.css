@@ -77,3 +77,69 @@
     text-decoration: none;
     display: inline-block;
 }
+
+/* ======= flash sale ========== */
+.flash-wrapper{
+    display:flex;
+    align-items:center;
+    margin:20px 0;
+}
+
+.flashsale-main-title{
+    font-size:40px;
+    font-weight:700;
+}
+
+.flashsale-countdown{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-left: 20px;
+}
+
+.flashsale-time-box{
+    text-align:center;
+}
+
+.flashsale-time-box span{
+    font-size:40px;
+    font-weight:700;
+    display:block;
+}
+
+.flashsale-time-box small{
+    font-size:14px;
+    color:#555;
+}
+
+.flashsale-dot{
+    font-size:30px;
+    color:#e57373;
+    font-weight:bold;
+}
+
+
+
+
+
+
+
+
+
+
+#slider.owl-theme .owl-nav.disabled+.owl-dots {
+    margin-top: -30px !important;
+}
+#slider.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
+    background: #DB4444;
+    border: 2px solid #fff;
+    width: 17px !important;
+    height: 17px !important;
+}
+#slider.owl-theme .owl-dots .owl-dot span{
+    width:15px !important;
+    height:15px !important;
+}
+#slider.owl-theme .owl-dots .owl-dot span{
+    background: #808080;
+}
