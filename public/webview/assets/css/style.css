@@ -119,10 +119,10 @@ button#purcheseBtn {
 }
 
 .main-header .top-search-holder .search-area .search-button:after {
-    color: #fff;
+    color: #000;
     content: "\f002";
     font-family: fontawesome;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 9px;
     vertical-align: middle;
 }
@@ -152,9 +152,10 @@ button#purcheseBtn {
     border-radius: 5px 0 0 5px;
     padding: 10px;
     width: 90%;
-    border: 1px solid #212129;
+    /* border: 1px solid #212129; */
     border-right: none;
     float: left;
+    background: #f1efef;
 }
 
 #menuiconcss {
@@ -169,8 +170,8 @@ button#purcheseBtn {
     margin: 0px;
     padding: 9px 15px 8px;
     text-align: center;
-    background-color: #212129;
-    border: 1px solid #212129;
+    background-color: #f1efef;
+    border: 1px solid #f1efef;
 }
 
 .dropbtn {
@@ -474,7 +475,7 @@ button#purcheseBtn {
 }
 
 #logoimage img {
-    max-height: 30px;
+    max-height: 50PX;
     margin-top: 18px;
 }
 
@@ -922,6 +923,7 @@ button#purcheseBtn {
         display: flex;
         justify-content: space-around;
         line-height: 35px;
+        align-items:center;
     }
     #logoimage img {
         margin-top: 6px;
@@ -1205,10 +1207,10 @@ a:focus {
 }
 
 .footer .module-title {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     letter-spacing: 0.5px;
-    margin-bottom: 6px;
+    margin-bottom: 14px;
     color: white;
     margin-top: 0;
 }
@@ -2076,4 +2078,11 @@ button.owl-prev {
 }
 
 
+.nav-items a{
+    color:black
+}
+.nav-items a:hover{
+    color:black;
+    border-bottom: 1px solid #000;
+}
 
