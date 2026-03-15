@@ -41,28 +41,28 @@ class WebviewController extends Controller
     public function datafeed()
     {
         $mainproducts = Mainproduct::all();
-    
+
         $xml = new \SimpleXMLElement('<rss/>');
         $xml->addAttribute('version', '2.0');
         $xml->addAttribute('xmlns:g', 'http://base.google.com/ns/1.0'); // ✅ Required namespace
-    
+
         $channel = $xml->addChild('channel');
         $channel->addChild('title', 'Thebdshop');
         $channel->addChild('link', url('https://www.thebdshop.com/'));
         $channel->addChild('description', 'Thebdshop is an online luxury store offering premium bags and accessories.');
-    
+
         foreach ($mainproducts as $mainproduct) {
             $relatedProducts = json_decode($mainproduct->RelatedProductIds, true);
             $relatedProductIds = collect($relatedProducts)->pluck('productID')->toArray();
-    
+
             $products = Product::whereIn('id', $relatedProductIds)->get();
-    
+
             foreach ($products as $product) {
                 if (!$product) continue;
-    
+
                 $color = Varient::where('product_id', $product->id)->first();
                 $sizes = Size::where('product_id', $product->id)->get();
-    
+
                 // ✅ If no size, create one default "variant"
                 if ($sizes->count() == 0) {
                     $sizes = collect([(object)[
@@ -72,45 +72,45 @@ class WebviewController extends Controller
                         'stock' => 10
                     ]]);
                 }
-    
+
                 foreach ($sizes as $index => $size) {
                     $item = $channel->addChild('item');
-                
+
                     // Unique ID using mainproduct, product, and index
-                    $item->addChild('g:id', 'P' . $mainproduct->id . '_' . $product->id . '_' . $index); 
-    
+                    $item->addChild('g:id', 'P' . $mainproduct->id . '_' . $product->id . '_' . $index);
+
                     // Group ID for variants (Facebook will group colors/sizes under same product)
                     $item->addChild('g:item_group_id', $mainproduct->id);
-    
+
                     // Title & Description
-                    $item->addChild('g:title', htmlspecialchars($product->ProductName)); 
+                    $item->addChild('g:title', htmlspecialchars($product->ProductName));
                     $item->addChild('g:description',  htmlspecialchars(strip_tags($product->ProductDetails)));
-    
+
                     // Link & Image
                     $item->addChild('g:link', 'https://thebdshop.com/view-product/' . $mainproduct->ProductSlug);
                     $item->addChild('g:image_link', 'https://thebdshop.com/' . $product->ProductImage);
-    
+
                     // Brand
                     $item->addChild('g:brand', 'thebdshop');
-    
+
                     // Color
                     $item->addChild('g:color', $color ? $color->color : '');
-    
+
                     // Size
                     if (!empty($size->size)) {
                         $item->addChild('g:size', $size->size);
                     }
-    
+
                     // Condition
                     $item->addChild('g:condition', 'new');
-    
+
                     // Availability
                     if (isset($size->available_stock) && $size->available_stock > 0) {
                         $item->addChild('g:availability', 'in stock');
                     } else {
                         $item->addChild('g:availability', 'out of stock');
                     }
-    
+
                     // Price & Sale Price
                     $item->addChild('g:price', number_format($size->RegularPrice, 2) . ' BDT');
                     if ($size->SalePrice && $size->SalePrice < $size->RegularPrice) {
@@ -119,7 +119,7 @@ class WebviewController extends Controller
                 }
             }
         }
-    
+
         return Response::make($xml->asXML(), 200, ['Content-Type' => 'application/xml']);
     }
 
@@ -199,9 +199,9 @@ class WebviewController extends Controller
 
         $topproducts = Mainproduct::where('status', 'Active')->where('top_rated', '1')->orderByRaw('ISNULL(`position`), `position` ASC')->select('id', 'ProductName', 'ProductSlug', 'ProductImage','ProductHoverImage' , 'status', 'position', 'top_rated', 'RelatedProductIds')->latest()->get();
         $today_deal = Mainproduct::where('status', 'Active')->where('top_rated', '1')->orderByRaw('ISNULL(`position`), `position` ASC')->select('id', 'ProductName', 'ProductSlug', 'ProductImage', 'ProductHoverImage','status', 'position', 'top_rated', 'RelatedProductIds')->latest()->take(2)->get();
-        
+
         $our_products = Mainproduct::where('status', 'Active')->orderByRaw('ISNULL(`position`), `position` ASC')->select('id', 'ProductName', 'ProductSlug', 'ProductImage', 'ProductHoverImage','status', 'position', 'top_rated', 'RelatedProductIds')->inRandomOrder()->take(8)->get();
-        
+
 
         $categoryproducts = Category::where('status', 'Active')->orderBy('position')->get();
 
@@ -212,7 +212,7 @@ class WebviewController extends Controller
                 ->orderBy('id', 'desc')
                 ->get();
         });
-      
+
       return view('webview.content.maincontent', ['categories' => $categories, 'sliders' => $sliders, 'adds' => $adds, 'addbottoms' => $addbottoms, 'topproducts' => $topproducts, 'categoryproducts' => $categoryproducts, 'today_deal' => $today_deal, 'our_products' => $our_products]);
     }
 
@@ -642,7 +642,7 @@ class WebviewController extends Controller
         $categories = Category::with(['subcategories' => function ($query) {
         $query->select('id', 'sub_category_name', 'slug', 'category_id')
               ->where('status', 'Active')
-              ->orderBy('id', 'desc'); 
+              ->orderBy('id', 'desc');
     }])
     ->where('status', 'Active')
     ->select('id', 'category_name', 'slug')
@@ -713,5 +713,57 @@ class WebviewController extends Controller
         } else {
             return response()->json('Error', 200);
         }
+    }
+
+    public function quick($id)
+    {
+        $singlemain = Mainproduct::find($id);
+
+        $relatedIds = json_decode($singlemain->RelatedProductIds, true);
+
+        if (!$relatedIds || !isset($relatedIds[0]['productID'])) {
+            return back()->with('error', 'No related product found');
+        }
+
+        $productId = $relatedIds[0]['productID'];
+
+        $productdetails = Product::with([
+            'sizes' => function ($query) {
+                $query->select('id', 'product_id', 'size', 'Discount', 'RegularPrice', 'SalePrice')
+                    ->where('status', 'Active');
+            },
+            'weights' => function ($query) {
+                $query->select('id', 'product_id', 'Discount', 'RegularPrice', 'SalePrice');
+            }
+        ])->where('id', $productId)->first();
+
+        if (!$productdetails) {
+            return back()->with('error', 'Product not found');
+        }
+
+        $varients = Varient::where('product_id', $productdetails->id)->get();
+
+        $relatedproducts = Mainproduct::where('category_id', $singlemain->category_id)
+            ->where('status', 'Active')
+            ->orderByRaw('ISNULL(`position`), `position` ASC')
+            ->select('id', 'ProductName', 'ProductSlug', 'ProductImage', 'status', 'position', 'top_rated', 'RelatedProductIds')
+            ->inRandomOrder()
+            ->limit(8)
+            ->get();
+
+        $sizesolds = Size::where('product_id', $productdetails->id)
+            ->where('status', 'Active')
+            ->get();
+
+        $weightolds = Weight::where('product_id', $productdetails->id)->get();
+
+        return view('webview.content.product.quick', [
+            'sizesolds' => $sizesolds,
+            'weightolds' => $weightolds,
+            'singlemain' => $singlemain,
+            'varients' => $varients,
+            'relatedproducts' => $relatedproducts,
+            'productdetails' => $productdetails
+        ]);
     }
 }
