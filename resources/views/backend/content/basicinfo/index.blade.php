@@ -150,6 +150,68 @@
         </div>
         <div class="mb-4 col-sm-12 col-md-12 col-xl-12">
             <div class="p-4 rounded bg-secondary h-100">
+                <h2 class="mb-4" style="text-align: center;color:red">Flashsale and Banner Time and Content</h2>
+                <form action="{{ route('admin.flash-footer.update', $webinfo->id) }}" method="POST"
+                    enctype="multipart/form-data">
+                    @method('PUT')
+                    @csrf
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="mb-3 form-floating">
+                                <input type="datetime-local" class="form-control" name="flash_sale_time"
+                                value="{{ \Carbon\Carbon::parse($webinfo->flash_sale_time)->format('Y-m-d\TH:i') }}" id="flash_sale_time"
+                                placeholder="Flash Sale Offer Time">
+                                <label for="floatingInput">Flash Sale Offer Time</label>
+                            </div>
+                            <div class="mb-3 form-floating">
+                                <input type="datetime-local" class="form-control" name="banner_time"
+                                value="{{ \Carbon\Carbon::parse($webinfo->banner_time)->format('Y-m-d\TH:i') }}" id="banner_time"
+                                placeholder="Banner Offer Time">
+                                <label for="floatingInput">Banner Time</label>
+                            </div>
+                            <div class="mb-3 form-floating">
+                                <input type="text" class="form-control" name="banner_subtitle"
+                                    value="{{ $webinfo->banner_subtitle }}" id="banner_subtitle"
+                                    placeholder="Banner Subtitle">
+                                <label for="floatingInput">Banner Subtitle</label>
+                            </div>
+
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3 form-floating">
+                                <input type="text" class="form-control" name="banner_title"
+                                    value="{{ $webinfo->banner_title }}" id="banner_title"
+                                    placeholder="Banner Title">
+                                <label for="floatingInput">Banner Title</label>
+                            </div>
+                            <div class="mb-3 form-floating">
+                                <input type="text" class="form-control" name="banner_link"
+                                    value="{{ $webinfo->banner_link }}" id="banner_link"
+                                    placeholder="Banner Link">
+                                <label for="floatingInput">Link</label>
+                            </div>
+                            <div class="mb-3 form-floating">
+                                <input type="file" class="form-control" name="banner_img" id="banner_img"
+                                    placeholder="Banner Image">
+                                <label for="floatingInput">Image</label>
+                            </div>
+                            <div class="mt-2">
+                                <img src="{{ asset($basicinfo->banner_img) }}" alt="" width="50">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mt-3">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">Update</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="mb-4 col-sm-12 col-md-12 col-xl-12">
+            <div class="p-4 rounded bg-secondary h-100">
                 <h2 class="mb-4" style="text-align: center;color:red">Shipping Information Update</h2>
                 <form action="{{ route('admin.shipping.update', $webinfo->id) }}" method="POST"
                     enctype="multipart/form-data">

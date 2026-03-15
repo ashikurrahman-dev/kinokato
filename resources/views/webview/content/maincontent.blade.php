@@ -178,8 +178,8 @@
             <!-- Categories -->
             <div class="p-0 mb-3 col-lg-2 col-12 d-sm-none">
                 <!-- <div class="category-title">
-                        <h5 class="m-0 text-white fw-bold">Categories</h5>
-                    </div> -->
+                                                                <h5 class="m-0 text-white fw-bold">Categories</h5>
+                                                            </div> -->
                 <div class="category-list">
                     <ul class="p-0 m-0 list-unstyled">
                         @forelse ($categories as $category)
@@ -369,10 +369,10 @@
 
                                                         </div>
                                                         <!-- <a href="{{ url('view-product/' . $promotional->ProductSlug) }}">
-                                                                                        <button class="mb-0 btn btn-danger btn-sm btn-block"
-                                                                                            style="width: 100%;border-radius: 0%;"
-                                                                                            id="purcheseBtn">অর্ডার করুন</button>
-                                                                                    </a> -->
+                                                                                                                                                                                                                                                        <button class="mb-0 btn btn-danger btn-sm btn-block"
+                                                                                                                                                                                                                                                            style="width: 100%;border-radius: 0%;"
+                                                                                                                                                                                                                                                            id="purcheseBtn">অর্ডার করুন</button>
+                                                                                                                                                                                                                                                    </a> -->
 
                                                     </div>
                                                     <!-- /.col -->
@@ -573,10 +573,10 @@
 
                                                     </div>
                                                     <!-- <a href="{{ url('view-product/' . $promotional->ProductSlug) }}">
-                                                                                        <button class="mb-0 btn btn-danger btn-sm btn-block"
-                                                                                            style="width: 100%;border-radius: 0%;"
-                                                                                            id="purcheseBtn">অর্ডার করুন</button>
-                                                                                    </a> -->
+                                                                                                                                                                                                                                                        <button class="mb-0 btn btn-danger btn-sm btn-block"
+                                                                                                                                                                                                                                                            style="width: 100%;border-radius: 0%;"
+                                                                                                                                                                                                                                                            id="purcheseBtn">অর্ডার করুন</button>
+                                                                                                                                                                                                                                                    </a> -->
 
                                                 </div>
                                                 <!-- /.col -->
@@ -597,6 +597,57 @@
         @else
         @endif
 
+
+        <section class="music-banner-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="music-banner-box">
+                            <img src="{{ asset($basicinfo->banner_img) }}"
+                                class="music-banner-bg">
+
+                            <div class="music-banner-overlay-content">
+
+                                <p class="music-banner-category">{{ $basicinfo->banner_subtitle }}</p>
+
+                                <h2 class="music-banner-title">
+                                    {!! $basicinfo->banner_title !!}
+                                </h2>
+
+                                <div class="music-banner-timer">
+
+                                    <div class="music-banner-time">
+                                        <span id="mb-days">00</span>
+                                        <p>Days</p>
+                                    </div>
+
+                                    <div class="music-banner-time">
+                                        <span id="mb-hours">00</span>
+                                        <p>Hours</p>
+                                    </div>
+
+                                    <div class="music-banner-time">
+                                        <span id="mb-minutes">00</span>
+                                        <p>Minutes</p>
+                                    </div>
+
+                                    <div class="music-banner-time">
+                                        <span id="mb-seconds">00</span>
+                                        <p>Seconds</p>
+                                    </div>
+                                </div>
+                                <a href="{{ $basicinfo->banner_link }}" class="music-banner-btn">Buy Now!</a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
         <div class="container">
             <hr style="border: 1px solid #999;margin: 50px 0;">
         </div>
@@ -614,8 +665,8 @@
                             <div style="display:flex; align-items:center; justify-content: space-between;margin:20px 0">
                                 <h2 class="m-0 main-title">Explore Our Products</h2>
                                 <!-- <a href="{{ url('promotional/products') }}" class="mb-0 btn btn-sm"
-                                                style="padding: 12px 30px;color: white;font-weight: bold;font-size:12px; background:#db4444;">VIEW
-                                                ALL</a> -->
+                                    style="padding: 12px 30px;color: white;font-weight: bold;font-size:12px; background:#db4444;">VIEW
+                                    ALL</a> -->
                             </div>
                         </div>
                     </div>
@@ -732,10 +783,10 @@
 
                                                     </div>
                                                     <!-- <a href="{{ url('view-product/' . $promotional->ProductSlug) }}">
-                                                                                        <button class="mb-0 btn btn-danger btn-sm btn-block"
-                                                                                            style="width: 100%;border-radius: 0%;"
-                                                                                            id="purcheseBtn">অর্ডার করুন</button>
-                                                                                    </a> -->
+                                                        <button class="mb-0 btn btn-danger btn-sm btn-block"
+                                                            style="width: 100%;border-radius: 0%;"
+                                                            id="purcheseBtn">অর্ডার করুন</button>
+                                                    </a> -->
 
                                                 </div>
                                                 <!-- /.col -->
@@ -768,165 +819,165 @@
 
         <!-- banner -->
         <!-- <div class="row gutters-10">
-                @if (count($adds) == '2')
-                    @forelse ($adds as $add)
-                        <div class="col-lg-6 col-6 ps-lg-0">
-                            <div class="mb-1 media-banner mb-lg-0">
-                                <a href="{{ $add->add_link }}" target="_blank" class="banner-container">
-                                    <img src="{{ asset($add->add_image) }}" alt="{{ env('APP_NAME') }}"
-                                        class="img-fluid ls-is-cached lazyloaded">
-                                </a>
-                            </div>
-                        </div>
-                    @empty
-                    @endforelse
-                @else
-                    @forelse ($adds as $add)
-                        <div class="col-lg-12 col-12 ps-0">
-                            <div class="mb-1 media-banner mb-lg-0">
-                                <a href="{{ $add->add_link }}" target="_blank" class="banner-container">
-                                    <img src="{{ asset($add->add_image) }}" alt="{{ env('APP_NAME') }}"
-                                        class="img-fluid ls-is-cached lazyloaded">
-                                </a>
-                            </div>
-                        </div>
-                    @empty
-                    @endforelse
+        @if (count($adds) == '2')
+            @forelse ($adds as $add)
+                <div class="col-lg-6 col-6 ps-lg-0">
+                    <div class="mb-1 media-banner mb-lg-0">
+                        <a href="{{ $add->add_link }}" target="_blank" class="banner-container">
+                            <img src="{{ asset($add->add_image) }}" alt="{{ env('APP_NAME') }}"
+                                class="img-fluid ls-is-cached lazyloaded">
+                        </a>
+                    </div>
+                </div>
+            @empty
+            @endforelse
+        @else
+            @forelse ($adds as $add)
+                <div class="col-lg-12 col-12 ps-0">
+                    <div class="mb-1 media-banner mb-lg-0">
+                        <a href="{{ $add->add_link }}" target="_blank" class="banner-container">
+                            <img src="{{ asset($add->add_image) }}" alt="{{ env('APP_NAME') }}"
+                                class="img-fluid ls-is-cached lazyloaded">
+                        </a>
+                    </div>
+                </div>
+            @empty
+            @endforelse
+        @endif
+    </div> -->
+
+<!-- category wise product -->
+<!-- @forelse ($categoryproducts as $key => $categoryproduct)
+        @if (count($categoryproduct->mainproducts) > 0)
+            <div class="pb-0 bg-white row">
+                <div class="col-12"
+                    style="border-bottom: 1px solid #212129;padding-left: 0;display: flex;justify-content: space-between;">
+                    <div class="px-2 pt-0 p-md-3 d-flex justify-content-between"
+                        style="padding-bottom:4px !important;padding-top: 8px !important;">
+                        <h4 class="m-0"><b>{{ $categoryproduct->category_name }}</b></h4>
+                    </div>
+                    <a href="{{ url('products/category/' . $categoryproduct->slug) }}"
+                        class="mb-0 btn btn-danger btn-sm"
+                        style="padding: 4px;height: 26px;color: white;font-weight: bold;margin-top:9px;font-size:12px;background: #212129;border: 1px solid #212129;">VIEW
+                        ALL</a>
+                </div>
+                @if(App\Models\Category::find($categoryproduct->id)->category_banner)
+                    <div class="mt-1 mb-2 col-12">
+                        <img src="{{ asset(App\Models\Category::find($categoryproduct->id)->category_banner) }}" alt="" class="category_Banner_Image">
+                    </div>
                 @endif
-            </div> -->
 
-        <!-- category wise product -->
-        <!-- @forelse ($categoryproducts as $key => $categoryproduct)
-                @if (count($categoryproduct->mainproducts) > 0)
-                    <div class="pb-0 bg-white row">
-                        <div class="col-12"
-                            style="border-bottom: 1px solid #212129;padding-left: 0;display: flex;justify-content: space-between;">
-                            <div class="px-2 pt-0 p-md-3 d-flex justify-content-between"
-                                style="padding-bottom:4px !important;padding-top: 8px !important;">
-                                <h4 class="m-0"><b>{{ $categoryproduct->category_name }}</b></h4>
-                            </div>
-                            <a href="{{ url('products/category/' . $categoryproduct->slug) }}"
-                                class="mb-0 btn btn-danger btn-sm"
-                                style="padding: 4px;height: 26px;color: white;font-weight: bold;margin-top:9px;font-size:12px;background: #212129;border: 1px solid #212129;">VIEW
-                                ALL</a>
-                        </div>
-                        @if(App\Models\Category::find($categoryproduct->id)->category_banner)
-                            <div class="mt-1 mb-2 col-12">
-                                <img src="{{ asset(App\Models\Category::find($categoryproduct->id)->category_banner) }}" alt="" class="category_Banner_Image">
-                            </div>
-                        @endif
+                @forelse ($categoryproduct->mainproducts as $product)
+                        @php
+                            $relatedProducts = json_decode($product->RelatedProductIds);
+                            $firstcatepro = null;
 
-                        @forelse ($categoryproduct->mainproducts as $product)
-                                @php
-                                    $relatedProducts = json_decode($product->RelatedProductIds);
-                                    $firstcatepro = null;
+                            if (is_array($relatedProducts) && isset($relatedProducts[0]->productID)) {
+                                $firstcatepro=App\Models\Product::with([
+                                'sizes' => function ($query) {
+                                    $query->select('id','product_id','Discount','RegularPrice','SalePrice')->take(1);
+                                }
+                                ])->where('id',json_decode($product->RelatedProductIds)[0]->productID)->select('id','ProductName')->first();
+                            }
+                        @endphp
 
-                                    if (is_array($relatedProducts) && isset($relatedProducts[0]->productID)) {
-                                        $firstcatepro=App\Models\Product::with([
-                                        'sizes' => function ($query) {
-                                            $query->select('id','product_id','Discount','RegularPrice','SalePrice')->take(1);
-                                        }
-                                        ])->where('id',json_decode($product->RelatedProductIds)[0]->productID)->select('id','ProductName')->first();
-                                    }
-                                @endphp
+                        @if (isset($firstcatepro))
+                        @php
+                            $category = App\Models\Category::find($product->category_id);
+                        @endphp
 
-                                @if (isset($firstcatepro))
-                                @php
-                                    $category = App\Models\Category::find($product->category_id);
-                                @endphp
-
-                                    <div class="mb-3 col-6 col-md-4 col-lg-2">
-                                            <div class="product">
-                                                <div class="product-micro">
-                                                    <div class="row product-micro-row">
-                                                        <div class="col-12">
-                                                            <div class="product-image" style="position: relative; overflow: hidden;">
-                                                                <div class="text-center image" style="position: relative;">
-                                                                    <div class="frs_discount">
-                                                                        <span>
-                                                                            {{ ($firstcatepro->sizes[0]->RegularPrice > 0) ? round((($firstcatepro->sizes[0]->RegularPrice - $firstcatepro->sizes[0]->SalePrice) / $firstcatepro->sizes[0]->RegularPrice) * 100) : 0 }}%
-                                                                            <br>
-                                                                            <span class="pip_pip_1s">ছাড়</span>
-                                                                        </span>
-                                                                    </div>
-
-                                                                    <a href="{{ url('view-product/' . $product->ProductSlug) }}" class="hover-switch"
-                                                                       data-main="{{ asset($product->ProductImage) }}"
-                                                                       data-hover="{{ !empty($product->ProductHoverImage) ? asset($product->ProductHoverImage) : '' }}">
-                                                                        <img src="{{ asset($product->ProductImage) }}"
-                                                                             alt="{{ $product->ProductName }}"
-                                                                             class="switchable-img"
-                                                                             style="width:100%; transition: opacity 0.3s ease;">
-                                                                    </a>
-                                                                </div>
+                            <div class="mb-3 col-6 col-md-4 col-lg-2">
+                                    <div class="product">
+                                        <div class="product-micro">
+                                            <div class="row product-micro-row">
+                                                <div class="col-12">
+                                                    <div class="product-image" style="position: relative; overflow: hidden;">
+                                                        <div class="text-center image" style="position: relative;">
+                                                            <div class="frs_discount">
+                                                                <span>
+                                                                    {{ ($firstcatepro->sizes[0]->RegularPrice > 0) ? round((($firstcatepro->sizes[0]->RegularPrice - $firstcatepro->sizes[0]->SalePrice) / $firstcatepro->sizes[0]->RegularPrice) * 100) : 0 }}%
+                                                                    <br>
+                                                                    <span class="pip_pip_1s">ছাড়</span>
+                                                                </span>
                                                             </div>
-                                                        </div>
 
-
-
-                                                        <div class="col-12">
-                                                            <div class="p-2 infofe p-md-2"
-                                                                style="padding-bottom: 4px !important;background: white;">
-                                                                <div class="product-info">
-                                                                    <h2 class="name text-truncate" id="f_name"><a
-                                                                            href="{{ url('view-product/' . $product->ProductSlug) }}"
-                                                                            id="f_pro_name">{{ $product->ProductName }}</a>
-                                                                    </h2>
-                                                                </div>
-
-
-                                                                <div class="d-flex" style="justify-content:space-between">
-                                                                    <div class="star" style="padding-top: 5px;">
-                                                                        <span
-                                                                            style="font-weight: bold;color:black;font-size:10px">({{ App\Models\Review::where('product_id', $product->id)->get()->count() }})</span>
-
-                                                                        <span class="fas fa-star" id="checked"></span>
-                                                                        <span class="fas fa-star" id="checked"></span>
-                                                                        <span class="fas fa-star" id="checked"></span>
-                                                                        <span class="fas fa-star" id="checked"></span>
-                                                                        <span class="fas fa-star" id="checked"></span>
-
-                                                                    </div>
-
-                                                                </div>
-
-                                                                <div class="price-box">
-                                                                    <del class="old-product-price strong-400"
-                                                                        style="color:red">৳
-                                                                        {{ round($firstcatepro->sizes[0]->RegularPrice) }}</del>
-                                                                    <span class="product-price strong-600"
-                                                                        style="color:black">৳
-                                                                        {{ round($firstcatepro->sizes[0]->SalePrice) }}</span>
-                                                                </div>
-
-                                                            </div>
-                                                            <a href="{{ url('view-product/' . $product->ProductSlug) }}">
-                                                                <button class="mb-0 btn btn-danger btn-sm btn-block"
-                                                                    style="width: 100%;border-radius: 0%;"
-                                                                    id="purcheseBtn">অর্ডার করুন</button>
+                                                            <a href="{{ url('view-product/' . $product->ProductSlug) }}" class="hover-switch"
+                                                                data-main="{{ asset($product->ProductImage) }}"
+                                                                data-hover="{{ !empty($product->ProductHoverImage) ? asset($product->ProductHoverImage) : '' }}">
+                                                                <img src="{{ asset($product->ProductImage) }}"
+                                                                        alt="{{ $product->ProductName }}"
+                                                                        class="switchable-img"
+                                                                        style="width:100%; transition: opacity 0.3s ease;">
                                                             </a>
-
                                                         </div>
-
                                                     </div>
-
                                                 </div>
 
 
+
+                                                <div class="col-12">
+                                                    <div class="p-2 infofe p-md-2"
+                                                        style="padding-bottom: 4px !important;background: white;">
+                                                        <div class="product-info">
+                                                            <h2 class="name text-truncate" id="f_name"><a
+                                                                    href="{{ url('view-product/' . $product->ProductSlug) }}"
+                                                                    id="f_pro_name">{{ $product->ProductName }}</a>
+                                                            </h2>
+                                                        </div>
+
+
+                                                        <div class="d-flex" style="justify-content:space-between">
+                                                            <div class="star" style="padding-top: 5px;">
+                                                                <span
+                                                                    style="font-weight: bold;color:black;font-size:10px">({{ App\Models\Review::where('product_id', $product->id)->get()->count() }})</span>
+
+                                                                <span class="fas fa-star" id="checked"></span>
+                                                                <span class="fas fa-star" id="checked"></span>
+                                                                <span class="fas fa-star" id="checked"></span>
+                                                                <span class="fas fa-star" id="checked"></span>
+                                                                <span class="fas fa-star" id="checked"></span>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="price-box">
+                                                            <del class="old-product-price strong-400"
+                                                                style="color:red">৳
+                                                                {{ round($firstcatepro->sizes[0]->RegularPrice) }}</del>
+                                                            <span class="product-price strong-600"
+                                                                style="color:black">৳
+                                                                {{ round($firstcatepro->sizes[0]->SalePrice) }}</span>
+                                                        </div>
+
+                                                    </div>
+                                                    <a href="{{ url('view-product/' . $product->ProductSlug) }}">
+                                                        <button class="mb-0 btn btn-danger btn-sm btn-block"
+                                                            style="width: 100%;border-radius: 0%;"
+                                                            id="purcheseBtn">অর্ডার করুন</button>
+                                                    </a>
+
+                                                </div>
+
                                             </div>
+
                                         </div>
-                                @endif
-
-                        @empty
-                        @endforelse
 
 
-                    </div>
-                @else
-                @endif
+                                    </div>
+                                </div>
+                        @endif
 
-            @empty
-            @endforelse -->
+                @empty
+                @endforelse
+
+
+            </div>
+        @else
+        @endif
+
+    @empty
+    @endforelse -->
 
         <div class="row gutters-10">
             @if (count($addbottoms) == '2')
@@ -1078,6 +1129,46 @@
         }, 1000);
 
     </script>
+
+    <script>
+
+function musicBannerCountdown(endTime) {
+
+    let end = new Date(endTime).getTime();
+
+    let x = setInterval(function () {
+
+        let now = new Date().getTime();
+        let distance = end - now;
+
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("mb-days").innerHTML = "00";
+            document.getElementById("mb-hours").innerHTML = "00";
+            document.getElementById("mb-minutes").innerHTML = "00";
+            document.getElementById("mb-seconds").innerHTML = "00";
+            return;
+        }
+
+        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+        let minutes = Math.floor((distance / (1000 * 60)) % 60);
+        let seconds = Math.floor((distance / 1000) % 60);
+
+        document.getElementById("mb-days").innerHTML = days;
+        document.getElementById("mb-hours").innerHTML = hours;
+        document.getElementById("mb-minutes").innerHTML = minutes;
+        document.getElementById("mb-seconds").innerHTML = seconds;
+
+    }, 1000);
+}
+
+// Laravel blade থেকে date pass করা
+let bannerTime = "{{ $basicinfo->banner_time }}";
+
+musicBannerCountdown(bannerTime);
+
+</script>
 
 
 

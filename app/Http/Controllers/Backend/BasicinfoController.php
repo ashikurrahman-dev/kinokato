@@ -57,8 +57,8 @@ class BasicinfoController extends Controller
             $logoImgUrl = $uploadPath . $name;
             $webinfo->logo = $logoImgUrl;
         }
-        
-        if ($request->favicon) { 
+
+        if ($request->favicon) {
             $logof = $request->file('favicon');
             $namef = time() . "_" . $logof->getClientOriginalName();
             $uploadPathf = ('public/images/categorybanner/');
@@ -66,8 +66,8 @@ class BasicinfoController extends Controller
             $logoImgUrlf = $uploadPathf . $namef;
             $webinfo->favicon = $logoImgUrlf;
         }
-        
-        if ($request->page_image) { 
+
+        if ($request->page_image) {
             $logop = $request->file('page_image');
             $namep = time() . "_" . $logop->getClientOriginalName();
             $uploadPathp = ('public/images/categorybanner/');
@@ -146,6 +146,54 @@ class BasicinfoController extends Controller
         }
         $webinfo->update();
         return redirect()->back()->with('message', 'Social Links updated successfully');
+    }
+
+    public function flashfooterinfo(Request $request, $id)
+    {
+        $webinfo = Basicinfo::where('id', $id)->first();
+        if (isset($request->flash_sale_time)) {
+            $webinfo->flash_sale_time = $request->flash_sale_time;
+        } else {
+            $webinfo->flash_sale_time = null;
+        }
+        if (isset($request->banner_time)) {
+            $webinfo->banner_time = $request->banner_time;
+        } else {
+            $webinfo->banner_time = null;
+        }
+        if (isset($request->banner_subtitle)) {
+            $webinfo->banner_subtitle = $request->banner_subtitle;
+        } else {
+            $webinfo->banner_subtitle = null;
+        }
+        if (isset($request->banner_title)) {
+            $webinfo->banner_title = $request->banner_title;
+        } else {
+            $webinfo->banner_title = null;
+        }
+        if (isset($request->banner_link)) {
+            $webinfo->banner_link = $request->banner_link;
+        } else {
+            $webinfo->banner_link = null;
+        }
+        if (isset($request->banner_img)) {
+            if ($request->file('banner_img')) {
+                $banner_img = $request->file('banner_img');
+                if (!is_null($webinfo->banner_img) && file_exists($webinfo->banner_img)) {
+                    unlink($webinfo->banner_img);
+                }
+
+                $imageName          = microtime('.') . '.' . $banner_img->getClientOriginalExtension();
+                $imagePath          = 'public/backend/images/addbanner/';
+                $banner_img->move($imagePath, $imageName);
+
+                $webinfo->banner_img   = $imagePath . $imageName;
+            }
+        } else {
+            $webinfo->banner_img = null;
+        }
+        $webinfo->update();
+        return redirect()->back()->with('message', 'Text info updated successfully');
     }
 
     public function shippinginfo(Request $request, $id)

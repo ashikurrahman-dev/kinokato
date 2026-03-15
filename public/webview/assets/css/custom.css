@@ -1,0 +1,79 @@
+.music-banner-box {
+    position: relative;
+    width: 100%;
+}
+
+.music-banner-bg {
+    width: 100%;
+    display: block;
+    border-radius: 6px;
+}
+
+.music-banner-overlay-content {
+    position: absolute;
+    top: 50%;
+    left: 60px;
+    transform: translateY(-50%);
+    color: #fff;
+}
+
+.music-banner-category {
+    color: #00ff66;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.music-banner-title {
+    font-size: 55px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 25px;
+}
+
+.music-banner-timer {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.music-banner-time {
+    width: 70px;
+    height: 70px;
+    background: #fff;
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.music-banner-time span {
+    font-size: 18px;
+}
+
+.music-banner-time p {
+    font-size: 12px;
+    margin: 0;
+}
+
+.music-banner-btn {
+    background: #00ff66;
+    padding: 12px 35px;
+    color: #000;
+    font-weight: 600;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.music-banner-btn:hover {
+    background: #00ff66;
+    padding: 12px 35px;
+    color: #000;
+    font-weight: 600;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
