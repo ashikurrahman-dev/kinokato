@@ -12,6 +12,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset(App\Models\Basicinfo::first()->logo) }}">
     <link rel="shortcut icon" type="image/png" href="{{ asset(App\Models\Basicinfo::first()->logo) }}" />
     <link rel="stylesheet" href="{{ asset('public/webview/assets/css/zoomsl.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/webview/assets/css/custom.css') }}">
     @yield('subhead')
     <style>
 
