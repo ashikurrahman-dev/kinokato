@@ -1,72 +1,125 @@
 @extends('webview.master')
 
 @section('maincontent')
-@section('title')
-    {{ env('APP_NAME') }}-Login
-@endsection
+    @section('title')
+        {{ env('APP_NAME') }}-Login
+    @endsection
 
-<div class="body-content">
     <div class="container">
-        <div class="sign-in-page m-b-10">
-            <div class="row">
-                <!-- create a new account -->
-                <div class="col-md-3 col-sm-2 create-new-account">
+        <div class="row login-wrapper">
 
-                </div>
-                <!-- Sign-in -->
-                <div class="mt-4 mb-4 card col-md-6 col-sm-8 sign-in">
-                    <p class="pt-4 text-center"> <b>Hello, Welcome to your account.</b> </p>
+            <div class="col-lg-7 col-12 left-img">
+                <img src="{{ asset('public/login-register-page-side-imag.png') }}">
+            </div>
 
-                    <form class="register-form outer-top-xs" method="POST" action="{{ url('login') }}"
-                        enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group">
-                            <label class="info-title" for="exampleInputEmail1">Email / Phone<span>*</span></label>
-                            <input type="text" name="email" class="form-control unicase-form-control text-input"
-                                id="exampleInputEmail1">
-                        </div>
-                        <div class="form-group">
-                            <label class="info-title" for="exampleInputPassword1">Password <span>*</span></label>
-                            <input type="password" name="password" class="form-control unicase-form-control text-input"
-                                id="exampleInputPassword1">
-                        </div>
-                        <div class="radio outer-xs">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Remember
-                                me!
-                            </label>
-                        </div>
-                        <button type="submit" id="submit-button"
-                            style="background:#000339;border:1px #000339;color: white;width:100%"
-                            class="btn-block btn-upper btn btn-dark checkout-page-button">Login</button>
-                        <div class="text-center radio outer-xs">
-                            <a href="{{ url('forgot-password') }}" class="forgot-password pull-right"
-                                style="color: #000">Forgot your
-                                Password?</a>
-                        </div>
-                    </form>
-                    <h4 class="text-center" style="margin-top: 20px;margin-bottom:20px;">
-                        Need an account? <a href="{{ url('register') }}" style="color: #000">Register Now</a>
-                    </h4>
+            <div class="col-lg-5 col-12 login-area">
 
-                    <a href="{{ url('auth/google') }}"
-                        style="margin-top: 0px !important;background: #e3e3e3;color: #0a0a0a;padding: 8px;border-radius: 6px;font-size: 24px;text-align: center;"
-                        class="mb-4 ml-2">
-                        <strong> <img src="{{ asset('public/search.png') }}" style="width: 30px;"> Login with
-                            Google</strong>
-                    </a>
+                <h2 class="login-title">Log in to Exclusive</h2>
+                <p class="login-sub">Enter your details below</p>
 
-                </div>
-                <!-- Sign-in -->
+                <form method="POST" action="{{ url('login') }}" enctype="multipart/form-data">
+                    @csrf
 
-                <!-- create a new account -->
-                <div class="col-md-3 col-sm-2 create-new-account">
+                    <div class="mb-4">
+                        <input type="text" class="form-control" name="email" placeholder="Email">
+                    </div>
 
-                </div>
-                <!-- create a new account -->
-            </div><!-- /.row -->
-        </div><!-- /.sigin-in-->
+                    <div class="mb-4">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between">
+
+                        <button type="submit" class="text-white btn login-btn">Log In</button>
+
+                        <a href="{{ url('register') }}" class="forgot">If Registered?</a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
     </div><!-- /.row -->
-</div><!-- /.sigin-in-->
+    <style>
+        .login-wrapper {
+            background: #fff;
+            align-items: center;
+        }
+
+        .left-img img {
+            width: 100%;
+        }
+
+        .login-area {
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .login-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .login-sub {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .form-control {
+            border: none !important;
+            border-bottom: 1px solid #ccc !important;
+            border-radius: 0 !important;
+            padding-left: 0;
+            background: transparent;
+            box-shadow: none !important;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-bottom: 1px solid #000 !important;
+            box-shadow: none !important;
+            outline: none;
+        }
+
+        .login-btn {
+            background: #e74c3c;
+            border: none;
+            padding: 8px 25px;
+        }
+
+        .login-btn:hover {
+            background: #e74c3c;
+            border: none;
+            padding: 8px 25px;
+        }
+
+        .forgot {
+            font-size: 14px;
+            color: #000;
+            text-decoration: none;
+            margin-left: 15px;
+            margin-top: -30px;
+        }
+
+        @media(max-width:768px) {
+
+            .login-area {
+                padding: 40px 25px;
+            }
+
+            .left-img {
+                padding: 20px;
+            }
+
+        }
+    </style>
 
 @endsection
