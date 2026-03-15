@@ -150,7 +150,7 @@
             border-radius: 4px;
             margin: 5px;
             font-size: 12px;
-            z-index:9999;
+            /* z-index:9999; */
         }
         .pip_pip_1s {
             animation: pip_pip 1s infinite !important;
@@ -397,15 +397,12 @@
                 responsive: {
                     0: {
                         items: 1,
-                        nav: false,
                     },
                     600: {
                          items: 1,
-                         nav: false
                         },
                     1000: {
                          items: 1,
-                         nav:true
                         }
                 }
             });
