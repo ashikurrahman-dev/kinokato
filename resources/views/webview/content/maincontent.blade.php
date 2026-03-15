@@ -1035,6 +1035,55 @@
 
     </div>
 
+    <style>
+  .features-section { background: #fff; padding: 50px 20px; }
+  .feature-icon-wrap {
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    background: #111;
+    transition: background .3s;
+  }
+  .feature-icon-wrap i { font-size: 26px; color: #fff; }
+  .feature-item:hover .feature-icon-wrap { background: #333; }
+  .feature-title { font-size: 14px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase; color: #111; margin-bottom: 8px; }
+  .feature-desc { font-size: 13px; color: #888; margin: 0; }
+</style>
+
+<section class="features-section">
+  <div class="container">
+    <div class="row text-center g-4">
+
+      <div class="col-12 col-md-4 feature-item">
+        <div class="feature-icon-wrap">
+          <i style="color:white;font-size:22px;" class="fa-solid fa-truck-fast"></i>
+        </div>
+        <h6 class="feature-title m-0">Free and Fast Delivery</h6>
+        <p class="feature-desc">Free delivery for all orders over $140</p>
+      </div>
+
+      <div class="col-12 col-md-4 feature-item">
+        <div class="feature-icon-wrap">
+          <i style="color:white;font-size:22px;" class="fa-solid fa-headset"></i>
+        </div>
+        <h6 class="feature-title m-0">24/7 Customer Service</h6>
+        <p class="feature-desc">Friendly 24/7 customer support</p>
+      </div>
+
+      <div class="col-12 col-md-4 feature-item">
+        <div class="feature-icon-wrap">
+          <i style="color:white;font-size:22px;" class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h6 class="feature-title m-0">Money Back Guarantee</h6>
+        <p class="feature-desc">We return money within 30 days</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
     @if (Auth::id())
         <input type="hidden" name="user_id" id="user_id" value="{{ Auth::id() }}">
