@@ -451,12 +451,12 @@
                                                     <div class="product-wishlist">
                                                         <form action="{{ route('wishlist.add') }}" method="POST" class="p-0 m-0">
                                                             @csrf
-                                                            <input type="hidden" name="product_id" value="{{ $productdetails->id }}">
+                                                            <input type="hidden" name="product_id" value="{{ $singlemain->id }}">
 
                                                             <button type="submit" class="p-0 m-0 bg-transparent border-0">
                                                                 @php
                                                                     $wishlist = session()->get('wishlist', []);
-                                                                    $inWishlist = in_array($productdetails->id, $wishlist);
+                                                                    $inWishlist = in_array($singlemain->id, $wishlist);
                                                                 @endphp
 
                                                                 @if($inWishlist)
@@ -563,6 +563,118 @@
                         </div>
                         <!-- /.row -->
                     </div>
+
+                    <div class="product-tabs inner-bottom-xs  wow fadeInUp">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ul id="product-tabs" class="nav nav-tabs nav-tab-cell"
+                                style="display: flex;justify-content: space-between;">
+                                <li class="active"><a data-bs-toggle="tab" id="istteb" href="#review"
+                                        style="margin-top: 10px;"> See Our
+                                        Products Review</a>
+                                </li>
+                                @auth
+                                    <li>
+                                        <button class="btn btn-info" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                            Leave Review
+                                        </button>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a class="btn btn-info" href="{{ url('login') }}">
+                                            Leave Reviews
+                                        </a>
+                                    </li>
+                                @endauth
+                            </ul>
+                            <!-- /.nav-tabs #product-tabs -->
+                        </div>
+                        <div class="col-sm-12">
+
+                            <div class="tab-content ">
+                                <!-- /.tab-pane -->
+
+                                <div id="review" class="tab-pane active show">
+                                    <div class="product-tab">
+
+                                        <div class="product-reviews">
+
+                                            <div class="row">
+                                                <div class="col-lg-7 col-12">
+                                                    <div class="review" id="reviewload">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.reviews -->
+                                        </div>
+
+                                    </div>
+                                    <!-- /.product-tab -->
+                                </div>
+                                <!-- /.tab-pane -->
+
+                            </div>
+                            <!-- /.tab-content -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title m-0">Give Rating And Review</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form name="form" id="AddReview" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group mb-3">
+                                        <div class="star">
+                                            <span class="fas fa-star" onclick="checked('1')" id="checked1"></span>
+                                            <span class="fas fa-star" onclick="checked('2')" id="checked2"></span>
+                                            <span class="fas fa-star" onclick="checked('3')" id="checked3"></span>
+                                            <span class="fas fa-star" onclick="checked('4')" id="checked4"></span>
+                                            <span class="fas fa-star" onclick="checked('5')" id="checked5"></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" value="{{ $productdetails->id }}" name="product_id"
+                                        id="product_id">
+                                    <div class="form-group mb-3">
+                                        <label for="floatingInput">Message</label>
+                                        <textarea class="form-group" name="messages" id="messages"></textarea>
+                                    </div>
+                                    <input type="hidden" name="rating" id="rating">
+                                    @if (Auth::id())
+                                        <input type="hidden" value="{{ Auth::id() }}" name="user_id"
+                                            id="user_id">
+                                    @else
+                                    @endif
+                                    <div class="mt-4 mb-4">
+                                        <input class="form-control form-control-lg" name="file" id="file"
+                                            type="file">
+                                    </div>
+                                    <br>
+                                    <div class="form-group mt-2" style="text-align: right">
+                                        <div class="submitBtnSCourse">
+                                            <button type="submit" name="btn" data-bs-dismiss="modal"
+                                                class="btn btn-dark btn-block" style="float: left">Close</button>
+                                            <button type="submit" name="btn"
+                                                class="btn btn-primary AddCourierBtn btn-block">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
                 </div>

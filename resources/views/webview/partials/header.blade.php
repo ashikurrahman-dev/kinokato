@@ -37,9 +37,9 @@
                     id="d-sm-none">
                     <!-- /.contact-row -->
                         <a href="{{ url('/') }}">Home</a>
-                        <a href="">Contact</a>
-                        <a href="">About</a>
-                        <a href="">Sing Up</a>
+                        <a href="{{ url('venture/contact_us') }}">Contact</a>
+                        <a href="{{ url('venture/about_us') }}">About</a>
+                        <a href="{{ url('register') }}">Sing Up</a>
 
                 </div>
                 <!-- /.top-search-holder -->
