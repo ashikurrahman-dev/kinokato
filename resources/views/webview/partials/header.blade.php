@@ -65,16 +65,6 @@
                            <i class="fa-regular fa-heart" style="font-size:21px;"></i>
                         </a>
                     </div>
-                    <!-- <div class="d-none d-xl-inline-block" id="d-sm-none">
-
-                        @if (Auth::id())
-                            <a href="#" type="button" onclick="openProfileNav()"
-                                style="color: #212129;font-size:20px"><i class="fa-solid fa-user" color="#212129"></i></a>
-                        @else
-                            <a href="{{ url('login') }}" id="iconhead" style="padding-right: 16px;"><i
-                                    class="fa-solid fa-user"></i></a>
-                        @endif
-                    </div> -->
 
                     <div class="dropdown-cart" id="d-sm-none" style="margin-left:-15px;">
                         <a href="#" class="dropdown" onclick="checkcart(this)" data-bs-toggle="dropdown"
@@ -94,6 +84,17 @@
                             </li>
                         </ul>
                         <!-- /.dropdown-menu-->
+                    </div>
+
+                    <div class="d-none d-xl-inline-block" id="d-sm-none">
+
+                        @if (Auth::id())
+                            <a href="#" type="button" onclick="openProfileNav()"
+                                style="color: #212129;font-size:20px"><i class="fa-solid fa-user" color="#212129"></i></a>
+                        @else
+                            <a href="{{ url('login') }}" id="iconhead" style="padding-right: 16px;font-size:20px"><i
+                                    class="fa-solid fa-user"></i></a>
+                        @endif
                     </div>
                     <!-- /.dropdown-cart -->
 

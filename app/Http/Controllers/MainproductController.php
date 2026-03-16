@@ -56,7 +56,7 @@ class MainproductController extends Controller
             $productImgUrl = $imguploadPath . $imgname;
             $mainproduct->ProductImage = $productImgUrl;
         }
-        
+
         if ($ProductHoverImage) {
             $imgname2 = $time . $ProductHoverImage->getClientOriginalName();
             $imguploadPath2 = ('public/images/product/');
@@ -85,24 +85,24 @@ class MainproductController extends Controller
             }else{
                 $products = Mainproduct::orderByRaw('ISNULL(`position`), `position` ASC');
             }
-            
+
         }else{
             if(isset($request->code)){
                 $products = Mainproduct::where('category_id',$request->category_id)->where('ProductName', 'LIKE', '%' . $request->code . '%')->orderByRaw('ISNULL(`position`), `position` ASC');
             }else{
                 $products = Mainproduct::where('category_id',$request->category_id)->orderByRaw('ISNULL(`position`), `position` ASC');
             }
-            
+
         }
-        
+
         return Datatables::of($products)
-            ->addColumn('position', function ($products) { 
+            ->addColumn('position', function ($products) {
                 if(isset($products->position)){
                     return '<div class="d-flex"><input type="text" id="pos'.$products->id.'" value="'. $products->position .'" style="width:60px;"><button type="button" class="btn btn-warning btn-sm btn-position'.$products->id.' ms-2" id="updateposition" data-id="'.$products->id.'"><i class="fa fa-check" aria-hidden="true"></i></button></div>';
                 }else{
                     return '<div class="d-flex"><input type="text" id="pos'.$products->id.'" value="" style="width:60px;"><button type="button" class="btn btn-warning btn-sm btn-position'.$products->id.' ms-2" id="updateposition" data-id="'.$products->id.'"><i class="fa fa-check" aria-hidden="true"></i></button></div>';
                 }
-                
+
             })
             ->addColumn('category', function ($products) {
                 $cate=Category::where('id', $products->category_id)->first();
@@ -111,7 +111,7 @@ class MainproductController extends Controller
                 }else{
                     return '<span style="color:red">Category Deleted</span>';
                 }
-                
+
             })
             ->addColumn('action', function ($products) {
                 return '<a href="mainproduct-edit/' . $products->id . '" class="btn btn-primary btn-sm" style="margin-bottom:2px;"><i class="bi bi-pencil-square"></i></a>';
@@ -128,7 +128,7 @@ class MainproductController extends Controller
         $product->update();
         return response()->json($product, 200);
     }
-    
+
     public function positionupdate(Request $request)
     {
 
@@ -142,6 +142,13 @@ class MainproductController extends Controller
     {
         $product = Mainproduct::where('id', $request->product_id)->first();
         $product->top_rated = $request->top_rated;
+        $product->update();
+        return response()->json($product, 200);
+    }
+    public function rbestsellingstatusupdate(Request $request)
+    {
+        $product = Mainproduct::where('id', $request->product_id)->first();
+        $product->bestselling = $request->bestselling;
         $product->update();
         return response()->json($product, 200);
     }
@@ -183,7 +190,7 @@ class MainproductController extends Controller
             $productImgUrl = $imguploadPath . $imgname;
             $mainproduct->ProductImage = $productImgUrl;
         }
-        
+
         if ($request->hasFile('ProductHoverImage')) {
             $imgname2 = $time . $ProductHoverImage->getClientOriginalName();
             $imguploadPath2 = ('public/images/product/');

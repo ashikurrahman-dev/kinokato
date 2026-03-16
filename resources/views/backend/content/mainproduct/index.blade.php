@@ -9,7 +9,7 @@
     div#roleinfo_length {
         color: red;
     }
-    
+
         div#productinfo_filter {
         display:none;
 }
@@ -56,7 +56,7 @@
                             <input type="text" name="code" id="code" class="form-control">
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -72,7 +72,8 @@
                                 <th>Name</th>
                                 <th>Category</th>
                                 <th>Position</th>
-                                <th>Promotion</th>
+                                <th>Flashsale</th>
+                                <th>Best Selling</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -142,6 +143,21 @@
                                 data.id + '">Active</button>';
                         } else {
                             return '<button type="button" class="btn btn-warning btn-sm btn-status" data-status="1" id="productratedstatusBtn" data-id="' +
+                                data.id + '" >Inactive</button>';
+                        }
+
+
+                    }
+                },
+                {
+                    "data": null,
+                    render: function(data) {
+
+                        if (data.bestselling == 1) {
+                            return '<button type="button" class="btn btn-success btn-sm btn-status" data-status="0" id="productbestsellingstatusBtn" data-id="' +
+                                data.id + '">Active</button>';
+                        } else {
+                            return '<button type="button" class="btn btn-warning btn-sm btn-status" data-status="1" id="productbestsellingstatusBtn" data-id="' +
                                 data.id + '" >Inactive</button>';
                         }
 
@@ -353,11 +369,11 @@
 
 
         // status update
-        
+
           $(document).on('click', '#updateposition', function() {
             let productId = $(this).data('id');
             let position = $('#pos'+productId).val();
-            
+
             $.ajax({
                 type: 'PUT',
                 url: 'mainproduct/position-update',
@@ -421,6 +437,38 @@
                 data: {
                     product_id: productId,
                     top_rated: productStatus,
+                    '_token': token
+                },
+
+                success: function(data) {
+                    swal({
+                        title: "Status updated !",
+                        icon: "success",
+                        showCancelButton: true,
+                        focusConfirm: false,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Yes",
+                        cancelButtonText: "No",
+                    });
+                    productinfo.ajax.reload();
+                },
+                error: function(error) {
+                    console.log('error');
+                }
+
+            });
+        });
+        // bestselling
+        $(document).on('click', '#productbestsellingstatusBtn', function() {
+            let productId = $(this).data('id');
+            let productStatus = $(this).data('status');
+
+            $.ajax({
+                type: 'PUT',
+                url: 'mainproduct/bestselling',
+                data: {
+                    product_id: productId,
+                    bestselling: productStatus,
                     '_token': token
                 },
 
@@ -507,7 +555,7 @@
 
             });
         });
-        
+
         $(document).on('change', '#category_id', function() {
             productinfo.ajax.reload();
         });
