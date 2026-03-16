@@ -349,11 +349,11 @@
                                                                     <img src="{{ asset($promotional->ProductImage) }}">
                                                                 </a>
 
-                                                                <form>
+                                                                {{-- <form>
                                                                     <button class="addtocartbtn">
                                                                         Add To Cart
                                                                     </button>
-                                                                </form>
+                                                                </form> --}}
                                                             </div>
                                                         </div>
                                                         <!-- /.product-image -->
@@ -553,11 +553,11 @@
                                                                 <img src="{{ asset($promotional->ProductImage) }}">
                                                             </a>
 
-                                                            <form>
+                                                            {{-- <form>
                                                                 <button class="addtocartbtn">
                                                                     Add To Cart
                                                                 </button>
-                                                            </form>
+                                                            </form> --}}
                                                         </div>
                                                     </div>
                                                     <!-- /.product-image -->
@@ -762,11 +762,11 @@
                                                                 <img src="{{ asset($promotional->ProductImage) }}">
                                                             </a>
 
-                                                            <form>
+                                                            {{-- <form>
                                                                 <button class="addtocartbtn">
                                                                     Add To Cart
                                                                 </button>
-                                                            </form>
+                                                            </form> --}}
                                                         </div>
                                                     </div>
                                                     <!-- /.product-image -->

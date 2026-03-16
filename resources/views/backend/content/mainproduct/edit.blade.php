@@ -44,8 +44,8 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="col-lg-6">
+
+                        <div class="col-lg-6 d-none">
                             <div class="form-group">
                                 <label for="ProductName">Product Hover Image</label>
                                 <input type="file" class="form-control" onchange="loadFile2(event)" id="ProductHoverImage">
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                         <div class="col-6">
                             <div class="form-group mb-3">
                                 <label for="ProductCategory" style="width: 100%;">Categories <span
@@ -264,7 +264,7 @@
                 URL.revokeObjectURL(output.src) // free memory
             }
         };
-        
+
         var loadFile2 = function(event) {
             var output = document.getElementById('prevImage2');
             output.src = URL.createObjectURL(event.target.files[0]);
@@ -272,7 +272,7 @@
                 URL.revokeObjectURL(output.src) // free memory
             }
         };
-        
+
         function setsubcategory() {
             var sub_id = $('#category_id').val();
             $.ajax({
@@ -293,10 +293,10 @@
                 }
             });
         }
-        
 
-    
-       
+
+
+
     </script>
 
 

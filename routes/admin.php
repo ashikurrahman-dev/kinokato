@@ -317,6 +317,7 @@ Route::group(['middleware' => ['auth.admin:admin']], function () {
     Route::get('mainproduct/get/data', [MainproductController::class, 'productdata'])->name('admin.mainproduct.data');
     Route::put('mainproduct/status', [MainproductController::class, 'statusupdate']);
     Route::put('mainproduct/rated', [MainproductController::class, 'ratedstatusupdate']);
+    Route::put('mainproduct/bestselling', [MainproductController::class, 'rbestsellingstatusupdate']);
     Route::post('mainproduct/{id}', [MainproductController::class, 'update']);
     Route::get('mainproduct-edit/{id}', [MainproductController::class, 'edit']);
 

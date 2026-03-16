@@ -227,12 +227,12 @@
                                         <div class="product-wishlist">
                                             <form action="{{ route('wishlist.add') }}" method="POST" class="p-0 m-0">
                                                 @csrf
-                                                <input type="hidden" name="product_id" value="{{ $productdetails->id }}">
+                                                <input type="hidden" name="product_id" value="{{ $singlemain->id }}">
 
                                                 <button type="submit" class="p-0 m-0 bg-transparent border-0">
                                                     @php
                                                         $wishlist = session()->get('wishlist', []);
-                                                        $inWishlist = in_array($productdetails->id, $wishlist);
+                                                        $inWishlist = in_array($singlemain->id, $wishlist);
                                                     @endphp
 
                                                     @if($inWishlist)
