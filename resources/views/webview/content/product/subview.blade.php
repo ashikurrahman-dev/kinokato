@@ -274,11 +274,18 @@
 </script>
 
 <script>
-    document.querySelectorAll('.wishlist-form').forEach(function (form) {
-        form.addEventListener('submit', function () {
+document.querySelectorAll('.wishlist-form').forEach(function (form) {
+    form.addEventListener('submit', function () {
+
+        setTimeout(function () {
+            window.location.reload();
+
             setTimeout(function () {
                 window.location.reload();
             }, 300);
-        });
+
+        }, 300);
+
     });
+});
 </script>
