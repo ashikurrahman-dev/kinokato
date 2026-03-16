@@ -50,15 +50,43 @@
                 <div class="col-sm-12 col-md-6 product-info-block" id="paddingnone">
                     <div class="product-info" id="productinfo">
                         <h1 class="name"
-                            style="margin-top:16px !important;padding-bottom: 6px;border-bottom: 1px solid #dfd6d6;font-size: 20px !important; line-height: 25px;">
+                            style="margin-top:16px !important;padding-bottom: 6px;font-size: 20px !important; line-height: 25px;">
                             {{ $productdetails->ProductName }}</h1>
 
+                        <div class="stock-container info-container m-t-10"
+                            style="margin-top:5px;">
+                            <div class="row" style="margin-bottom:5px;">
+                                <div class="col-12">
+                                    @if (App\Models\Size::where('product_id', $productdetails->id)->first())
+                                        <div class="product-price strong-700"
+                                            style="color:black;font-weight:bold;padding-top: 6px;" id="productPriceAmount">
+                                            <span id="salePrice">{{ App\Models\Size::where('product_id', $productdetails->id)->first()->SalePrice }}</span> TK
+                                            @if(App\Models\Size::where('product_id', $productdetails->id)->first()->Discount>0) &nbsp;<del class="old-product-price strong-400" style="color: #fe0909;font-size: 20px;">{{ round(App\Models\Size::where('product_id',$productdetails->id)->first()->RegularPrice) }}</del>@endif
+                                        </div>
+                                    @else
+                                        <div class="product-price strong-700"
+                                            style="color:black;font-weight:bold;padding-top: 6px;" id="productPriceAmount">
+                                            <span id="salePrice" style="color:black;font-weight:bold;">{{ App\Models\Weight::where('product_id', $productdetails->id)->first()->SalePrice }}</span> TK
+                                        </div>
+                                    @endif
+                                </div>
+
+                            </div>
+                            <!-- /.row -->
+                        </div>
+
                         <div class="mt-2 mb-2 row">
+
+                            <div class="mt-2 col-12 col-md-12 colorpart">
+                                <div id="breaftext">
+                                    {!! $productdetails->ProductBreaf !!}
+                                </div>
+                            </div>
 
                             @if (empty(json_decode($singlemain->RelatedProductIds)))
                             @else
                                 <div class="mb-2 col-12 col-md-12 colorpart">
-                                    <h4 id="productselect" class="m-0"><b style="font-size:14px">প্রডাক্ট সিলেক্ট করুননঃ </b></h4>
+                                    <h4 id="productselect" class="m-0"><b style="font-size:14px">Select Product Colours: </b></h4>
                                     <div class="d-flex">
                                         <div class="colorinfo">
                                             @forelse (json_decode($singlemain->RelatedProductIds) as $key=>$ids)
@@ -76,16 +104,10 @@
                                 </div>
                             @endif
 
-                            <div class="mt-2 col-12 col-md-12 colorpart">
-                                <div id="breaftext">
-                                    {!! $productdetails->ProductBreaf !!}
-                                </div>
-                            </div>
-
                             @if (count($sizes) < 1)
                             @else
                                 <div class="col-12 col-md-12 colorpart">
-                                    <h4 id="resellerprice" class="m-0"><b style="font-size:14px">নিচে সাইজ সিলেক্ট করুনঃ </b></h4>
+                                    <h4 id="resellerprice" class="m-0"><b style="font-size:14px">Select Product Sizes: </b></h4>
                                     <div class="sizeinfo">
                                         @forelse ($sizes as $sizesold)
                                             @if ($sizesold->available_stock > 0)
@@ -156,43 +178,28 @@
                         <p for="" style=" margin: 0; padding-top: 1px;text-align:left">Product Code : {{ $productdetails->ProductSku }}</p>
 
 
-                        <div class="stock-container info-container m-t-10"
-                            style="margin-top:5px;border-bottom: 1px solid #dfd6d6;">
-                            <div class="row" style="margin-bottom:5px;">
-                                <div class="col-6">
-                                    @if (App\Models\Size::where('product_id', $productdetails->id)->first())
-                                        <div class="product-price strong-700"
-                                            style="color:black;font-weight:bold;padding-top: 6px;" id="productPriceAmount">
-                                            <span id="salePrice">{{ App\Models\Size::where('product_id', $productdetails->id)->first()->SalePrice }}</span> TK
-                                            @if(App\Models\Size::where('product_id', $productdetails->id)->first()->Discount>0) &nbsp;<del class="old-product-price strong-400" style="color: #fe0909;font-size: 20px;">{{ round(App\Models\Size::where('product_id',$productdetails->id)->first()->RegularPrice) }}</del>@endif
-                                        </div>
-                                    @else
-                                        <div class="product-price strong-700"
-                                            style="color:black;font-weight:bold;padding-top: 6px;" id="productPriceAmount">
-                                            <span id="salePrice" style="color:black;font-weight:bold;">{{ App\Models\Weight::where('product_id', $productdetails->id)->first()->SalePrice }}</span> TK
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="col-6">
-                                    <div class="pr-2 d-flex" style="justify-content: right;padding-right: 4px;">
-                                        <button class="btn btn-sm" id="buttonminus" onclick="minus()">-</button>
-                                        <div class="cart-quantity" style="height: 33px;">
-                                            <div class="quant-input">
-                                                <input type="text" class="form-control" style="font-size: 20px;height: fit-content;height: 34px;padding:0px;width: 80px;text-align: center;" value="1" id="qtyval">
-                                            </div>
-                                        </div>
-                                        <button class="btn btn-sm" id="buttonplus" onclick="plus()">+</button>
-                                    </div>
-                                </div>
 
-                            </div>
-                            <!-- /.row -->
-                        </div>
                         <!-- /.stock-container -->
                         <div class="text-center quantity-container info-container"
-                            style="width: 100%;border-bottom: 1px solid #dfd6d6; float: left;">
+                            style="width: 100%; float: left;">
 
                             <div class="row">
+                                <div class="col-4 col-lg-4 my-2">
+                                    <div class="pr-2 d-flex"
+                                        style="justify-content: start;padding-right: 4px;border:1px solid #000;width:89%">
+                                        <button class="btn btn-sm" id="buttonminus" onclick="minus()"><i
+                                                class="fa-solid fa-minus"></i></button>
+                                        <div class="cart-quantity" style="height: 33px;">
+                                            <div class="quant-input">
+                                                <input type="text" class="form-control"
+                                                    style="font-size: 20px;height: fit-content;height: 34px;padding:0px;text-align: center;border-left:1px solid #000; border-right:1px solid #000;border-radius:0"
+                                                    value="1" id="qtyval">
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-sm" id="buttonplus" onclick="plus()"><i
+                                                class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                 <div class="col-6 col-lg-6 my-2">
                                     <form name="form" action="{{ url('add-to-cart') }}" id="submitaddtocart"
                                         method="POST" enctype="multipart/form-data" style="text-align: center;">
@@ -210,73 +217,74 @@
                                         <input type="hidden" name="qty" value="1" id="qtyoror">
                                         <button type="submit"
                                             class="mb-0 ml-2 btn btn-styled btn-base-1 btn-icon-left strong-700 hov-bounce hov-shaddow buy-now"
-                                            style="background:#212129;color:white;width: 100%;font-size: 15px;">
-                                            অর্ডার করুন
+                                            style="background:#db4444;color:white;width: 100%;font-size: 15px;">
+                                            Buy Now
                                         </button>
                                     </form>
                                 </div>
-                                <div class="col-6 col-lg-6 my-2">
-                                    <form name="form" action="{{ url('add-to-cart-new') }}" id="submitaddtocart"
-                                        method="POST" enctype="multipart/form-data" style="text-align: center;">
-                                        @method('POST')
-                                        @csrf
-                                        <input type="hidden" name="color" id="product_colororder"
-                                            value="{{ $varients[0]->color }}">
-                                        <input type="hidden" name="size" id="product_sizeorder" value="">
-                                        <input type="hidden" name="sigment" id="product_sigmentorder"
-                                            value="">
-                                        <input type="hidden" name="price" id="product_priceneworder" value="">
+                                <div class="col-2 col-lg-2 my-2">
+                                    <div class="d-flex justify-content-end">
+                                        <div class="product-wishlist">
+                                            <form action="{{ route('wishlist.add') }}" method="POST" class="p-0 m-0">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{ $productdetails->id }}">
 
-                                        <input type="hidden" name="product_id" value=" {{ $productdetails->id }}"
-                                            hidden>
-                                        <input type="hidden" name="qty" value="1" id="qtyor">
-                                        <button type="submit"
-                                            class="mb-0 ml-2 btn btn-styled btn-base-1 btn-icon-left strong-700 hov-bounce hov-shaddow buy-now"
-                                            style="background:#008000;color:white;width: 100%;font-size: 15px;">
-                                            কার্ডে যোগ করুন
-                                        </button>
-                                    </form>
+                                                <button type="submit" class="p-0 m-0 bg-transparent border-0">
+                                                    @php
+                                                        $wishlist = session()->get('wishlist', []);
+                                                        $inWishlist = in_array($productdetails->id, $wishlist);
+                                                    @endphp
+
+                                                    @if($inWishlist)
+                                                        <i class="fa-solid fa-heart fs-5" style="color: #120D3F"></i>
+                                                    @else
+                                                        <i class="fa-regular fa-heart fs-5" style="color: #120D3F"></i>
+                                                    @endif
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
 
                             </div>
-                            <!--<div class="text-center quantity-container info-container pb-0"-->
-                            <!--    style="width: 100%;float: left;">-->
-                            <!--    <div class=""-->
-                            <!--        style="justify-content: left;width: 100%;float: left;text-align: center;">-->
-                            <!--        <a class="btn" id="formTextBtn" style="background: #29962f;color: white;border: none;border-radius: 4px;"-->
-                            <!--            href="tel:{{ App\Models\Basicinfo::first()->phone_one }}"><i class="fa-brands fa-whatsapp"></i><span style="color:white">-->
-                            <!--            হোয়াটসঅ্যাপে অর্ডার করুন </span> </a>-->
-                            <!--    </div>-->
-                            <!--</div>-->
-                            <div class="text-center quantity-container info-container pt-1 pb-2"
-                                style="width: 100%;border-bottom: 1px solid #dfd6d6; float: left;">
-                                <div class=""
-                                    style="justify-content: left;width: 100%;float: left;text-align: center;">
-                                    <a class="btn" id="formTextBtn" style="background: #ff7f04;color: white;border: none;border-radius: 4px;width:100%"
-                                        href="tel:{{ App\Models\Basicinfo::first()->phone_one }}"><i
-                                            class="fas fa-phone"></i> <span  style="color:white">
-                                          কলে অর্ডার করুন</span> </a>
+                            <section>
+                                <div class="mt-3">
+                                    <div class="delivery-box">
+                                        <div class="delivery-item">
+                                            <div class="row align-items-center">
+
+                                                <div class="col-2 text-center">
+                                                    <i class="fa-solid fa-truck delivery-icon"></i>
+                                                </div>
+
+                                                <div class="col-10">
+                                                    <div class="delivery-title">Free Delivery</div>
+                                                    <a href="#" class="delivery-link mt-2">Enter your postal code for
+                                                        Delivery Availability</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="delivery-item">
+                                            <div class="row align-items-center">
+                                                <div class="col-2 text-center">
+                                                    <i class="fa-solid fa-rotate delivery-icon"></i>
+                                                </div>
+
+                                                <div class="col-10">
+                                                    <div class="delivery-title">Return Delivery</div>
+                                                    <span class="d-flex mt-2">Free 30 Days Delivery Returns. <a href="#"
+                                                            class="delivery-link">Details</a></span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
                                 </div>
-                            </div>
-                            <p class="mt-4" style="text-align: left">
-                                <strong><img style="width:120px;" src="{{asset('public/cashd-removebg-preview.png')}}"> Cash On Delivery</strong>
-                            </p>
-                            <p for="" class="mt-4" style=" margin: 0; padding-top: 1px;text-align:justify">বিঃদ্রঃ আপনি অর্ডার করে দিন অতিশিগ্রই আমাদের প্রতিনিধি আপনার সাথে যোগাযোগ করবে ।</p>
-                                    <p for="" class="mt-4" style=" margin: 0; padding-top: 1px;text-align:justify"> বিঃদ্রঃ: আপনার কম্পিউটার বা মোবাইল স্ক্রীন রেজুলেশন উপর নির্ভর করে, পণ্যের রঙ সামান্য পরিবর্তিত হতে পারে।</p>
-
-
-                            <p class="m-0 mb-2" style="text-align: left"><strong style="font-size: 18px;color: black;font-weight: bold;"><i class="fas fa-check"></i> Order today and receive it within {{App\Models\Basicinfo::first()->insie_dhaka}}.</strong></p>
-                            <p class="m-0 mb-2" style="text-align: left"><strong style="font-size: 18px;color: black;font-weight: bold;"><i class="fas fa-thumbs-up"></i>Quality Product</strong></p>
-                        </div>
-
-                        <div class="text-center quantity-container info-container"
-                            style="width: 100%;border-bottom: 1px solid #dfd6d6; float: left;">
-                            <div class="" style="justify-content: left;width: 50%;float: left;text-align: center;">
-                                <a class="btn" id="formTextBtn" href="tel:{{App\Models\Basicinfo::first()->phone_one}}"><i class="fas fa-phone"></i> <span class="animate-charcter"> {{App\Models\Basicinfo::first()->phone_one}}</span> </a>
-                            </div>
-                            <div style="width: 50%;float: left;text-align: center;">
-                                <a class="btn" id="formText" href="https://wa.me/+88{{ App\Models\Basicinfo::first()->wp_1 }}?text=I%20am%20interested"> <img src="{{ asset('public/whatsappns.png') }}" style="width: 22px;border-radius: 50%;margin-top: -2px;" alt=""><span class="animate-charcter"> {{App\Models\Basicinfo::first()->wp_1}}</span> </a>
-                            </div>
+                            </section>
                         </div>
 
                     </div>
