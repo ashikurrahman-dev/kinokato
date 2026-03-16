@@ -1649,7 +1649,8 @@ ul.toggle-footer {
 
 .single-product .product-info .quantity-container .cart-quantity .quant-input input {
     background: none repeat scroll 0 0 #fff;
-    border: 1px solid #000;
+    border: none;
+    box-shadow: none;
     box-sizing: border-box;
     font-size: 15px;
     height: 35px;
@@ -2032,12 +2033,12 @@ button.owl-prev {
     margin-top:10px;
     font-size:32px;
     font-weight:700;
-} 
+}
 
 
 .product:hover .addtocartbtn{
     opacity:1;
-    
+
 }
 .addtocartbtn{
     width: 100%;

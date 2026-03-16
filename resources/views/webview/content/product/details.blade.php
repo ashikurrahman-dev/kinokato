@@ -99,26 +99,71 @@
             height: 34px;
             margin: 0;
             line-height: 4px;
-            background: green;
-            color: white;
-            border: 1px solid green;
+            color: #000;
+            border: none;
         }
 
         #buttonminus {
             font-size: 18px;
-            border: 1px solid;
             padding: 3px 14px;
             border-radius: 0px;
             height: 34px;
             margin: 0;
             line-height: 4px;
-            background: red;
-            color: white;
-            border: 1px solid red;
+            color: #000;
+            border: none;
+        }
+
+        #buttonminus:hover {
+            background: #db4444;
+            color: #fff;
+        }
+
+        #buttonplus:hover {
+            background: #db4444;
+            color: #fff;
         }
 
         #checked {
             color: orange;
+        }
+
+        .delivery-box {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 100%;
+        }
+
+        .delivery-item {
+            padding: 20px;
+        }
+
+        .delivery-item+.delivery-item {
+            border-top: 1px solid #ccc;
+        }
+
+        .delivery-icon {
+            font-size: 28px;
+            color: #000;
+        }
+
+        .delivery-title {
+            font-weight: 600;
+            font-size: 18px;
+            text-align: start;
+        }
+
+        .delivery-link {
+            color: #000;
+            text-decoration: underline;
+            font-size: 14px;
+            display: flex;
+        }
+        .product-wishlist{
+            border: 1px solid #000;
+            padding: 6px;
+            border-radius: 5px;
+            margin-right: 15px;
         }
     </style>
     <!-- Body -->
@@ -173,30 +218,39 @@
                                     @if (json_decode($productdetails->PostImage))
                                         <div id="sync1" class="owl-carousel owl-theme">
                                             <div class="items">
-                                                <img class="w-100 h-100 block__pic" src="{{ asset($productdetails->ProductImage) }}" alt="" style="border-radius: 4px;">
+                                                <img class="w-100 h-100 block__pic"
+                                                    src="{{ asset($productdetails->ProductImage) }}" alt=""
+                                                    style="border-radius: 4px;">
                                             </div>
                                             @forelse (json_decode($productdetails->PostImage) as $image)
                                                 <div class="items">
-                                                    <img class="w-100 h-100 block__pic" src="{{ asset('public/images/product/slider') }}/{{ $image }}" alt="" style="border-radius: 4px;">
+                                                    <img class="w-100 h-100 block__pic"
+                                                        src="{{ asset('public/images/product/slider') }}/{{ $image }}" alt=""
+                                                        style="border-radius: 4px;">
                                                 </div>
                                             @empty
                                             @endforelse
                                         </div>
-                                    
+
                                         <div id="sync2" class="owl-carousel owl-theme" style="padding-top: 10px;">
                                             <div class="items">
-                                                <img class="w-100 h-100 " style="padding:6px;border:1px solid;border-radius: 4px;" src="{{ asset($productdetails->ProductImage) }}" alt="">
+                                                <img class="w-100 h-100 "
+                                                    style="padding:6px;border:1px solid;border-radius: 4px;"
+                                                    src="{{ asset($productdetails->ProductImage) }}" alt="">
                                             </div>
                                             @forelse (json_decode($productdetails->PostImage) as $image)
                                                 <div class="items">
-                                                    <img class="w-100 h-100" style="padding:6px;border:1px solid;border-radius: 4px;" src="{{ asset('public/images/product/slider') }}/{{ $image }}" alt="">
+                                                    <img class="w-100 h-100"
+                                                        style="padding:6px;border:1px solid;border-radius: 4px;"
+                                                        src="{{ asset('public/images/product/slider') }}/{{ $image }}" alt="">
                                                 </div>
                                             @empty
                                             @endforelse
                                         </div>
                                     @else
                                         <div class="items">
-                                            <img class="w-100 h-100" src="{{ asset($productdetails->ProductImage) }}" alt="" style="border-radius: 4px;">
+                                            <img class="w-100 h-100" src="{{ asset($productdetails->ProductImage) }}" alt=""
+                                                style="border-radius: 4px;">
                                         </div>
                                     @endif
 
@@ -207,131 +261,13 @@
                             <div class="col-sm-12 col-md-6 product-info-block" id="paddingnone">
                                 <div class="product-info" id="productinfo">
                                     <h1 class="name"
-                                        style="margin-top:16px !important;padding-bottom: 6px;border-bottom: 1px solid #dfd6d6;font-size: 20px !important; line-height: 25px;">
-                                        {{ $productdetails->ProductName }}</h1>
+                                        style="margin-top:16px !important;padding-bottom: 6px;font-size: 20px !important; line-height: 25px;">
+                                        {{ $productdetails->ProductName }}
+                                    </h1>
 
-                                    <div class="mt-2 mb-2 row">
-
-                                        @if (empty(json_decode($singlemain->RelatedProductIds)))
-                                        @else
-                                            <div class="mb-2 col-12 col-md-12 colorpart">
-                                                <h4 id="productselect" class="m-0"><b style="font-size:14px">প্রডাক্ট এর
-                                                        কালার সিলেক্ট করুনঃ </b></h4>
-                                                <div class="d-flex">
-                                                    <div class="colorinfo">
-                                                        @forelse (json_decode($singlemain->RelatedProductIds) as $key => $ids)
-                                                            @php
-                                                                $prodinfo = App\Models\Product::where('id', $ids->productID)
-                                                                    ->where('status', 'Active')
-                                                                    ->first();
-                                                            @endphp
-                                                            @if (isset($prodinfo))
-                                                                <input type="radio" class="m-0"
-                                                                    id="relproduct{{ $prodinfo->id }}" hidden
-                                                                    name="relproduct"
-                                                                    onclick="getrelproduct('{{ $prodinfo->id }}','{{ $singlemain->id }}')">
-                                                                <label class="relproduct ms-0"
-                                                                    id="relproducttext{{ $prodinfo->id }}"
-                                                                    for="relproduct{{ $prodinfo->id }}"
-                                                                    style="border: 1px solid #000;padding: 0px;"
-                                                                    onclick="getrelproduct('{{ $prodinfo->id }}','{{ $singlemain->id }}')">
-                                                                    <img src="{{ asset($prodinfo->ProductImage) }}"
-                                                                        alt="" style="width:60px;">
-                                                                </label>
-                                                            @endif
-                                                        @empty
-                                                        @endforelse
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif
-
-                                        <div class="mt-2 col-12 col-md-12 colorpart">
-                                            <div id="breaftext">
-                                                {!! $productdetails->ProductBreaf !!}
-                                            </div>
-                                        </div>
-
-                                        @if (count($sizesolds) < 1)
-                                        @else
-                                            <div class="col-12 col-md-12 colorpart">
-                                                <h4 id="resellerprice" class="m-0"><b style="font-size:14px">নিচে সাইজ
-                                                        সিলেক্ট করুনঃ </b></h4>
-                                                <div class="sizeinfo">
-                                                    @forelse ($sizesolds as $sizesold)
-                                                        @if ($sizesold->available_stock > 0)
-                                                            <input type="hidden" name="regularpriceofsize"
-                                                                id="regularpriceofsize{{ $sizesold->id }}"
-                                                                value="{{ $sizesold->RegularPrice }}">
-                                                            <input type="hidden" name="salepriceofsize"
-                                                                id="salepriceofsize{{ $sizesold->id }}"
-                                                                value="{{ $sizesold->SalePrice }}">
-                                                            <input type="radio" class="m-0" hidden
-                                                                id="size{{ $sizesold->id }}" name="size"
-                                                                onclick="getsize('{{ $sizesold->id }}')">
-                                                            <label class="sizetext ms-0"
-                                                                id="sizetext{{ $sizesold->id }}"
-                                                                for="size{{ $sizesold->id }}"
-                                                                style="border: 1px solid #e4e4e4;font-size:18px;font-weight:bold;padding: 0px 8px;border-radius: 2px;margin-right:4px;margin-bottom:4px;"
-                                                                onclick="getsize('{{ $sizesold->id }}')">{{ $sizesold->size }}</label>
-                                                        @else
-                                                            <input type="hidden" name="regularpriceofsize"
-                                                                id="regularpriceofsize{{ $sizesold->id }}"
-                                                                value="{{ $sizesold->RegularPrice }}">
-                                                            <input type="hidden" name="salepriceofsize"
-                                                                id="salepriceofsize{{ $sizesold->id }}"
-                                                                value="{{ $sizesold->SalePrice }}">
-                                                            <input type="radio" class="m-0" hidden
-                                                                id="size{{ $sizesold->id }}" name="size">
-                                                            <label class="sizetext ms-0"
-                                                                id="sizetext{{ $sizesold->id }}"
-                                                                for="size{{ $sizesold->id }}"
-                                                                style="border: 1px solid #e4e4e4;    color: rgb(151 150 150) !important;font-size:18px;font-weight:bold;padding: 0px 8px;border-radius: 2px;margin-right:4px;margin-bottom:4px;"><del>{{ $sizesold->size }}
-                                                                </del> </label>
-                                                        @endif
-                                                    @empty
-                                                    @endforelse
-                                                </div>
-                                            </div>
-                                        @endif
-                                        @if (count($weightolds) < 1)
-                                        @else
-                                            <div class="col-12 col-md-12 colorpart">
-                                                <h4 id="resellerprice" class="m-0"><b style="font-size:14px">সিলেক্ট
-                                                        করে কনফার্ম করুনঃ</b></h4>
-                                                <div class="sizeinfo">
-                                                    @forelse ($weightolds as $weight)
-                                                        <input type="hidden" name="regularpriceofsize"
-                                                            id="regularpriceofsize{{ $weight->id }}"
-                                                            value="{{ $weight->RegularPrice }}">
-                                                        <input type="hidden" name="salepriceofsize"
-                                                            id="salepriceofsize{{ $weight->id }}"
-                                                            value="{{ $weight->SalePrice }}">
-                                                        <input type="hidden" name="weightsigmrnt"
-                                                            id="weightsigmrnt{{ $weight->id }}"
-                                                            value="{{ $weight->weight }}">
-                                                        <input type="radio" class="m-0" hidden
-                                                            id="size{{ $weight->id }}" name="size"
-                                                            onclick="getweight('{{ $weight->id }}')">
-                                                        <label class="weighttext ms-0" id="weighttext{{ $weight->id }}"
-                                                            for="size{{ $weight->id }}"
-                                                            style="border: 1px solid #e4e4e4;font-size:16px;font-weight:bold;padding: 0px 6px;border-radius: 2px;margin-right:4px;margin-bottom:4px;"
-                                                            onclick="getweight('{{ $weight->id }}')">{{ $weight->weight }}</label>
-                                                    @empty
-                                                    @endforelse
-                                                </div>
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <p for="" style=" margin: 0; padding-top: 1px;text-align:left">Product Code :
-                                        {{ $productdetails->ProductSku }}</p>
-
-
-
-                                    <div class="stock-container info-container m-t-10"
-                                        style="margin-top:5px;border-bottom: 1px solid #dfd6d6;">
+                                    <div class="stock-container info-container m-t-10" style="margin-top:5px;">
                                         <div class="row" style="margin-bottom:5px;">
-                                            <div class="col-6">
+                                            <div class="col-12">
                                                 @if (App\Models\Size::where('product_id', $productdetails->id)->first())
                                                     <div class="product-price strong-700"
                                                         style="color:black;font-weight:bold;padding-top: 6px;"
@@ -354,31 +290,141 @@
                                                     </div>
                                                 @endif
                                             </div>
-                                            <div class="col-6">
-                                                <div class="pr-2 d-flex"
-                                                    style="justify-content: right;padding-right: 4px;">
-                                                    <button class="btn btn-sm" id="buttonminus"
-                                                        onclick="minus()">-</button>
-                                                    <div class="cart-quantity" style="height: 33px;">
-                                                        <div class="quant-input">
-                                                            <input type="text" class="form-control"
-                                                                style="font-size: 20px;height: fit-content;height: 34px;padding:0px;width: 80px;text-align: center;"
-                                                                value="1" id="qtyval">
-                                                        </div>
-                                                    </div>
-                                                    <button class="btn btn-sm" id="buttonplus"
-                                                        onclick="plus()">+</button>
-                                                </div>
-                                            </div>
 
                                         </div>
                                         <!-- /.row -->
                                     </div>
+
+                                    <div class="mt-2 mb-2 row">
+                                        <div class=" col-12 col-md-12 colorpart">
+                                            <div id="breaftext">
+                                                {!! $productdetails->ProductBreaf !!}
+                                            </div>
+                                        </div>
+
+                                        @if (empty(json_decode($singlemain->RelatedProductIds)))
+                                        @else
+                                            <div class="mb-2 col-12 col-md-12 colorpart">
+                                                <h4 id="productselect" class="m-0"><b style="font-size:14px">Select Product
+                                                        Colours: </b></h4>
+                                                <div class="d-flex">
+                                                    <div class="colorinfo">
+                                                        @forelse (json_decode($singlemain->RelatedProductIds) as $key => $ids)
+                                                            @php
+                                                                $prodinfo = App\Models\Product::where('id', $ids->productID)
+                                                                    ->where('status', 'Active')
+                                                                    ->first();
+                                                            @endphp
+                                                            @if (isset($prodinfo))
+                                                                <input type="radio" class="m-0" id="relproduct{{ $prodinfo->id }}"
+                                                                    hidden name="relproduct"
+                                                                    onclick="getrelproduct('{{ $prodinfo->id }}','{{ $singlemain->id }}')">
+                                                                <label class="relproduct ms-0" id="relproducttext{{ $prodinfo->id }}"
+                                                                    for="relproduct{{ $prodinfo->id }}"
+                                                                    style="border: 1px solid #000;padding: 0px;"
+                                                                    onclick="getrelproduct('{{ $prodinfo->id }}','{{ $singlemain->id }}')">
+                                                                    <img src="{{ asset($prodinfo->ProductImage) }}" alt=""
+                                                                        style="width:60px;">
+                                                                </label>
+                                                            @endif
+                                                        @empty
+                                                        @endforelse
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+
+                                        @if (count($sizesolds) < 1)
+                                        @else
+                                            <div class="col-12 col-md-12 colorpart">
+                                                <h4 id="resellerprice" class="m-0"><b style="font-size:14px">Select Product
+                                                        Sizes: </b></h4>
+                                                <div class="sizeinfo">
+                                                    @forelse ($sizesolds as $sizesold)
+                                                        @if ($sizesold->available_stock > 0)
+                                                            <input type="hidden" name="regularpriceofsize"
+                                                                id="regularpriceofsize{{ $sizesold->id }}"
+                                                                value="{{ $sizesold->RegularPrice }}">
+                                                            <input type="hidden" name="salepriceofsize"
+                                                                id="salepriceofsize{{ $sizesold->id }}"
+                                                                value="{{ $sizesold->SalePrice }}">
+                                                            <input type="radio" class="m-0" hidden id="size{{ $sizesold->id }}"
+                                                                name="size" onclick="getsize('{{ $sizesold->id }}')">
+                                                            <label class="sizetext ms-0" id="sizetext{{ $sizesold->id }}"
+                                                                for="size{{ $sizesold->id }}"
+                                                                style="border: 1px solid #e4e4e4;font-size:18px;font-weight:bold;padding: 0px 8px;border-radius: 2px;margin-right:4px;margin-bottom:4px;"
+                                                                onclick="getsize('{{ $sizesold->id }}')">{{ $sizesold->size }}</label>
+                                                        @else
+                                                            <input type="hidden" name="regularpriceofsize"
+                                                                id="regularpriceofsize{{ $sizesold->id }}"
+                                                                value="{{ $sizesold->RegularPrice }}">
+                                                            <input type="hidden" name="salepriceofsize"
+                                                                id="salepriceofsize{{ $sizesold->id }}"
+                                                                value="{{ $sizesold->SalePrice }}">
+                                                            <input type="radio" class="m-0" hidden id="size{{ $sizesold->id }}"
+                                                                name="size">
+                                                            <label class="sizetext ms-0" id="sizetext{{ $sizesold->id }}"
+                                                                for="size{{ $sizesold->id }}"
+                                                                style="border: 1px solid #e4e4e4;    color: rgb(151 150 150) !important;font-size:18px;font-weight:bold;padding: 0px 8px;border-radius: 2px;margin-right:4px;margin-bottom:4px;"><del>{{ $sizesold->size }}
+                                                                </del> </label>
+                                                        @endif
+                                                    @empty
+                                                    @endforelse
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if (count($weightolds) < 1)
+                                        @else
+                                            <div class="col-12 col-md-12 colorpart">
+                                                <h4 id="resellerprice" class="m-0"><b style="font-size:14px">সিলেক্ট
+                                                        করে কনফার্ম করুনঃ</b></h4>
+                                                <div class="sizeinfo">
+                                                    @forelse ($weightolds as $weight)
+                                                        <input type="hidden" name="regularpriceofsize"
+                                                            id="regularpriceofsize{{ $weight->id }}"
+                                                            value="{{ $weight->RegularPrice }}">
+                                                        <input type="hidden" name="salepriceofsize"
+                                                            id="salepriceofsize{{ $weight->id }}" value="{{ $weight->SalePrice }}">
+                                                        <input type="hidden" name="weightsigmrnt"
+                                                            id="weightsigmrnt{{ $weight->id }}" value="{{ $weight->weight }}">
+                                                        <input type="radio" class="m-0" hidden id="size{{ $weight->id }}"
+                                                            name="size" onclick="getweight('{{ $weight->id }}')">
+                                                        <label class="weighttext ms-0" id="weighttext{{ $weight->id }}"
+                                                            for="size{{ $weight->id }}"
+                                                            style="border: 1px solid #e4e4e4;font-size:16px;font-weight:bold;padding: 0px 6px;border-radius: 2px;margin-right:4px;margin-bottom:4px;"
+                                                            onclick="getweight('{{ $weight->id }}')">{{ $weight->weight }}</label>
+                                                    @empty
+                                                    @endforelse
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <p for="" style=" margin: 0; padding-top: 1px;text-align:left">Product Code :
+                                        {{ $productdetails->ProductSku }}
+                                    </p>
+
+
                                     <!-- /.stock-container -->
                                     <div class="text-center quantity-container info-container"
-                                        style="width: 100%;border-bottom: 1px solid #dfd6d6; float: left;">
+                                        style="width: 100%; float: left;">
 
                                         <div class="row">
+                                            <div class="col-4 col-lg-4 my-2">
+                                                <div class="pr-2 d-flex"
+                                                    style="justify-content: start;padding-right: 4px;border:1px solid #000;width:89%">
+                                                    <button class="btn btn-sm" id="buttonminus" onclick="minus()"><i
+                                                            class="fa-solid fa-minus"></i></button>
+                                                    <div class="cart-quantity" style="height: 33px;">
+                                                        <div class="quant-input">
+                                                            <input type="text" class="form-control"
+                                                                style="font-size: 20px;height: fit-content;height: 34px;padding:0px;text-align: center;border-left:1px solid #000; border-right:1px solid #000;border-radius:0"
+                                                                value="1" id="qtyval">
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-sm" id="buttonplus" onclick="plus()"><i
+                                                            class="fa-solid fa-plus"></i></button>
+                                                </div>
+                                            </div>
                                             <div class="col-6 col-lg-6 my-2">
                                                 <form name="form" action="{{ url('add-to-cart') }}" id="submitaddtocart"
                                                     method="POST" enctype="multipart/form-data" style="text-align: center;">
@@ -387,102 +433,83 @@
                                                     <input type="hidden" name="color" id="product_colororder"
                                                         value="{{ $varients[0]->color }}">
                                                     <input type="hidden" name="size" id="product_sizeordernew" value="">
-                                                    <input type="hidden" name="sigment" id="product_sigmentorder"
-                                                        value="">
+                                                    <input type="hidden" name="sigment" id="product_sigmentorder" value="">
                                                     <input type="hidden" name="price" id="product_priceorder" value="">
 
-                                                    <input type="hidden" name="product_id" value=" {{ $productdetails->id }}"
-                                                        hidden>
+                                                    <input type="hidden" name="product_id"
+                                                        value=" {{ $productdetails->id }}" hidden>
                                                     <input type="hidden" name="qty" value="1" id="qtyoror">
                                                     <button type="submit"
                                                         class="mb-0 ml-2 btn btn-styled btn-base-1 btn-icon-left strong-700 hov-bounce hov-shaddow buy-now"
-                                                        style="background:#212129;color:white;width: 100%;font-size: 15px;">
-                                                        অর্ডার করুন
+                                                        style="background:#db4444;color:white;width: 100%;font-size: 15px;">
+                                                        Buy Now
                                                     </button>
                                                 </form>
                                             </div>
-                                            <div class="col-6 col-lg-6 my-2">
-                                                <form name="form" action="{{ url('add-to-cart-new') }}" id="submitaddtocart"
-                                                    method="POST" enctype="multipart/form-data" style="text-align: center;">
-                                                    @method('POST')
-                                                    @csrf
-                                                    <input type="hidden" name="color" id="product_colororder"
-                                                        value="{{ $varients[0]->color }}">
-                                                    <input type="hidden" name="size" id="product_sizeorder" value="">
-                                                    <input type="hidden" name="sigment" id="product_sigmentorder"
-                                                        value="">
-                                                    <input type="hidden" name="price" id="product_priceneworder" value="">
+                                            <div class="col-2 col-lg-2 my-2">
+                                                <div class="d-flex justify-content-end">
+                                                    <div class="product-wishlist">
+                                                        <form action="{{ route('wishlist.add') }}" method="POST" class="p-0 m-0">
+                                                            @csrf
+                                                            <input type="hidden" name="product_id" value="{{ $productdetails->id }}">
 
-                                                    <input type="hidden" name="product_id" value=" {{ $productdetails->id }}"
-                                                        hidden>
-                                                    <input type="hidden" name="qty" value="1" id="qtyor">
-                                                    <button type="submit"
-                                                        class="mb-0 ml-2 btn btn-styled btn-base-1 btn-icon-left strong-700 hov-bounce hov-shaddow buy-now"
-                                                        style="background:#008000;color:white;width: 100%;font-size: 15px;">
-                                                        কার্ডে যোগ করুন
-                                                    </button>
-                                                </form>
+                                                            <button type="submit" class="p-0 m-0 bg-transparent border-0">
+                                                                @php
+                                                                    $wishlist = session()->get('wishlist', []);
+                                                                    $inWishlist = in_array($productdetails->id, $wishlist);
+                                                                @endphp
+
+                                                                @if($inWishlist)
+                                                                    <i class="fa-solid fa-heart fs-5" style="color: #120D3F"></i>
+                                                                @else
+                                                                    <i class="fa-regular fa-heart fs-5" style="color: #120D3F"></i>
+                                                                @endif
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
-
                                         </div>
+                                        <section>
+                                            <div class="mt-3">
+                                                <div class="delivery-box">
+                                                    <div class="delivery-item">
+                                                        <div class="row align-items-center">
 
-                                    <!--<div class="text-center quantity-container info-container pb-0"-->
-                                    <!--    style="width: 100%;float: left;">-->
-                                    <!--    <div class=""-->
-                                    <!--        style="justify-content: left;width: 100%;float: left;text-align: center;">-->
-                                    <!--        <a class="btn" id="formTextBtn" style="background: #29962f;color: white;border: none;border-radius: 4px;"-->
-                                    <!--            href="tel:{{ App\Models\Basicinfo::first()->phone_one }}"><i class="fa-brands fa-whatsapp"></i><span style="color:white">-->
-                                    <!--            হোয়াটসঅ্যাপে অর্ডার করুন </span> </a>-->
-                                    <!--    </div>-->
-                                    <!--</div>-->
-                                    <div class="text-center quantity-container info-container pt-1 pb-2"
-                                        style="width: 100%;border-bottom: 1px solid #dfd6d6; float: left;">
-                                        <div class=""
-                                            style="justify-content: left;width: 100%;float: left;text-align: center;">
-                                            <a class="btn" id="formTextBtn" style="background: #ff7f04;color: white;border: none;border-radius: 4px;width: 100%"
-                                                href="tel:{{ App\Models\Basicinfo::first()->phone_one }}"><i
-                                                    class="fas fa-phone"></i> <span  style="color:white">
-                                                  কলে অর্ডার করুন</span> </a>
-                                        </div>
+                                                            <div class="col-2 text-center">
+                                                                <i class="fa-solid fa-truck delivery-icon"></i>
+                                                            </div>
+
+                                                            <div class="col-10">
+                                                                <div class="delivery-title">Free Delivery</div>
+                                                                <a href="#" class="delivery-link mt-2">Enter your postal
+                                                                    code for
+                                                                    Delivery Availability</a>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="delivery-item">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-2 text-center">
+                                                                <i class="fa-solid fa-rotate delivery-icon"></i>
+                                                            </div>
+
+                                                            <div class="col-10">
+                                                                <div class="delivery-title">Return Delivery</div>
+                                                                <span class="d-flex mt-2">Free 30 Days Delivery Returns.
+                                                                    <a href="#" class="delivery-link">Details</a></span>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </section>
                                     </div>
-
-
-                                        <p class="mt-4" style="text-align: left">
-                                            <strong><img style="width:120px;"
-                                                    src="{{ asset('public/cashd-removebg-preview.png') }}"> Cash On
-                                                Delivery</strong>
-                                        </p>
-                                        <p for="" class="mt-4"
-                                            style=" margin: 0; padding-top: 1px;text-align:justify">বিঃদ্রঃ আপনি অর্ডার করে
-                                            দিন অতিশিগ্রই আমাদের প্রতিনিধি আপনার সাথে যোগাযোগ করবে ।</p>
-                                        <p for="" class="mt-4"
-                                            style=" margin: 0; padding-top: 1px;text-align:justify"> বিঃদ্রঃ: আপনার
-                                            কম্পিউটার বা মোবাইল স্ক্রীন রেজুলেশন উপর নির্ভর করে, পণ্যের রঙ সামান্য পরিবর্তিত
-                                            হতে পারে।</p>
-
-
-
-                                        <p class="m-0 mb-2" style="text-align: left"><strong
-                                                style="font-size: 18px;color: black;font-weight: bold;"><i
-                                                    class="fas fa-check"></i> Order today and receive it within
-                                                {{ App\Models\Basicinfo::first()->insie_dhaka }}.</strong></p>
-                                        <p class="m-0 mb-2" style="text-align: left"><strong
-                                                style="font-size: 18px;color: black;font-weight: bold;"><i
-                                                    class="fas fa-thumbs-up"></i> Quality Product</strong></p>
-                                    </div>
-
-                                    <div class="text-center quantity-container info-container"
-                                        style="width: 100%;border-bottom: 1px solid #dfd6d6; float: left;">
-                                        <div style="width: 100%;float: left;text-align: center;">
-                                            <a class="btn" id="formText"
-                                                href="https://wa.me/+88{{ App\Models\Basicinfo::first()->wp_1 }}?text=I%20am%20interested">
-                                                <img src="{{ asset('public/whatsappns.png') }}"
-                                                    style="width: 22px;border-radius: 50%;margin-top: -2px;"
-                                                    alt=""><span class="animate-charcter">
-                                                    {{ App\Models\Basicinfo::first()->wp_1 }}</span> </a>
-                                        </div>
-                                    </div>
-
                                 </div>
                                 <!-- /.product-info -->
                             </div>
@@ -560,7 +587,7 @@
             <input type="hidden" id="gtmproductsku" value="{{ $productdetails->ProductSku }}">
 
             <script>
-                $(document).ready(function() {
+                $(document).ready(function () {
 
                     var sync1 = $("#sync1");
                     var sync2 = $("#sync2");
@@ -581,7 +608,7 @@
                     }).on('changed.owl.carousel', syncPosition);
 
                     sync2
-                        .on('initialized.owl.carousel', function() {
+                        .on('initialized.owl.carousel', function () {
                             sync2.find(".owl-item").eq(0).addClass("current");
                         })
                         .owlCarousel({
@@ -595,8 +622,8 @@
                             responsiveRefreshRate: 100
                         }).on('changed.owl.carousel', syncPosition2);
 
-                    function syncPosition(el) { 
-                        
+                    function syncPosition(el) {
+
                         var count = el.item.count - 1;
                         var current = Math.round(el.item.index - (el.item.count / 2) - .5);
 
@@ -633,14 +660,14 @@
                         }
                     }
 
-                    sync2.on("click", ".owl-item", function(e) {
+                    sync2.on("click", ".owl-item", function (e) {
                         e.preventDefault();
                         var number = $(this).index();
                         sync1.data('owl.carousel').to(number, 300, true);
                     });
 
 
-                    $('#AddToCartForm').submit(function(e) {
+                    $('#AddToCartForm').submit(function (e) {
                         e.preventDefault();
                         $('#processing').css({
                             'display': 'flex',
@@ -655,24 +682,24 @@
                             contentType: false,
                             data: new FormData(this),
 
-                            success: function(data) {
+                            success: function (data) {
                                 updatecart();
                                 $.ajax({
                                     type: 'GET',
                                     url: '{{ url('get-cart-content') }}',
 
-                                    success: function(response) {
+                                    success: function (response) {
                                         $('#cartViewModal .modal-body').empty().append(
                                             response);
                                     },
-                                    error: function(error) {
+                                    error: function (error) {
                                         console.log('error');
                                     }
                                 });
                                 $('#processing').modal('hide');
                                 $('#cartViewModal').modal('show');
                             },
-                            error: function(error) {
+                            error: function (error) {
                                 console.log('error');
                             }
                         });
@@ -726,8 +753,8 @@
                 });
             </script>
             <script type="text/javascript">
-                $(document).ready(function() {
-                    document.getElementById('submitaddtocart').addEventListener('submit', function(event) {
+                $(document).ready(function () {
+                    document.getElementById('submitaddtocart').addEventListener('submit', function (event) {
                         window.dataLayer = window.dataLayer || [];
                         dataLayer.push({
                             ecommerce: null
@@ -761,161 +788,140 @@
                     <!-- ============================================== UPSELL PRODUCTS ============================================== -->
                     <section class="pb-2 section featured-product wow fadeInUp" id="cateoryPro"
                         style="margin-bottom:0px !important">
-                        <h3 class="section-title"
-                            style="border-bottom: 1px solid #212129; padding: 8px;margin-bottom: 0;">Related
+                        <h3 class="section-title" style="border-bottom: 1px solid #212129; padding: 8px;margin-bottom: 0;">
+                            Related
                             products</h3>
                         <div class="owl-carousel related-owl-carousel featured-carousel owl-theme outer-top-xs"
                             id="relatedCarousel">
                             @forelse ($relatedproducts as $promotional)
-                                                        @php
-                                $relatedIds = json_decode($promotional->RelatedProductIds);
-                                $firstpro = null;
+                                @php
+                                    $relatedIds = json_decode($promotional->RelatedProductIds);
+                                    $firstpro = null;
 
-                                if (!empty($relatedIds) && isset($relatedIds[0]->productID)) {
-                                    $firstpro = App\Models\Product::with([
-                                        'sizes' => function ($query) {
-                                            $query
-                                                ->select('id', 'product_id', 'Discount', 'RegularPrice', 'SalePrice')
-                                                ->take(1);
-                                        },
-                                    ])
-                                        ->where('id', $relatedIds[0]->productID)
-                                        ->select('id', 'ProductName')
-                                        ->first();
-                                }
+                                    if (!empty($relatedIds) && isset($relatedIds[0]->productID)) {
+                                        $firstpro = App\Models\Product::with([
+                                            'sizes' => function ($query) {
+                                                $query
+                                                    ->select('id', 'product_id', 'Discount', 'RegularPrice', 'SalePrice')
+                                                    ->take(1);
+                                            },
+                                        ])
+                                            ->where('id', $relatedIds[0]->productID)
+                                            ->select('id', 'ProductName')
+                                            ->first();
+                                    }
 
-                                $review = $firstpro
-                                    ? App\Models\Review::where('product_id', $firstpro->id)->avg('rating')
-                                    : 0;
-                                                        @endphp
+                                    $review = $firstpro
+                                        ? App\Models\Review::where('product_id', $firstpro->id)->avg('rating')
+                                        : 0;
+                                @endphp
 
-                                                        @if (isset($firstpro))
-                                                            <div class="item" id="featuredproduct">
-                                                                <div class="products best-product">
-                                                                    <div class="product">
-                                                                        <div class="product-micro">
-                                                                            <div class="row product-micro-row">
-                                                                                <div class="col-12">
-                                                                                    <div class="product-image" style="position: relative;">
-                                                                                        <div class="text-center image">
-                                                                                            <div class="frs_discount">
-                                                                                                <span>
-                                                                                                    {{ ($firstpro->sizes[0]->RegularPrice > 0) ? round((($firstpro->sizes[0]->RegularPrice - $firstpro->sizes[0]->SalePrice) / $firstpro->sizes[0]->RegularPrice) * 100) : 0 }}%<br>
-                                                                                                    <span class="pip_pip_1s">ছাড়</span> </span>
-                                                                                            </div>
-                                                                                            <a
-                                                                                                href="{{ url('view-product/' . $promotional->ProductSlug) }}">
-                                                                                                <img src="{{ asset($promotional->ProductImage) }}"
-                                                                                                    alt="{{ $promotional->ProductName }}"
-                                                                                                    id="featureimagess">
-                                                                                            </a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <!-- /.product-image -->
-                                                                                </div>
-                                                                                <!-- /.col -->
-                                                                                <div class="col-12">
-                                                                                    <div class="p-2 infofe p-md-2"
-                                                                                        style="padding-bottom: 4px !important;background: white;">
-                                                                                        <div class="product-info">
-                                                                                            <h2 class="name text-truncate" id="f_name"><a
-                                                                                                    href="{{ url('view-product/' . $promotional->ProductSlug) }}"
-                                                                                                    id="f_pro_name">{{ $promotional->ProductName }}</a>
-                                                                                            </h2>
-                                                                                        </div>
-
-
-                                                                                        <div class="d-flex" style="justify-content:space-between">
-                                                                                            <div class="star" style="padding-top: 5px;">
-                                                                                                <span
-                                                                                                    style="font-weight: bold;color:black;font-size:10px">({{ App\Models\Review::where('product_id', $promotional->id)->get()->count() }})</span>
-                                                                                                @if (intval($review) == 1)
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"></span>
-                                                                                                    <span class="fas fa-star"></span>
-                                                                                                    <span class="fas fa-star"></span>
-                                                                                                    <span class="fas fa-star"></span>
-                                                                                                @elseif(intval($review) == 2)
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"></span>
-                                                                                                    <span class="fas fa-star"></span>
-                                                                                                    <span class="fas fa-star"></span>
-                                                                                                @elseif(intval($review) == 3)
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"></span>
-                                                                                                    <span class="fas fa-star"></span>
-                                                                                                @elseif(intval($review) == 4)
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"></span>
-                                                                                                @elseif(intval($review) == 5)
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                @else
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                    <span class="fas fa-star"
-                                                                                                        id="checked"></span>
-                                                                                                @endif
-                                                                                            </div>
-
-                                                                                        </div>
-
-                                                                                        <div class="price-box">
-                                                                                            <del class="old-product-price strong-400">৳
-                                                                                                {{ round($firstpro->sizes[0]->RegularPrice) }}</del>
-                                                                                            <span class="product-price strong-600">৳
-                                                                                                {{ round($firstpro->sizes[0]->SalePrice) }}</span>
-                                                                                        </div>
-
-                                                                                    </div>
-                                                                                    <a
-                                                                                        href="{{ url('view-product/' . $promotional->ProductSlug) }}">
-                                                                                        <button class="mb-0 btn btn-danger btn-sm btn-block"
-                                                                                            style="width: 100%;border-radius: 0%;"
-                                                                                            id="purcheseBtn">অর্ডার করুন</button>
-                                                                                    </a>
-
-                                                                                </div>
-                                                                                <!-- /.col -->
-                                                                            </div>
-                                                                            <!-- /.product-micro-row -->
-                                                                        </div>
-                                                                        <!-- /.product-micro -->
-
+                                @if (isset($firstpro))
+                                    <div class="item" id="featuredproduct">
+                                        <div class="products best-product">
+                                            <div class="product">
+                                                <div class="product-micro">
+                                                    <div class="row product-micro-row">
+                                                        <div class="col-12">
+                                                            <div class="product-image" style="position: relative;">
+                                                                <div class="text-center image">
+                                                                    <div class="frs_discount">
+                                                                        <span>
+                                                                            {{ ($firstpro->sizes[0]->RegularPrice > 0) ? round((($firstpro->sizes[0]->RegularPrice - $firstpro->sizes[0]->SalePrice) / $firstpro->sizes[0]->RegularPrice) * 100) : 0 }}%<br>
+                                                                            <span class="pip_pip_1s">ছাড়</span> </span>
                                                                     </div>
+                                                                    <a
+                                                                        href="{{ url('view-product/' . $promotional->ProductSlug) }}">
+                                                                        <img src="{{ asset($promotional->ProductImage) }}"
+                                                                            alt="{{ $promotional->ProductName }}"
+                                                                            id="featureimagess">
+                                                                    </a>
                                                                 </div>
                                                             </div>
-                                                        @endif
+                                                            <!-- /.product-image -->
+                                                        </div>
+                                                        <!-- /.col -->
+                                                        <div class="col-12">
+                                                            <div class="p-2 infofe p-md-2"
+                                                                style="padding-bottom: 4px !important;background: white;">
+                                                                <div class="product-info">
+                                                                    <h2 class="name text-truncate" id="f_name"><a
+                                                                            href="{{ url('view-product/' . $promotional->ProductSlug) }}"
+                                                                            id="f_pro_name">{{ $promotional->ProductName }}</a>
+                                                                    </h2>
+                                                                </div>
+
+
+                                                                <div class="d-flex" style="justify-content:space-between">
+                                                                    <div class="star" style="padding-top: 5px;">
+                                                                        <span
+                                                                            style="font-weight: bold;color:black;font-size:10px">({{ App\Models\Review::where('product_id', $promotional->id)->get()->count() }})</span>
+                                                                        @if (intval($review) == 1)
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star"></span>
+                                                                            <span class="fas fa-star"></span>
+                                                                            <span class="fas fa-star"></span>
+                                                                            <span class="fas fa-star"></span>
+                                                                        @elseif(intval($review) == 2)
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star"></span>
+                                                                            <span class="fas fa-star"></span>
+                                                                            <span class="fas fa-star"></span>
+                                                                        @elseif(intval($review) == 3)
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star"></span>
+                                                                            <span class="fas fa-star"></span>
+                                                                        @elseif(intval($review) == 4)
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star"></span>
+                                                                        @elseif(intval($review) == 5)
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                        @else
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                            <span class="fas fa-star" id="checked"></span>
+                                                                        @endif
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="price-box">
+                                                                    <del class="old-product-price strong-400">৳
+                                                                        {{ round($firstpro->sizes[0]->RegularPrice) }}</del>
+                                                                    <span class="product-price strong-600">৳
+                                                                        {{ round($firstpro->sizes[0]->SalePrice) }}</span>
+                                                                </div>
+
+                                                            </div>
+                                                            <a href="{{ url('view-product/' . $promotional->ProductSlug) }}">
+                                                                <button class="mb-0 btn btn-danger btn-sm btn-block"
+                                                                    style="width: 100%;border-radius: 0%;" id="purcheseBtn">অর্ডার
+                                                                    করুন</button>
+                                                            </a>
+
+                                                        </div>
+                                                        <!-- /.col -->
+                                                    </div>
+                                                    <!-- /.product-micro-row -->
+                                                </div>
+                                                <!-- /.product-micro -->
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             @empty
                             @endforelse
                         </div>
@@ -949,7 +955,7 @@
                     'product_id': id,
                 },
 
-                success: function(data) {
+                success: function (data) {
                     if (data.sigment == 'like') {
                         $('#relatedCarousel #likereactof' + id).text(data.total);
                         $('#relatedCarousel #likereactdone' + id).css('color', 'green');
@@ -971,7 +977,7 @@
                     }
 
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log('error');
                 }
             });
@@ -986,7 +992,7 @@
                     'product_id': id,
                 },
 
-                success: function(data) {
+                success: function (data) {
                     if (data.sigment == 'love') {
                         $('#relatedCarousel #lovereactof' + id).text(data.total);
                         $('#relatedCarousel #lovereactdone' + id).css('color', 'red');
@@ -1002,7 +1008,7 @@
                         $('#productinfo #lovereactdone' + id).css('color', 'black');
                     }
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log('error');
                 }
             });
@@ -1024,11 +1030,13 @@
                     'product_id': product_id,
                     'mainproduct_id': mainpro_id
                 },
-                success: function(response) {
+                success: function (response) {
                     $('#processing').modal('hide');
                     $('#loadproduct').empty().append(response);
+                    $('.color-label').css('border', '1px solid #000');
+                    $('#relproducttext' + product_id).css('border', '2px solid #db4444');
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log('error');
                 }
             });
@@ -1044,7 +1052,7 @@
                     'review_id': id,
                 },
 
-                success: function(data) {
+                success: function (data) {
                     if (data.status == 'like') {
                         $('#likeof' + data.review_id).text(data.total);
                         $('#likedone' + data.review_id).css('color', 'green');
@@ -1053,7 +1061,7 @@
                         $('#likedone' + data.review_id).css('color', 'black');
                     }
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log('error');
                 }
             });
@@ -1069,7 +1077,7 @@
                     'review_id': id,
                 },
 
-                success: function(data) {
+                success: function (data) {
                     if (data.status == 'share') {
                         $('#shareof' + data.review_id).text(data.total);
                         $('#sharedone' + data.review_id).css('color', 'red');
@@ -1078,7 +1086,7 @@
                         $('#sharedone' + data.review_id).css('color', 'black');
                     }
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log('error');
                 }
             });
@@ -1128,20 +1136,20 @@
                 type: 'GET',
                 url: '{{ url('load/review') }}',
 
-                success: function(response) {
+                success: function (response) {
                     $('#reviewload').empty().append(response);
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log('error');
                 }
             });
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             loadreview();
 
-            $('#AddReview').submit(function(e) {
+            $('#AddReview').submit(function (e) {
                 e.preventDefault();
 
                 $.ajax({
@@ -1151,13 +1159,13 @@
                     contentType: false,
                     data: new FormData(this),
 
-                    success: function(data) {
+                    success: function (data) {
                         swal({
                             title: "Success!",
                             icon: "success",
                         });
                     },
-                    error: function(error) {
+                    error: function (error) {
                         console.log('error');
                     }
                 });
@@ -1238,7 +1246,7 @@
             $('.sizetext').css('color', '#000');
             $('.sizetext').css('background', '#fff');
             $('#sizetext' + size).css('color', '#fff');
-            $('#sizetext' + size).css('background', '#613EEA');
+            $('#sizetext' + size).css('background', '#db4444');
             $('#product_sigmentorder').val('');
         }
 
