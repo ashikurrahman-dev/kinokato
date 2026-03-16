@@ -647,7 +647,7 @@ button#purcheseBtn {
 .sidepanel li {
     display: block;
     position: relative;
-    border-bottom: 1px solid #ddd !important;
+    /* border-bottom: 1px solid #ddd !important; */
 }
 
 .sidepanel .level1-styles a {
