@@ -20,7 +20,7 @@
             <div style="display:flex; align-items:center;justify-content:center;">
                 <p class="m-0" style="color: white;text-align:center;">
                     {{ $basicinfo->marquee_text }}
-                    <a href="" style="color:white; text-decoration:underline;font-size:17px; margin-left:20px">
+                    <a href="{{ url('/shop') }}" style="color:white; text-decoration:underline;font-size:17px; margin-left:20px">
                         Shop Now
                     </a>
                 </p>
