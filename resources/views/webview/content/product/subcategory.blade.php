@@ -28,9 +28,9 @@
         </div>
         <!-- /.container -->
     </div>
- 
+
     <div class='container'>
-        <div class='row'> 
+        <div class='row'>
             <!-- /.sidebar -->
             <div class='col-md-12' id="cateoryPro">
                 <div class="container" id="viewCategoryProduct">

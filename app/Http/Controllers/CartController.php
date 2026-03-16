@@ -317,7 +317,7 @@ class CartController extends Controller
     public function wishlistPage()
     {
         $wishlist = session()->get('wishlist', []);
-        $products = Mainproduct::whereIn('id', $wishlist)->get();
+        $products = Mainproduct::whereIn('id', $wishlist)->paginate(12);
 
         return view('webview.content.product.wishlist', compact('products'));
     }
