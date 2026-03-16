@@ -243,7 +243,7 @@
 
     <!-- flash sale -->
     <div class="container">
-        @if (count($topproducts) > 0)
+        @if (count($bestselling) > 0)
             <div class="pb-2 bg-white row">
                 <div class="col-12">
                     <div class="section-title">
@@ -288,7 +288,7 @@
                 </div>
                 <div class="col-12">
                     <div class="owl-carousel " id="promotionalofferSlide">
-                        @forelse ($topproducts as $promotional)
+                        @forelse ($bestselling as $promotional)
                             @php
                                 $firstpro = App\Models\Product::with([
                                     'sizes' => function ($query) {
@@ -418,7 +418,7 @@
                 </div>
             </div>
             <div class="text-center" style="margin-top:30px">
-                <a href="{{ url('promotional/products') }}"
+                <a href="{{ url('best/products') }}"
                     style="padding:15px 35px;color:white;font-weight:bold;font-size:15px;background:#db4444;border-radius:4px">
                     View All Products
                 </a>
@@ -829,7 +829,7 @@
                     <!-- </div> -->
                 </div>
                 <div class="text-center" style="margin-top:30px">
-                    <a href="{{ url('promotional/products') }}"
+                    <a href="{{ url('/shop') }}"
                         style="padding:15px 35px;color:white;font-weight:bold;font-size:15px;background:#db4444;border-radius:4px">
                         View All Products
                     </a>

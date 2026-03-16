@@ -1,6 +1,52 @@
-<div class="row pt-2 pb-2" id="cateoryPro" style="background: white;">
+@extends('webview.master')
 
-@forelse ($slugproducts as $promotional)
+@section('maincontent')
+@section('title')
+    {{ env('APP_NAME') }}- Shop Product
+@endsection
+{{-- category slug --}}
+<style>
+    .product{
+            margin-top: 4px !important;
+
+    }
+
+    #featureimagess{
+        width: 100%;
+        padding: 0px;
+        padding-top: 0;
+        height:180px;
+    }
+    #checked {
+        color: orange;
+    }
+    .star{
+        font-size: 8px !important;
+    }
+</style>
+<!-- /.breadcrumb -->
+<div class="body-content outer-top-xs container">
+
+    <div class="breadcrumb pt-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-inner p-0">
+                        <ul class="list-inline list-unstyled mb-0">
+                            <li><a href="#"
+                                    style="text-transform: capitalize !important;color: #888;padding-right: 12px;font-size: 12px;">Home
+                                    > list > <span class="active"></span> Shop Product</span>
+                                </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.breadcrumb-inner -->
+            </div>
+        </div>
+        <!-- /.container -->
+         <div class="row pt-2 pb-2" id="cateoryPro" style="background: white;">
+
+@forelse ($shops as $promotional)
     @php
         $firstpro = App\Models\Product::with([
             'sizes' => function ($query) {
@@ -150,7 +196,7 @@
 
 </script>
 
-<script>
+<!-- <script>
 document.querySelectorAll('.wishlist-form').forEach(function (form) {
     form.addEventListener('submit', function () {
 
@@ -165,4 +211,7 @@ document.querySelectorAll('.wishlist-form').forEach(function (form) {
 
     });
 });
-</script>
+</script> -->
+
+</div>
+@endsection

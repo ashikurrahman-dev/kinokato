@@ -66,6 +66,8 @@ Route::get('/wishlist/remove/{id}', [CartController::class, 'removewishlist'])->
 Route::get('category-info-ajax', [WebviewController::class, 'categoryinfoajax']);
 
 Route::get('get/slug/products', [WebviewController::class, 'getslugproduct']);
+Route::get('shop', [WebviewController::class, 'shop']);
+
 Route::get('view/categories', [WebviewController::class, 'allcategories']);
 Route::post('review/store', [WebviewController::class, 'review'])->name('review.store');
 Route::get('load/review', [WebviewController::class, 'loadreview']);
