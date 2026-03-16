@@ -33,27 +33,6 @@
         </div>
         <!-- /.container -->
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-16">
-                <h4 class="m-0 fw-bold">Subcategory</h4>
-                @foreach(App\Models\Subcategory::where('category_id',$categorysingle->id)->get() as $value)
-                
-                    <div class="item">
-                        <a href="{{ url('products/sub/category/'.$value->slug) }}" >
-                            <div id="cath">
-                                <div class="d-flex justify-content-center" >
-                                    <img  src="{{ asset($value->subcategory_icon) }}" id="catimg">
-                                </div>
-    
-                                <p id="catp" style="font-weight:bold;color: black;">{{ $value->sub_category_name }}</p>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
     <div class='container'>
         <div class='row'>
             <!-- /.sidebar -->
@@ -91,10 +70,10 @@
     var ENDPOINT = "{{ url('category-info-ajax') }}";
     var page = 1;
 
-    $(window).scroll(function(){
-        page++;
-        infinteLoadMore(page);
-    });
+    // $(window).scroll(function(){
+    //     page++;
+    //     infinteLoadMore(page);
+    // });
 
 
     function infinteLoadMore(page) {
