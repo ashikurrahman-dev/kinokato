@@ -59,6 +59,7 @@
         }
 
         .category-list {
+            margin-top: 20px;
             background: #fff;
             border-radius: 5px;
             /*padding: 15px;*/
@@ -173,10 +174,10 @@
     </style>
 
 
-    <div class="container p-0" style="margin-top:30px;">
+    <div class="container p-0">
         <div class="row">
             <!-- Categories -->
-            <div class="p-0 mb-3 col-lg-2 col-12 d-sm-none">
+            <div class="p-0 mb-3 col-lg-2 col-12 d-sm-none" style="border-right: 1px solid #ddd">
                 <!-- <div class="category-title">
                         <h5 class="m-0 text-white fw-bold">Categories</h5>
                     </div> -->
@@ -221,7 +222,7 @@
             </div>
 
             <!-- Banner  -->
-            <div class="mb-3 col-lg-10 col-12" style="padding-left:15px;">
+            <div class="mb-3 col-lg-10 col-12" style="padding-left:20px;margin-top:20px">
                 <div class="owl-carousel owl-theme" id="slider">
                     @forelse ($sliders as $slider)
                         <div class="item" style="margin:0 !important;">
@@ -394,10 +395,10 @@
 
                                                         </div>
                                                         <!-- <a href="{{ url('view-product/' . $promotional->ProductSlug) }}">
-                                                                                                                                                                                                                                                                        <button class="mb-0 btn btn-danger btn-sm btn-block"
-                                                                                                                                                                                                                                                                            style="width: 100%;border-radius: 0%;"
-                                                                                                                                                                                                                                                                            id="purcheseBtn">অর্ডার করুন</button>
-                                                                                                                                                                                                                                                                    </a> -->
+                                                            <button class="mb-0 btn btn-danger btn-sm btn-block"
+                                                                style="width: 100%;border-radius: 0%;"
+                                                                id="purcheseBtn">অর্ডার করুন</button>
+                                                        </a> -->
 
                                                     </div>
                                                     <!-- /.col -->
@@ -448,7 +449,7 @@
                     @forelse ($categories as $category)
                         <div class="item">
                             <a href="{{ url('products/category/' . $category->slug) }}">
-                                <div id="cath">
+                                <div id="cath" style="border: 1px solid #ddd;border-radius:5px">
                                     <div class="d-flex justify-content-center">
                                         <img src="{{ asset($category->category_icon) }}" id="catimg">
                                     </div>
