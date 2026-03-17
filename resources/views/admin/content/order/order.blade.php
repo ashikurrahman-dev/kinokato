@@ -506,7 +506,6 @@ $users = Admin::whereHas('roles', function ($q) {
                             <div class="col-8" style="text-align: right">
                                 <a href="{{ url('admin/create/order') }}" class="btn btn-primary btn-sm"><span
                                             style="font-weight: bold;">+</span> Add New Order</a>
-                                @if(request()->segment(count(request()->segments()))=='Ready to Ship')
                                     @if ($admin->hasrole('superadmin') || $admin->hasrole('accounts') || $admin->hasrole('store'))
                                     <button type="button" class="btn btn-warning order-print-btn btn-sm">
                                         <i class="mr-1 fas fa-print"></i> Invoice Print
@@ -531,7 +530,6 @@ $users = Admin::whereHas('roles', function ($q) {
                                             @endforeach
                                         </div>
                                     </div>
-                                    @endif
 
                                 @else
                                     @if ($admin->hasrole('superadmin'))
