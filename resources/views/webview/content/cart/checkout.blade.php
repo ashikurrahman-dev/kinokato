@@ -328,8 +328,8 @@
                                                     <div class="ext w-100">
                                                         <div class="price">
 
-                                                            <span class="pt-0 pr-3 mt-2 d-block" id="proPrice"> <small
-                                                                    style="color: #000000;font-size: 16px;font-weight: bold;">
+                                                            <span class="pt-0 pr-3 my-2 d-block" id="proPrice"> <small
+                                                                    style="color: #000000;font-size: 14px;">
                                                                     @if (isset($cartProduct->options['size']))
                                                                         Size : {{ $cartProduct->options['size'] }},&nbsp;
                                                                     @endif
@@ -342,8 +342,7 @@
                                                                 </small></span>
                                                         </div>
                                                         <div class="qtyinfo">
-                                                            <div class="pr-4 input-group input-group--style-2"
-                                                                style="width: 130px;float:left">
+                                                            <div class="pr-4 input-group input-group--style-2 quantity_width_checkout">
                                                                 <span class="input-group-btn">
                                                                     <button class="btn btn-number"
                                                                         onclick="remnum('{{ $cartProduct->rowId }}')" id="remqty"
@@ -586,8 +585,15 @@
             }
 
         }
+        .quantity_width_checkout{
+            width: 81px;
+            float: left;
+        }
 
         @media only screen and (max-width: 767px) {
+            .quantity_width_checkout{
+                width:65px;
+            }
             .input-group--style-2 .input-group-btn>.btn {
                 background: 0 0;
                 border-color: #e6e6e6;

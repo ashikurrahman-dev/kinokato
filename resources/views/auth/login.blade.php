@@ -14,7 +14,7 @@
 
             <div class="col-lg-5 col-12 login-area">
 
-                <h2 class="login-title">Log in to Exclusive</h2>
+                <h2 class="m-0 login-title">Log in to Exclusive</h2>
                 <p class="login-sub">Enter your details below</p>
 
                 <form method="POST" action="{{ url('login') }}" enctype="multipart/form-data">

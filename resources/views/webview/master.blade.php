@@ -15,40 +15,46 @@
     <link rel="stylesheet" href="{{ asset('public/webview/assets/css/custom.css') }}">
     @yield('subhead')
     <style>
+        #crimg:hover {
+            transform: rotate(360deg);
+            /* Firefox */
+            -moz-transition: all .5s ease-in;
+            -webkit-transition: all .5s ease-in;
+            -o-transition: all .5s ease-in;
+            transition: all .5s ease-in;
+        }
 
-         #crimg:hover{
-            transform:rotate(360deg);
+        #shimg:hover {
+            transform: rotate(360deg);
             /* Firefox */
             -moz-transition: all .5s ease-in;
             -webkit-transition: all .5s ease-in;
             -o-transition: all .5s ease-in;
             transition: all .5s ease-in;
         }
-         #shimg:hover{
-            transform:rotate(360deg);
-            /* Firefox */
-            -moz-transition: all .5s ease-in;
-            -webkit-transition: all .5s ease-in;
-            -o-transition: all .5s ease-in;
-            transition: all .5s ease-in;
+
+        #message {
+            display: none;
         }
-        #message{
-            display:none;
+
+        #crossm {
+            display: none;
         }
-        #crossm{
-            display:none;
+
+        #crossms {
+            display: none;
         }
-        #crossms{
-            display:none;
-        }
+
         #hideser {
             display: none;
             float: left;
             padding: 0;
         }
+
         .header-top-inner {
             padding: 4px;
         }
+
         #subcategoryhover li {
             border-bottom: 1px solid #eee;
         }
@@ -58,7 +64,7 @@
         }
 
 
-        #discountpart{
+        #discountpart {
             position: absolute;
             top: 0px;
             right: 0px;
@@ -69,7 +75,8 @@
             box-shadow: 1px 1px 10px 1px #05050522;
 
         }
-        #discountparttwo{
+
+        #discountparttwo {
             background: #ff0a01;
             border-radius: 50%;
             height: 32px;
@@ -77,7 +84,8 @@
             float: left;
 
         }
-        #pdis{
+
+        #pdis {
             font-size: 10px;
             margin: 0;
             padding-top: 2px;
@@ -86,20 +94,22 @@
             font-weight: bold;
             padding-right: 4px;
         }
-        .product-image{
-            overflow:hidden;
+
+        .product-image {
+            overflow: hidden;
         }
+
         /* .product-image img:hover{
             transform: scale(1.2);
         } */
-        .product-image img{
+        .product-image img {
             transition: .5s;
         }
 
         /*#sync1 .items img:hover{*/
         /*    transform: scale(1.4);*/
         /*}*/
-        #sync1 .items img{
+        #sync1 .items img {
             transition: .5s;
         }
 
@@ -118,7 +128,7 @@
         .module-title {
             border-bottom: 2px solid #212129;
             padding-bottom: 4px;
-                width: max-content;
+            width: max-content;
         }
 
 
@@ -127,15 +137,18 @@
                 opacity: 1;
                 transform: scale(1);
             }
+
             50% {
                 opacity: 0;
                 transform: scale(1.2);
             }
+
             100% {
                 opacity: 1;
                 transform: scale(1);
             }
         }
+
         .frs_discount {
             position: absolute;
             text-align: center;
@@ -153,21 +166,22 @@
             font-size: 12px;
             /* z-index:9999; */
         }
+
         .pip_pip_1s {
             animation: pip_pip 1s infinite !important;
         }
 
-        .category_Banner_Image{
+        .category_Banner_Image {
             width: 100%;
             height: 300px;
             object-fit: cover;
         }
+
         @media screen and (max-width:768px) {
-            .category_Banner_Image{
+            .category_Banner_Image {
                 height: 100px !important;
             }
         }
-
     </style>
 
 
@@ -194,49 +208,55 @@
     <!-- === FOOTER === -->
     @include('webview.partials.footer')
     <!-- === FOOTER : END === -->
-    <div class="bottom-navbar b-block d-lg-none">
+    {{-- <div class="bottom-navbar b-block d-lg-none">
         <div class="container" style="padding: 6px 0px !important;">
             <div class="row">
                 <div class="logo-bar-icons col-lg-12 col" style="margin: 0px">
                     <ul class="inline-links d-flex justify-content-between">
                         @if (Request::url() == env('APP_URL'))
-                            <li class="text-center">
-                                <a class="nav-cart-box d-flex" id="viewall" href="{{url('/')}}">
-                                    <img src="{{ asset('public/ihome.png') }}" alt="" width="30px"><br><span>Home</span>
-                                </a>
-                            </li>
+                        <li class="text-center">
+                            <a class="nav-cart-box d-flex" id="viewall" href="{{url('/')}}">
+                                <img src="{{ asset('public/ihome.png') }}" alt="" width="30px"><br><span>Home</span>
+                            </a>
+                        </li>
                         @else
-                            <li class="text-center">
-                                <a class="nav-cart-box" href="{{ url('/') }}">
-                                    <img src="{{ asset('public/ihome.png') }}" alt="" width="30px"><br><span style="color: #212129;">Home</span>
-                                </a>
-                            </li>
+                        <li class="text-center">
+                            <a class="nav-cart-box" href="{{ url('/') }}">
+                                <img src="{{ asset('public/ihome.png') }}" alt="" width="30px"><br><span
+                                    style="color: #212129;">Home</span>
+                            </a>
+                        </li>
                         @endif
 
                         <li class="text-center">
                             <a href="javascript:void(0);" onclick="openNav()" class="nav-cart-box">
-                                <img src="{{ asset('public/menu.png') }}" alt="" style="width: 30px;"><br><span style="color: #212129;">Category</span>
+                                <img src="{{ asset('public/menu.png') }}" alt="" style="width: 30px;"><br><span
+                                    style="color: #212129;">Category</span>
                             </a>
                         </li>
 
                         <li class="text-center" style="height: 36px;position: relative;top: -30px;    left: 9px;">
-                            <a href="javascript:void(0);" onclick="showmessage()" id="showms" >
-                                <img src="{{asset('public/livec-removebg-preview.png')}}" style="height:45px;" id="shimg">
+                            <a href="javascript:void(0);" onclick="showmessage()" id="showms">
+                                <img src="{{asset('public/livec-removebg-preview.png')}}" style="height:45px;"
+                                    id="shimg">
                             </a>
-                            <a href="javascript:void(0);" onclick="hidemessage()" id="crossms" >
-                                <img src="{{asset('public/livec-removebg-preview.png')}}" style="height:60px;" id="crimg">
+                            <a href="javascript:void(0);" onclick="hidemessage()" id="crossms">
+                                <img src="{{asset('public/livec-removebg-preview.png')}}" style="height:60px;"
+                                    id="crimg">
                             </a>
                         </li>
-                            <li class="text-center">
-                                <a class="nav-cart-box" href="{{ url('track-order') }}">
-                                    <img src="{{ asset('public/truck.png') }}" alt="" style="width: 30px;"><br><span style="color: #212129;">Track Order</span>
-                                </a>
-                            </li>
+                        <li class="text-center">
+                            <a class="nav-cart-box" href="{{ url('track-order') }}">
+                                <img src="{{ asset('public/truck.png') }}" alt="" style="width: 30px;"><br><span
+                                    style="color: #212129;">Track Order</span>
+                            </a>
+                        </li>
 
                         <li class="text-center">
 
                             <a class="nav-cart-box" href="{{ url()->previous() }}">
-                                <img src="{{ asset('public/arrows.png') }}" alt="" style="width: 30px;"><br><span style="color: #212129;">Back</span>
+                                <img src="{{ asset('public/arrows.png') }}" alt="" style="width: 30px;"><br><span
+                                    style="color: #212129;">Back</span>
                             </a>
 
                         </li>
@@ -245,7 +265,90 @@
                 </div>
             </div>
         </div>
+    </div> --}}
+    <div class="mobnav-container-91x2">
+
+        <a href="{{ url('/') }}" class="mobnav-item-91x2 active">
+            <i class="fa-solid fa-house mobnav-icon-91x2"></i>
+            <span class="mobnav-text-91x2">Home</span>
+        </a>
+
+        <a href="{{ url('shop') }}" class="mobnav-item-91x2">
+            <i class="fa-solid fa-location-dot mobnav-icon-91x2"></i>
+            <span class="mobnav-text-91x2">Shop</span>
+        </a>
+
+        <a href="{{ url('checkout') }}" class="mobnav-item-91x2">
+            <i class="fa-solid fa-bag-shopping mobnav-icon-91x2"></i>
+            <span class="mobnav-text-91x2">Bag</span>
+        </a>
+
+        <a href="{{ url('login') }}" class="mobnav-item-91x2">
+            <i class="fa-solid fa-user mobnav-icon-91x2"></i>
+            <span class="mobnav-text-91x2">Account</span>
+        </a>
+
     </div>
+    <style>
+        /* Hidden by default */
+        .mobnav-container-91x2 {
+            display: none;
+        }
+
+        /* Mobile only */
+        @media (max-width: 768px) {
+
+            .mobnav-container-91x2 {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: #ffffff;
+                border-top: 1px solid #e5e5e5;
+                justify-content: space-around;
+                align-items: center;
+                padding: 6px 0;
+                z-index: 9999;
+            }
+
+            .mobnav-item-91x2 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                font-size: 11px;
+                color: #777;
+                transition: all 0.3s ease;
+            }
+
+            .mobnav-icon-91x2 {
+                font-size: 18px;
+                margin-bottom: 3px;
+                transition: transform 0.2s ease, color 0.2s ease;
+            }
+
+            .mobnav-text-91x2 {
+                font-size: 11px;
+            }
+
+            /* Tap effect */
+            .mobnav-item-91x2:active .mobnav-icon-91x2 {
+                transform: scale(1.2);
+            }
+
+            /* Active state */
+            .mobnav-item-91x2.active {
+                color: #000;
+            }
+
+            .mobnav-item-91x2.active .mobnav-icon-91x2 {
+                color: #000;
+                transform: translateY(-2px);
+            }
+        }
+    </style>
 
     <!--Footer Js-->
     @include('webview.partials.links.footer')
@@ -254,22 +357,27 @@
 
     <div id="message">
 
-        <a href="{{$basicinfo->messanger}}" target="_blank" style="position: fixed;bottom: 230px;right: 6px;z-index:1111">
+        <a href="{{$basicinfo->messanger}}" target="_blank"
+            style="position: fixed;bottom: 230px;right: 6px;z-index:1111">
             <img src="{{asset('public/messenger.png')}}" style="height:60px;border-radius:50%">
         </a>
-        <a href="tel:+88{{ $basicinfo->wp_1 }}" target="_blank" style="position: fixed;bottom: 160px;right: 6px;z-index:1111">
+        <a href="tel:+88{{ $basicinfo->wp_1 }}" target="_blank"
+            style="position: fixed;bottom: 160px;right: 6px;z-index:1111">
             <img src="{{asset('public/telephone.png')}}" style="height:60px;border-radius:50%">
         </a>
 
-        <a href="https://wa.me/+88{{ $basicinfo->wp_1 }}?text=I%20am%20interested" style="position: fixed;bottom: 90px;right: 6px;z-index:1111">
+        <a href="https://wa.me/+88{{ $basicinfo->wp_1 }}?text=I%20am%20interested"
+            style="position: fixed;bottom: 90px;right: 6px;z-index:1111">
             <img src="{{asset('public/whatsappns.png')}}" style="height:60px;border-radius:50%">
         </a>
     </div>
 
-    <a href="javascript:void(0);" class="d-none d-lg-block" onclick="showmessage()" id="showm" style="position: fixed;bottom: 10px;right: 6px;z-index:1111">
+    <a href="javascript:void(0);" class="d-none d-lg-block" onclick="showmessage()" id="showm"
+        style="position: fixed;bottom: 10px;right: 6px;z-index:1111">
         <img src="{{asset('public/chat-whatsapp.png')}}" style="height:60px;" id="shimg">
     </a>
-    <a href="javascript:void(0);" onclick="hidemessage()" id="crossm" style="position: fixed;bottom: 10px;right: 6px;z-index:1111">
+    <a href="javascript:void(0);" onclick="hidemessage()" id="crossm"
+        style="position: fixed;bottom: 10px;right: 6px;z-index:1111">
         <img src="{{asset('public/chat-whatsapp.png')}}" style="height:60px;" id="crimg">
     </a>
 
@@ -278,8 +386,7 @@
     <div class="modal" id="processing">
         <div class="modal-dialog">
             <div class="modal-content" style="text-align: center;background: none;">
-                <i class="spinner fa fa-spinner fa-spin"
-                    style="color: #ffffff; font-size: 70px;  padding: 22px;"></i>
+                <i class="spinner fa fa-spinner fa-spin" style="color: #ffffff; font-size: 70px;  padding: 22px;"></i>
             </div>
         </div>
     </div>
@@ -292,8 +399,7 @@
 
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span
-                            aria-hidden="true">Add
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span aria-hidden="true">Add
                             More Products</span></button>
                     <a href="{{ url('checkout') }}" class="btn" style="background: #212129;color:#fff">Submit Order</a>
                 </div>
@@ -325,7 +431,7 @@
 
     <script>
 
-        window.onscroll = function() {
+        window.onscroll = function () {
             myFunction()
         };
 
@@ -340,16 +446,16 @@
             }
         }
 
-        function checkcartview(){
+        function checkcartview() {
             $.ajax({
                 type: 'GET',
                 url: '{{ url('get-cart-content') }}',
 
-                success: function(response) {
+                success: function (response) {
                     $('#cartViewModal .modal-body').empty().append(
                         response);
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log('error');
                 }
             });
@@ -359,23 +465,23 @@
 
 
 
-        function showmessage(){
-            $('#showm').css('display','none');
-            $('#showms').css('display','none');
-            $('#crossms').css('display','inline');
-            $('#crossm').css('display','inline');
+        function showmessage() {
+            $('#showm').css('display', 'none');
+            $('#showms').css('display', 'none');
+            $('#crossms').css('display', 'inline');
+            $('#crossm').css('display', 'inline');
             $("#message").fadeIn('slow');
         }
-        function hidemessage(){
-            $('#showm').css('display','inline');
-            $('#showms').css('display','inline');
-            $('#crossms').css('display','none');
-            $('#crossm').css('display','none');
+        function hidemessage() {
+            $('#showm').css('display', 'inline');
+            $('#showms').css('display', 'inline');
+            $('#crossms').css('display', 'none');
+            $('#crossm').css('display', 'none');
             $("#message").fadeOut('slow');
         }
 
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             var idval = $('#CountSlider').val();
 
             $('#slider').owlCarousel({
@@ -393,11 +499,11 @@
                         items: 1,
                     },
                     600: {
-                         items: 1,
-                        },
+                        items: 1,
+                    },
                     1000: {
-                         items: 1,
-                        }
+                        items: 1,
+                    }
                 }
             });
 
@@ -479,24 +585,24 @@
                     qty: '1',
                 },
 
-                success: function(data) {
+                success: function (data) {
                     updatecart();
                     $.ajax({
                         type: 'GET',
                         url: '{{ url('get-cart-content') }}',
 
-                        success: function(response) {
+                        success: function (response) {
                             $('#cartViewModal .modal-body').empty().append(
                                 response);
                         },
-                        error: function(error) {
+                        error: function (error) {
                             console.log('error');
                         }
                     });
                     $('#processing').modal('hide');
                     $('#cartViewModal').modal('show');
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log('error');
                 }
             });
@@ -518,14 +624,14 @@
                     qty: '1',
                 },
 
-                success: function(data) {
+                success: function (data) {
                     updatecart();
                     if (data == 'success') {
                         window.location.href = 'https://com/checkout';
                         $('#processing').modal('hide');
                     }
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log('error');
                 }
             });
@@ -542,7 +648,7 @@
                     rowId: rowId,
                 },
 
-                success: function(response) {
+                success: function (response) {
 
                     updatecart();
                     swal({
@@ -569,7 +675,7 @@
 
 
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log('error');
                 }
             });
@@ -610,12 +716,12 @@
                 type: 'GET',
                 url: '{{ url('get-checkcart-content') }}',
 
-                success: function(response) {
+                success: function (response) {
                     $('#checkcartview').html('');
                     $('#checkcartview').append(
                         response);
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log('error');
                 }
             });
@@ -631,7 +737,7 @@
                     rowId: rowId,
                 },
 
-                success: function(response) {
+                success: function (response) {
                     if (response == 'empty') {
                         $('#loadingreload').css({
                             'display': 'flex',
@@ -654,7 +760,7 @@
 
 
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log('error');
                 }
             });
@@ -665,11 +771,11 @@
                 type: 'get',
                 url: '{{ url('load-cart') }}',
 
-                success: function(response) {
+                success: function (response) {
                     $('#cart-summary').empty().append(
                         response);
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log('error');
                 }
             });
@@ -680,11 +786,11 @@
                 type: 'get',
                 url: '{{ url('update-cart') }}',
 
-                success: function(response) {
+                success: function (response) {
                     $('.basket-item-count').html(response.item);
                     $('.cartamountvalue').html(response.amount);
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log('error');
                 }
             });
@@ -700,18 +806,18 @@
                     search: search,
                 },
 
-                success: function(response) {
+                success: function (response) {
                     $('#searchproductlist').html('');
                     $('#searchproductlist').append(
                         response);
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log('error');
                 }
             });
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('img').lazyload();
         });
     </script>
