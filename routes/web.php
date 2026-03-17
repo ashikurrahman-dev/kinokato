@@ -17,7 +17,8 @@ use App\Http\Controllers\GoogleController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/cc', function() {
+
+Route::get('/cc', function () {
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
     Artisan::call('route:clear');
@@ -43,6 +44,7 @@ Route::get('incomplete-order', [OrderController::class, 'incomplete']);
 
 Route::get('/set-value/city/{id}', [StockController::class, 'getCityByCurier']);
 Route::get('venture/{slug}', [WebviewController::class, 'index']);
+Route::post('contact/post', [WebviewController::class, 'contact_post']);
 Route::get('menu/{slug}', [WebviewController::class, 'menuindex']);
 Route::get('view-product-load/{slug}', [WebviewController::class, 'productdetailsnew']);
 Route::get('product/{slug}', [WebviewController::class, 'productdetails']);
