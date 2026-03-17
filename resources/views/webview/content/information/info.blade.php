@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="p-0 breadcrumb-inner">
                         <ul class="mb-0 list-inline list-unstyled">
-                            <li><a href="#"
+                            <li><a href="{{ url('/') }}"
                                     style="text-transform: capitalize !important;color: #888;padding-right: 12px;font-size: 12px;">Home
                                     > {{ $title }}
                                 </a></li>
