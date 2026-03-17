@@ -28,4 +28,16 @@ class Mainproduct extends Model
     {
         return 'ProductSlug';
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function sizes()
+    {
+        return $this->hasMany(Size::class, 'product_id');
+    }
+
+
 }

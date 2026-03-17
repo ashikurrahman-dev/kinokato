@@ -633,11 +633,78 @@ class WebviewController extends Controller
         return view('webview.content.product.slugview', ['categories' => $categories, 'slugproducts' => $slugproducts]);
     }
 
-    public function shop(){
-        $shops = Mainproduct::where('status', 'Active')->orderBy('position', 'desc')->select('id', 'ProductName', 'ProductSlug', 'ProductImage', 'status', 'position', 'top_rated', 'bestselling', 'RelatedProductIds')->get();
+        public function shop(Request $request)
+        {
+            $query = Mainproduct::query()
+                ->where('mainproducts.status', 'Active');
 
-        return view('webview.content.product.shop', compact('shops'));
-    }
+            // Category filter
+            if ($request->category) {
+                $query->whereHas('category', function ($q) use ($request) {
+                    $q->where('slug', $request->category);
+                });
+            }
+
+            // Price join (needed for price sorting)
+            if ($request->filter == 'low_to_high' || $request->filter == 'high_to_low') {
+                $query->leftJoin('sizes', 'sizes.product_id', '=', 'mainproducts.id');
+            }
+
+            // Sorting
+            if ($request->filter == 'latest') {
+
+                $query->orderBy('mainproducts.id', 'DESC');
+
+            } elseif ($request->filter == 'oldest') {
+
+                $query->orderBy('mainproducts.id', 'ASC');
+
+            } elseif ($request->filter == 'a_to_z') {
+
+                $query->orderBy('mainproducts.ProductName', 'ASC');
+
+            } elseif ($request->filter == 'z_to_a') {
+
+                $query->orderBy('mainproducts.ProductName', 'DESC');
+
+            } elseif ($request->filter == 'low_to_high') {
+
+                $query->orderBy('sizes.SalePrice', 'ASC');
+
+            } elseif ($request->filter == 'high_to_low') {
+
+                $query->orderBy('sizes.SalePrice', 'DESC');
+
+            } else {
+
+                $query->orderByRaw('ISNULL(mainproducts.position), mainproducts.position ASC');
+
+            }
+
+            $shops = $query
+                ->select(
+                    'mainproducts.id',
+                    'mainproducts.ProductName',
+                    'mainproducts.ProductSlug',
+                    'mainproducts.ProductImage',
+                    'mainproducts.status',
+                    'mainproducts.position',
+                    'mainproducts.top_rated',
+                    'mainproducts.bestselling',
+                    'mainproducts.RelatedProductIds'
+                )
+                ->groupBy('mainproducts.id')
+                ->paginate(12)
+                ->withQueryString();
+
+            $categories = Category::where('status', 'Active')
+                ->select('id', 'category_name', 'slug', 'category_icon')
+                ->get();
+
+            return view('webview.content.product.shop', compact('shops', 'categories'));
+        }
+
+
 
     public function getsubcategoryproduct(Request $request)
     {
