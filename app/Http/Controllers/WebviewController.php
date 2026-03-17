@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Addbanner;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Models\Information;
 use App\Models\Product;
@@ -470,6 +471,16 @@ class WebviewController extends Controller
 
         $value = Information::where('key', $slug)->first();
         return view('webview.content.information.info', ['title' => $title, 'slug' => $slug, 'value' => $value]);
+    }
+
+    public function contact_post(Request $request){
+        $contact = new Contact();
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->phone = $request->phone;
+        $contact->message = $request->message;
+        $contact->save();
+        return back()->with('success','Message send Successfully!');
     }
 
     public function productdetails($slug)
