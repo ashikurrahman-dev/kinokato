@@ -77,6 +77,29 @@ class InformationController extends Controller
             $valuenew=new Information();
             $valuenew->key=$request->key;
             $valuenew->value=$request->value;
+            $valuenew->sale1_amount = $request->sale1_amount;
+            $valuenew->sale1_title = $request->sale1_title;
+            $valuenew->sale2_amount = $request->sale2_amount;
+            $valuenew->sale2_title = $request->sale2_title;
+            $valuenew->sale3_amount = $request->sale3_amount;
+            $valuenew->sale3_title = $request->sale3_title;
+            $valuenew->sale4_amount = $request->sale4_amount;
+            $valuenew->sale4_title = $request->sale4_title;
+            $valuenew->member1_name = $request->member1_name;
+            $valuenew->member1_designation = $request->member1_designation;
+            $valuenew->member1_twitter = $request->member1_twitter;
+            $valuenew->member1_instagram = $request->member1_instagram;
+            $valuenew->member1_linkedin = $request->member1_linkedin;
+            $valuenew->member2_name = $request->member2_name;
+            $valuenew->member2_designation = $request->member2_designation;
+            $valuenew->member2_twitter = $request->member2_twitter;
+            $valuenew->member2_instagram = $request->member2_instagram;
+            $valuenew->member2_linkedin = $request->member2_linkedin;
+            $valuenew->member3_name = $request->member3_name;
+            $valuenew->member3_designation = $request->member3_designation;
+            $valuenew->member3_twitter = $request->member3_twitter;
+            $valuenew->member3_instagram = $request->member3_instagram;
+            $valuenew->member3_linkedin = $request->member3_linkedin;
             $valuenew->save();
             return redirect()->back()->with('message','Info created Successfully.');
         }
@@ -124,6 +147,109 @@ class InformationController extends Controller
     {
         $value=Information::where('key',$slug)->first();
         $value->value=$request->value;
+        $value->sale1_amount = $request->sale1_amount;
+        $value->sale1_title = $request->sale1_title;
+        $value->sale2_amount = $request->sale2_amount;
+        $value->sale2_title = $request->sale2_title;
+        $value->sale3_amount = $request->sale3_amount;
+        $value->sale3_title = $request->sale3_title;
+        $value->sale4_amount = $request->sale4_amount;
+        $value->sale4_title = $request->sale4_title;
+        $value->member1_name = $request->member1_name;
+        $value->member1_designation = $request->member1_designation;
+        $value->member1_twitter = $request->member1_twitter;
+        $value->member1_instagram = $request->member1_instagram;
+        $value->member1_linkedin = $request->member1_linkedin;
+        $value->member2_name = $request->member2_name;
+        $value->member2_designation = $request->member2_designation;
+        $value->member2_twitter = $request->member2_twitter;
+        $value->member2_instagram = $request->member2_instagram;
+        $value->member2_linkedin = $request->member2_linkedin;
+        $value->member3_name = $request->member3_name;
+        $value->member3_designation = $request->member3_designation;
+        $value->member3_twitter = $request->member3_twitter;
+        $value->member3_instagram = $request->member3_instagram;
+        $value->member3_linkedin = $request->member3_linkedin;
+
+        if ($request->file('about_img')) {
+            $about_img = $request->file('about_img');
+
+            $imageName          = microtime('.') . '.' . $about_img->getClientOriginalExtension();
+            $imagePath          = 'public/backend/images/about/';
+            $about_img->move($imagePath, $imageName);
+
+            $value->about_img   = $imagePath . $imageName;
+        }
+
+        if ($request->file('sale1_img')) {
+            $sale1_img = $request->file('sale1_img');
+
+            $imageName          = microtime('.') . '.' . $sale1_img->getClientOriginalExtension();
+            $imagePath          = 'public/backend/images/about/';
+            $sale1_img->move($imagePath, $imageName);
+
+            $value->sale1_img   = $imagePath . $imageName;
+        }
+
+        if ($request->file('sale2_img')) {
+            $sale2_img = $request->file('sale2_img');
+
+            $imageName          = microtime('.') . '.' . $sale2_img->getClientOriginalExtension();
+            $imagePath          = 'public/backend/images/about/';
+            $sale2_img->move($imagePath, $imageName);
+
+            $value->sale2_img   = $imagePath . $imageName;
+        }
+
+        if ($request->file('sale3_img')) {
+            $sale3_img = $request->file('sale3_img');
+
+            $imageName          = microtime('.') . '.' . $sale3_img->getClientOriginalExtension();
+            $imagePath          = 'public/backend/images/about/';
+            $sale3_img->move($imagePath, $imageName);
+
+            $value->sale3_img   = $imagePath . $imageName;
+        }
+
+        if ($request->file('sale4_img')) {
+            $sale4_img = $request->file('sale4_img');
+
+            $imageName          = microtime('.') . '.' . $sale4_img->getClientOriginalExtension();
+            $imagePath          = 'public/backend/images/about/';
+            $sale4_img->move($imagePath, $imageName);
+
+            $value->sale4_img   = $imagePath . $imageName;
+        }
+
+        if ($request->file('member1_img')) {
+            $member1_img = $request->file('member1_img');
+
+            $imageName          = microtime('.') . '.' . $member1_img->getClientOriginalExtension();
+            $imagePath          = 'public/backend/images/about/';
+            $member1_img->move($imagePath, $imageName);
+
+            $value->member1_img   = $imagePath . $imageName;
+        }
+
+        if ($request->file('member2_img')) {
+            $member2_img = $request->file('member2_img');
+
+            $imageName          = microtime('.') . '.' . $member2_img->getClientOriginalExtension();
+            $imagePath          = 'public/backend/images/about/';
+            $member2_img->move($imagePath, $imageName);
+
+            $value->member2_img   = $imagePath . $imageName;
+        }
+        if ($request->file('member3_img')) {
+            $member3_img = $request->file('member3_img');
+
+            $imageName          = microtime('.') . '.' . $member2_img->getClientOriginalExtension();
+            $imagePath          = 'public/backend/images/about/';
+            $member3_img->move($imagePath, $imageName);
+
+            $value->member3_img   = $imagePath . $imageName;
+        }
+
         $value->update();
         return redirect()->back()->with('message','Info Update Successfully.');
     }

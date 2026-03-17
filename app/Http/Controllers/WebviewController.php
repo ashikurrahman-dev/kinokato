@@ -483,6 +483,12 @@ class WebviewController extends Controller
         return back()->with('success','Message send Successfully!');
     }
 
+    public function about()
+    {
+        $about = Information::where('key','about_us')->first();
+        return view('webview.content.about',compact('about'));
+    }
+
     public function productdetails($slug)
     {
         $productdetails = Product::where('ProductSlug', $slug)->first();

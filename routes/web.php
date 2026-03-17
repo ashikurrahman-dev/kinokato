@@ -45,6 +45,7 @@ Route::get('incomplete-order', [OrderController::class, 'incomplete']);
 Route::get('/set-value/city/{id}', [StockController::class, 'getCityByCurier']);
 Route::get('venture/{slug}', [WebviewController::class, 'index']);
 Route::post('contact/post', [WebviewController::class, 'contact_post']);
+Route::get('about-us',[WebviewController::class,'about']);
 Route::get('menu/{slug}', [WebviewController::class, 'menuindex']);
 Route::get('view-product-load/{slug}', [WebviewController::class, 'productdetailsnew']);
 Route::get('product/{slug}', [WebviewController::class, 'productdetails']);

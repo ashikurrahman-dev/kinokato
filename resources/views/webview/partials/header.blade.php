@@ -52,7 +52,7 @@
                     <!-- /.contact-row -->
                         <a href="{{ url('/') }}">Home</a>
                         <a href="{{ url('venture/contact_us') }}">Contact</a>
-                        <a href="{{ url('venture/about_us') }}">About</a>
+                        <a href="{{ url('about-us') }}">About</a>
                         <a href="{{ url('register') }}">Sing Up</a>
 
                 </div>
@@ -177,7 +177,7 @@
         </div>
         <ul class="level1-styles collapse show" id="id0">
 
-            <ul class="list-unstyled mb-0">
+            <ul class="mb-0 list-unstyled">
     @forelse ($categories as $category)
         @php
             $subcategories = App\Models\Subcategory::where('status','Active')
@@ -191,7 +191,7 @@
                 </a>
 
                 @if($subcategories->isNotEmpty())
-                    <button class="arrow-btn m-0" onclick="toggleSub(this)">
+                    <button class="m-0 arrow-btn" onclick="toggleSub(this)">
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
                 @endif
