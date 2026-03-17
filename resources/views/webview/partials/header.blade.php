@@ -20,9 +20,9 @@
             <div style="display:flex; align-items:center;justify-content:center;">
                 <p class="m-0" style="color: white;text-align:center;">
                     {{ $basicinfo->marquee_text }}
-                    <a href="{{ url('/shop') }}" style="color:white; text-decoration:underline;font-size:17px; margin-left:20px">
+                    {{-- <a href="{{ url('/shop') }}" style="color:white; text-decoration:underline;font-size:17px; margin-left:20px">
                         Shop Now
-                    </a>
+                    </a> --}}
                 </p>
             </div>
         </div>
@@ -53,7 +53,7 @@
                         <a href="{{ url('/') }}">Home</a>
                         <a href="{{ url('venture/contact_us') }}">Contact</a>
                         <a href="{{ url('about-us') }}">About</a>
-                        <a href="{{ url('register') }}">Sing Up</a>
+                        <a href="{{ url('shop') }}">Shop</a>
 
                 </div>
                 <!-- /.top-search-holder -->
