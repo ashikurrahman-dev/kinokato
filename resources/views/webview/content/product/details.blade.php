@@ -408,45 +408,47 @@
                                     <div class="text-center quantity-container info-container"
                                         style="width: 100%; float: left;">
 
-                                        <div class="row">
-                                            <div class="col-4 col-lg-4 my-2">
-                                                <div class="pr-2 d-flex"
-                                                    style="justify-content: start;padding-right: 4px;border:1px solid #000;width:89%">
-                                                    <button class="btn btn-sm" id="buttonminus" onclick="minus()"><i
-                                                            class="fa-solid fa-minus"></i></button>
-                                                    <div class="cart-quantity" style="height: 33px;">
+                                       <!-- responsive add-to-cart block -->
+                                        <div class="row align-items-center">
+                                            <!-- Quantity (mobile: col-6, desktop: col-lg-4) -->
+                                            <div class="col-6 col-lg-4 my-2 order-1">
+                                                <div class="pr-2 d-flex align-items-center" style="justify-content: start;padding-right: 4px;border:1px solid #000;">
+                                                    <button type="button" class="btn btn-sm" id="buttonminus" onclick="minus()"><i class="fa-solid fa-minus"></i></button>
+
+                                                    <div class="cart-quantity mx-2" style="height: 34px; min-width:70px;">
                                                         <div class="quant-input">
-                                                            <input type="text" class="form-control"
-                                                                style="font-size: 20px;height: fit-content;height: 34px;padding:0px;text-align: center;border-left:1px solid #000; border-right:1px solid #000;border-radius:0"
-                                                                value="1" id="qtyval">
+                                                            <input type="text" class="form-control" id="qtyval"
+                                                                style="font-size: 18px;height: 34px;padding:0px;text-align: center;border-left:1px solid #000; border-right:1px solid #000;border-radius:0; width:70px;"
+                                                                value="1" readonly>
                                                         </div>
                                                     </div>
-                                                    <button class="btn btn-sm" id="buttonplus" onclick="plus()"><i
-                                                            class="fa-solid fa-plus"></i></button>
+
+                                                    <button type="button" class="btn btn-sm" id="buttonplus" onclick="plus()"><i class="fa-solid fa-plus"></i></button>
                                                 </div>
                                             </div>
-                                            <div class="col-6 col-lg-6 my-2">
-                                                <form name="form" action="{{ url('add-to-cart') }}" id="submitaddtocart"
-                                                    method="POST" enctype="multipart/form-data" style="text-align: center;">
+
+                                            <!-- Buy Now (mobile: full width below, desktop: middle col) -->
+                                            <div class="col-12 col-lg-6 my-2 order-3 order-lg-2">
+                                                <form name="form" action="{{ url('add-to-cart') }}" id="submitaddtocart" method="POST" enctype="multipart/form-data" style="text-align: center;">
                                                     @method('POST')
                                                     @csrf
-                                                    <input type="hidden" name="color" id="product_colororder"
-                                                        value="{{ $varients[0]->color }}">
+                                                    <input type="hidden" name="color" id="product_colororder" value="{{ $varients[0]->color }}">
                                                     <input type="hidden" name="size" id="product_sizeordernew" value="">
                                                     <input type="hidden" name="sigment" id="product_sigmentorder" value="">
                                                     <input type="hidden" name="price" id="product_priceorder" value="">
-
-                                                    <input type="hidden" name="product_id"
-                                                        value=" {{ $productdetails->id }}" hidden>
+                                                    <input type="hidden" name="product_id" value="{{ $productdetails->id }}" hidden>
                                                     <input type="hidden" name="qty" value="1" id="qtyoror">
+
                                                     <button type="submit"
-                                                        class="mb-0 ml-2 btn btn-styled btn-base-1 btn-icon-left strong-700 hov-bounce hov-shaddow buy-now"
-                                                        style="background:#db4444;color:white;width: 100%;font-size: 15px;">
+                                                        class="mb-0 ml-2 btn btn-styled btn-base-1 btn-icon-left strong-700 hov-bounce hov-shaddow buy-now w-100"
+                                                        style="background:#db4444;color:white;font-size: 15px;">
                                                         Buy Now
                                                     </button>
                                                 </form>
                                             </div>
-                                            <div class="col-2 col-lg-2 my-2">
+
+                                            <!-- Wishlist (mobile: col-6, desktop: col-lg-2) -->
+                                            <div class="col-6 col-lg-2 my-2 order-2 order-lg-3">
                                                 <div class="d-flex justify-content-end">
                                                     <div class="product-wishlist">
                                                         <form action="{{ route('wishlist.add') }}" method="POST" class="p-0 m-0">
@@ -470,6 +472,11 @@
                                                 </div>
                                             </div>
                                         </div>
+
+
+
+
+
                                         <section>
                                             <div class="mt-3">
                                                 <div class="delivery-box">

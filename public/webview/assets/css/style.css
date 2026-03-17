@@ -858,7 +858,7 @@ button#purcheseBtn {
 #cath:hover{
     box-shadow: 0px 0px 6px #282626;
     border-radius: 6px;
-    background: #db4444;
+    /* background: #db4444; */
 }
 #cath:hover #catp{
     color:white;

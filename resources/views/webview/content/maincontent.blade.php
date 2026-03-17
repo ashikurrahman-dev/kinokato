@@ -449,7 +449,7 @@
                     @forelse ($categories as $category)
                         <div class="item">
                             <a href="{{ url('products/category/' . $category->slug) }}">
-                                <div id="cath" style="border: 1px solid #ddd;border-radius:5px">
+                                <div id="cath" style="border: 1px solid #000;border-radius:5px">
                                     <div class="d-flex justify-content-center">
                                         <img src="{{ asset($category->category_icon) }}" id="catimg">
                                     </div>
